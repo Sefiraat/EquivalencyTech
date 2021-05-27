@@ -1,0 +1,9 @@
+name: EquivalencyTech
+version: 1.0.0
+main: io.github.sefiraat.equivalencyTech.EquivalencyTech
+api-version: 1.16
+softdepend:
+  - Slimefun
+permissions:
+  danktech.admin:
+    description: Allows access to /et
