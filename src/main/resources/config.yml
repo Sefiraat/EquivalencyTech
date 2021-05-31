@@ -238,6 +238,7 @@ MESSAGES:
     COMMAND_TRANSMUTATION_ORB_GIVEN: "You have been given a Transmutation Orb"
     GENERAL_NO_INVENTORY_SPACE: "You do not have enough space for this item"
 ITEMS:
+  GENERAL_CRAFTING_ITEM: "Crafting Ingredient"
   TRANSMUTATION_ORB_NAME: "Transmutation Orb"
   TRANSMUTATION_ORB_LORE:
     - "A powerful magical artifact that"
@@ -246,6 +247,11 @@ ITEMS:
     - "EMC can be turned into other items"
     - "through a simple alchemical process"
   TRANSMUTATION_ORB_INFO: "Right click to open"
+  ALCHEMICAL_COAL_NAME: "Alchemical Coal"
+  MOBIUS_FUEL_NAME: "Mobius Fuel"
+  AETERNALIS_FUEL_NAME: "Aeternalis Fuel"
+  DARK_MATTER_NAME: "Dark Matter"
+  RED_MATTER_NAME: "Red Matter"
 GUI:
   SLOT_BORDER_NAME: "EquiTech"
   SLOT_FILLER_NAME: "No recipe here"

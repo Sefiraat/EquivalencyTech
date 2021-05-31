@@ -16,7 +16,7 @@ public class ContainerStorage {
     }
 
     public static boolean containerHasData(ItemStack i, NamespacedKey key, PersistentDataType<?, ?> type) {
-        if (i.hasItemMeta()) {
+        if (i != null && i.hasItemMeta()) {
             ItemMeta im = i.getItemMeta();
             assert im != null;
             return im.getPersistentDataContainer().has(key, type);
@@ -93,6 +93,66 @@ public class ContainerStorage {
 
     public static void makeTransmutationOrb(ItemStack i, EquivalencyTech plugin) {
         NamespacedKey key = new NamespacedKey(plugin.getInstance(), Constants.CS_IS_TRANSMUTATION_ORB);
+        setData(i, key, 1);
+    }
+
+    public static boolean isCrafting(ItemStack i, EquivalencyTech plugin) {
+        NamespacedKey key = new NamespacedKey(plugin.getInstance(), Constants.CS_IS_CRAFTING);
+        return containerHasData(i, key, PersistentDataType.INTEGER);
+    }
+
+    public static void makeCrafting(ItemStack i, EquivalencyTech plugin) {
+        NamespacedKey key = new NamespacedKey(plugin.getInstance(), Constants.CS_IS_CRAFTING);
+        setData(i, key, 1);
+    }
+
+    public static boolean isAlchemicalCoal(ItemStack i, EquivalencyTech plugin) {
+        NamespacedKey key = new NamespacedKey(plugin.getInstance(), Constants.CS_IS_COAL_1);
+        return containerHasData(i, key, PersistentDataType.INTEGER);
+    }
+
+    public static void makeAlchemicalCoal(ItemStack i, EquivalencyTech plugin) {
+        NamespacedKey key = new NamespacedKey(plugin.getInstance(), Constants.CS_IS_COAL_1);
+        setData(i, key, 1);
+    }
+
+    public static boolean isMobiusFuel(ItemStack i, EquivalencyTech plugin) {
+        NamespacedKey key = new NamespacedKey(plugin.getInstance(), Constants.CS_IS_COAL_2);
+        return containerHasData(i, key, PersistentDataType.INTEGER);
+    }
+
+    public static void makeMobiusFuel(ItemStack i, EquivalencyTech plugin) {
+        NamespacedKey key = new NamespacedKey(plugin.getInstance(), Constants.CS_IS_COAL_2);
+        setData(i, key, 1);
+    }
+
+    public static boolean isAeternalisFuel(ItemStack i, EquivalencyTech plugin) {
+        NamespacedKey key = new NamespacedKey(plugin.getInstance(), Constants.CS_IS_COAL_3);
+        return containerHasData(i, key, PersistentDataType.INTEGER);
+    }
+
+    public static void makeAeternalisFuel(ItemStack i, EquivalencyTech plugin) {
+        NamespacedKey key = new NamespacedKey(plugin.getInstance(), Constants.CS_IS_COAL_3);
+        setData(i, key, 1);
+    }
+
+    public static boolean isDarkMatter(ItemStack i, EquivalencyTech plugin) {
+        NamespacedKey key = new NamespacedKey(plugin.getInstance(), Constants.CS_IS_DRK);
+        return containerHasData(i, key, PersistentDataType.INTEGER);
+    }
+
+    public static void makeDarkMatter(ItemStack i, EquivalencyTech plugin) {
+        NamespacedKey key = new NamespacedKey(plugin.getInstance(), Constants.CS_IS_DRK);
+        setData(i, key, 1);
+    }
+
+    public static boolean isRedMatter(ItemStack i, EquivalencyTech plugin) {
+        NamespacedKey key = new NamespacedKey(plugin.getInstance(), Constants.CS_IS_RED);
+        return containerHasData(i, key, PersistentDataType.INTEGER);
+    }
+
+    public static void makeRedMatter(ItemStack i, EquivalencyTech plugin) {
+        NamespacedKey key = new NamespacedKey(plugin.getInstance(), Constants.CS_IS_RED);
         setData(i, key, 1);
     }
 }

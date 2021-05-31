@@ -6,13 +6,14 @@ import io.github.sefiraat.equivalencytech.configuration.ConfigStrings;
 import io.github.sefiraat.equivalencytech.statics.Colours;
 import io.github.sefiraat.equivalencytech.statics.ContainerStorage;
 import io.github.sefiraat.equivalencytech.statics.SkullTextures;
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class TransmutationOrb {
+public class AeternalisFuel {
 
     private final ItemStack item;
 
@@ -28,27 +29,23 @@ public class TransmutationOrb {
         return plugin;
     }
 
-    public TransmutationOrb(EquivalencyTech plugin) {
+    public AeternalisFuel(EquivalencyTech plugin) {
 
         this.plugin = plugin;
 
         ConfigStrings c = plugin.getConfigClass().getStrings();
 
-        item = SkullCreator. itemFromBase64(SkullTextures.ITEM_TRANSMUTATION_ORB);
+        item = SkullCreator. itemFromBase64(SkullTextures.ITEM_AETERNALIS_FUEL);
         ItemMeta im = item.getItemMeta();
-        im.setDisplayName(Colours.THEME_EMC_PURPLE + c.getItemTransmutationOrbName());
+        im.setDisplayName(Colours.THEME_ITEM_NAME_GENERAL + c.getItemAeternalisFuelName());
         List<String> lore = new ArrayList<>();
-        for (String s : c.getItemTransmutationOrbLore()) {
-            lore.add(Colours.THEME_PASSIVE_GRAY + s);
-        }
         lore.add("");
-        lore.add(Colours.THEME_CLICK_INSTRUCTION + c.getItemRightClickToOpen());
+        lore.add(ChatColor.GRAY + c.getGeneralCraftingItem());
         im.setLore(lore);
         item.setItemMeta(im);
 
-        ContainerStorage.makeTransmutationOrb(item, plugin);
+        ContainerStorage.makeAeternalisFuel(item, plugin);
         ContainerStorage.makeCrafting(item, plugin);
-
     }
 
 }

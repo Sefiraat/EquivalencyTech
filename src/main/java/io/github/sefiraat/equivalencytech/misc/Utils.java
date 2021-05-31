@@ -5,6 +5,7 @@ import io.github.sefiraat.equivalencytech.statics.Messages;
 import org.apache.commons.lang.WordUtils;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
 public class Utils {
 
@@ -14,6 +15,10 @@ public class Utils {
 
     public static Double getEMC(EquivalencyTech plugin, Material m) {
         return plugin.getEmcDefinitions().getEmcExtended().get(m);
+    }
+
+    public static Double getEmcEq(EquivalencyTech plugin, ItemStack i) {
+        return plugin.getEmcDefinitions().getEmcEQ().get(i.getItemMeta().getDisplayName());
     }
 
     public static String toTitleCase(String string) {
@@ -26,7 +31,7 @@ public class Utils {
     }
 
     public static void givePlayerOrb(EquivalencyTech plugin, Player player) {
-        player.getPlayer().getInventory().addItem(plugin.getEqItems().getTransmutationTable().getClone());
+        player.getPlayer().getInventory().addItem(plugin.getEqItems().getTransmutationOrb().getClone());
         player.getPlayer().sendMessage(Messages.messageCommandOrbGiven(plugin));
     }
 

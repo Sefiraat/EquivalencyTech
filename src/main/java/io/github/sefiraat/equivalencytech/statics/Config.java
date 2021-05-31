@@ -1,29 +1,25 @@
 package io.github.sefiraat.equivalencytech.statics;
 
 import io.github.sefiraat.equivalencytech.EquivalencyTech;
-import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 
 public class Config {
 
-    public static void addLearnedItem(EquivalencyTech plugin, Player player, Material material) {
+    public static void addLearnedItem(EquivalencyTech plugin, Player player, String itemName) {
         FileConfiguration c = plugin.getLearnedItemsConfig();
-        c.set(player.getUniqueId().toString() + "." + material.name(), true);
+        c.set(player.getUniqueId().toString() + "." + itemName, true);
     }
 
-    public static List<Material> getLearnedItems(EquivalencyTech plugin, Player player) {
+    public static List<String> getLearnedItems(EquivalencyTech plugin, Player player) {
         FileConfiguration c = plugin.getLearnedItemsConfig();
-        List<Material> list = new ArrayList<>();
+        List<String> list = new ArrayList<>();
         if (c.contains(player.getUniqueId().toString())) {
-            for (String s : c.getConfigurationSection(player.getUniqueId().toString()).getKeys(false)) {
-                list.add(Material.valueOf(s));
-            }
-            list.sort(Comparator.comparing(Material::name));
+            list.addAll(c.getConfigurationSection(player.getUniqueId().toString()).getKeys(false));
+            java.util.Collections.sort(list);
         }
         return list;
     }

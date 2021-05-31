@@ -1,13 +1,16 @@
 package io.github.sefiraat.equivalencytech.misc;
 
 import io.github.sefiraat.equivalencytech.EquivalencyTech;
+import io.github.sefiraat.equivalencytech.statics.ContainerStorage;
 import io.github.sefiraat.equivalencytech.statics.DebugLogging;
+import io.github.sefiraat.equivalencytech.statics.Recipes;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.inventory.*;
 
 import javax.annotation.Nullable;
 import java.util.EnumMap;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -21,11 +24,16 @@ public class EmcDefinitions {
     public Map<Material, Double> getEmcExtended() {
         return emcExtended;
     }
+    private final Map<String, Double> emcEQ = new HashMap<>();
+    public Map<String, Double> getEmcEQ() {
+        return emcEQ;
+    }
 
     public EmcDefinitions(EquivalencyTech plugin) {
         fillBase(plugin);
         fillSpecialCases();
         fillExtended(plugin);
+        fillEQItems(plugin);
     }
 
     private void fillBase(EquivalencyTech plugin) {
@@ -66,6 +74,56 @@ public class EmcDefinitions {
                     DebugLogging.logEmcNull(plugin, 1);
                 }
             }
+        }
+    }
+
+    private void fillEQItems(EquivalencyTech plugin) {
+        for (Map.Entry<List<ItemStack>, ItemStack> recipeMap : Recipes.getEQRecipes(plugin).entrySet()) {
+            ItemStack checkedItem = recipeMap.getValue();
+            DebugLogging.logBoring(plugin, checkedItem.getItemMeta().getDisplayName());
+            Double itemAmount = 0D;
+            for (ItemStack recipeItem : recipeMap.getKey()) {
+                Double testAmount = getEQEmcValue(plugin, recipeItem, 1);
+                if (testAmount != null) {
+                    itemAmount += testAmount;
+                }
+            }
+            DebugLogging.logBoring(plugin, checkedItem.getItemMeta().getDisplayName() + " added to EQ for : " + itemAmount);
+            emcEQ.put(checkedItem.getItemMeta().getDisplayName(), itemAmount);
+        }
+    }
+
+    @Nullable
+    private Double getEQEmcValue(EquivalencyTech plugin, ItemStack itemStack, Integer nestLevel) {
+        if (itemStack != null) {
+            DebugLogging.logEQStart(plugin, nestLevel, itemStack);
+            if (ContainerStorage.isCrafting(itemStack, plugin)) {
+                double amount = 0D;
+                DebugLogging.logEQisCrafting(plugin, nestLevel, itemStack);
+                if (emcEQ.containsKey(itemStack)) {
+                    amount = getEmcEQ().get(itemStack);
+                    DebugLogging.logEmcIsRegisteredExtended(plugin, amount, nestLevel);
+                } else {
+                    List<ItemStack> itemStacks = Recipes.getEQRecipe(plugin, itemStack);
+                    for (ItemStack itemStack1 : itemStacks) {
+                        if (itemStack1 != null) {
+                            Double stackAmount = getEQEmcValue(plugin, itemStack1, nestLevel + 1);
+                            if (stackAmount != null) {
+                                amount += stackAmount;
+                            } else {
+                                DebugLogging.logEmcNull(plugin, nestLevel);
+                                return null;
+                            }
+                        }
+                    }
+                }
+                return amount;
+            } else {
+                DebugLogging.logEQisNotCrafting(plugin, nestLevel, itemStack);
+                return getEmcValue(plugin, itemStack, nestLevel + 1);
+            }
+        } else {
+            return 0D;
         }
     }
 

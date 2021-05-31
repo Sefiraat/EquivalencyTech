@@ -3,10 +3,12 @@ package io.github.sefiraat.equivalencytech;
 import co.aikar.commands.PaperCommandManager;
 import io.github.sefiraat.equivalencytech.commands.Commands;
 import io.github.sefiraat.equivalencytech.configuration.Config;
-import io.github.sefiraat.equivalencytech.items.EQItems;
+import io.github.sefiraat.equivalencytech.listeners.CraftListener;
 import io.github.sefiraat.equivalencytech.listeners.OrbOpenListener;
+import io.github.sefiraat.equivalencytech.misc.EQItems;
 import io.github.sefiraat.equivalencytech.misc.EmcDefinitions;
 import io.github.sefiraat.equivalencytech.misc.SlimefunEQAddon;
+import io.github.sefiraat.equivalencytech.statics.Recipes;
 import io.github.sefiraat.equivalencytech.timers.TimerSave;
 import org.bstats.bukkit.Metrics;
 import org.bukkit.configuration.InvalidConfigurationException;
@@ -94,8 +96,6 @@ public class EquivalencyTech extends JavaPlugin {
         getLogger().info("########################################");
         getLogger().info("");
         getLogger().info("             EquivalencyTech            ");
-        getLogger().info("              Version 1.0.0             ");
-        getLogger().info("");
         getLogger().info("           Created by Sefiraat          ");
         getLogger().info("");
         getLogger().info("########################################");
@@ -109,10 +109,13 @@ public class EquivalencyTech extends JavaPlugin {
         new OrbOpenListener(this.getInstance());
 
         configClass = new Config(this.getInstance());
-        emcDefinitions = new EmcDefinitions(this.getInstance());
         eqItems = new EQItems(this.getInstance());
+        emcDefinitions = new EmcDefinitions(this.getInstance());
 
-        mcMMO = getServer().getPluginManager().isPluginEnabled("mcMMO");
+        addRecipes();
+
+        new CraftListener(this.getInstance());
+
         slimefun = getServer().getPluginManager().isPluginEnabled("Slimefun");
 
         if (isSlimefun()) {
@@ -192,6 +195,15 @@ public class EquivalencyTech extends JavaPlugin {
         } catch (IOException e) {
             this.getLogger().warning("Unable to save " + playerEMCConfigFile.getName());
         }
+    }
+
+    private void addRecipes() {
+        this.getServer().addRecipe(Recipes.recipeCoal1(this.getInstance()));
+        this.getServer().addRecipe(Recipes.recipeCoal2(this.getInstance()));
+        this.getServer().addRecipe(Recipes.recipeCoal3(this.getInstance()));
+        this.getServer().addRecipe(Recipes.recipeDarkMatter(this.getInstance()));
+        this.getServer().addRecipe(Recipes.recipeRedMatter(this.getInstance()));
+        this.getServer().addRecipe(Recipes.recipeTransmutationOrb(this.getInstance()));
     }
 
 }

@@ -74,10 +74,35 @@ public class GUIItems {
         return g;
     }
 
+    public static GuiItem guiEMCItem(EquivalencyTech plugin, ItemStack itemStack) {
+
+        GuiItem g = new GuiItem(itemStack);
+        ItemMeta im = itemStack.getItemMeta();
+
+        im.setDisplayName(ChatColor.WHITE + im.getDisplayName());
+        im.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+
+        im.setLore(getEmcItemLore(plugin, itemStack));
+        itemStack.setItemMeta(im);
+        g.setItemStack(itemStack);
+        return g;
+    }
+
     public static List<String> getEmcItemLore(EquivalencyTech plugin, Material material) {
         ConfigStrings c = plugin.getConfigClass().getStrings();
         List<String> lore = new ArrayList<>();
         lore.add(Colours.THEME_EMC_PURPLE + "EMC: " + Utils.getEMC(plugin, material));
+        lore.add("");
+        lore.add(Colours.THEME_CLICK_INSTRUCTION + "Left Click: " + ChatColor.WHITE + c.getGuiEntryLeftClick());
+        lore.add(Colours.THEME_CLICK_INSTRUCTION + "Right Click: " + ChatColor.WHITE + c.getGuiEntryRightClick());
+        return lore;
+    }
+
+
+    public static List<String> getEmcItemLore(EquivalencyTech plugin, ItemStack itemStack) {
+        ConfigStrings c = plugin.getConfigClass().getStrings();
+        List<String> lore = new ArrayList<>();
+        lore.add(Colours.THEME_EMC_PURPLE + "EMC: " + Utils.getEmcEq(plugin, itemStack));
         lore.add("");
         lore.add(Colours.THEME_CLICK_INSTRUCTION + "Left Click: " + ChatColor.WHITE + c.getGuiEntryLeftClick());
         lore.add(Colours.THEME_CLICK_INSTRUCTION + "Right Click: " + ChatColor.WHITE + c.getGuiEntryRightClick());

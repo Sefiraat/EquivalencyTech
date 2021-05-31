@@ -37,8 +37,14 @@ public final class Messages {
     public static String msgCmdEmcDisplay(Material m, Double emc) {
         return PREFIX + WARNING + Utils.materialFriendlyName(m) + " x 1 = EMC " + emc;
     }
+    public static String msgCmdEmcDisplay(String s, Double emc) {
+        return PREFIX + WARNING + s + " x 1 = EMC " + emc;
+    }
     public static String msgCmdEmcDisplayStack(Material m, Integer amount, Double emc) {
         return PREFIX + WARNING + Utils.materialFriendlyName(m) + " x " + amount + " = EMC " + emc;
+    }
+    public static String msgCmdEmcDisplayStack(String s, Integer amount, Double emc) {
+        return PREFIX + WARNING + s + " x " + amount + " = EMC " + emc;
     }
     public static String messageCommandSelectItem(EquivalencyTech plugin) {
         return PREFIX + NOTICE + plugin.getConfigClass().getStrings().getCommandSelectItem();

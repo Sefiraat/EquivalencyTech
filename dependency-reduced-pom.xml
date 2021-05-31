@@ -33,7 +33,7 @@
             </relocation>
             <relocation>
               <pattern>org.bstats</pattern>
-              <shadedPattern>io.github.sefiraat.equivalencytech</shadedPattern>
+              <shadedPattern>io.github.sefiraat.equivalencytech.bstats</shadedPattern>
             </relocation>
           </relocations>
         </configuration>
