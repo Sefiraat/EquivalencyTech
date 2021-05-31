@@ -28,6 +28,7 @@ The plugin currently features:
   * As at this first release, only vanilla items + EquiTech items can be condensed / synthesized. A Future update will allow for Slimefun core items to also be added.
 * DankTech
   * The addition of a new type of pack to DankTech that converts voided items into EMC with a % loss
+  * The addition of a new type of pack that builds from assigned slots using EMC.
 
 ## Pages
 * **_READ THIS ONE FIRST ->_** [Balancing](https://github.com/Sefiraat/EquivalencyTech/wiki/Balancing) **_<-READ THIS ONE FIRST_**
