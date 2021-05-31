@@ -1,6 +1,7 @@
 package io.github.sefiraat.equivalencytech.statics;
 
 import io.github.sefiraat.equivalencytech.EquivalencyTech;
+import io.github.sefiraat.equivalencytech.misc.Utils;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 
@@ -8,6 +9,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Config {
+
+    private Config() {
+        throw new IllegalStateException("Utility class");
+    }
 
     public static void addLearnedItem(EquivalencyTech plugin, Player player, String itemName) {
         FileConfiguration c = plugin.getLearnedItemsConfig();
@@ -24,13 +29,23 @@ public class Config {
         return list;
     }
 
-    public static void addPlayerEmc(EquivalencyTech plugin, Player player, Double emcValue) {
+    public static int getLearnedItemAmount(EquivalencyTech plugin, Player player) {
+        return getLearnedItems(plugin, player).size();
+    }
+
+    public static void addPlayerEmc(EquivalencyTech plugin, Player player, Double emcValue, Double totalEmc, int stackAmount) {
         double playerEmc = getPlayerEmc(plugin, player);
-        Double sum = playerEmc + emcValue;
+        int burnRate = plugin.getConfigClass().getEmc().getBurnRate();
+        if (burnRate > 0) {
+            totalEmc -= ((totalEmc / 100) * burnRate);
+        }
+        totalEmc = Utils.roundDown(totalEmc, 2);
+        Double sum = playerEmc + totalEmc;
         if (sum.equals(Double.POSITIVE_INFINITY)) {
             sum = Double.MAX_VALUE;
         }
         setPlayerEmc(plugin, player, sum);
+        player.sendMessage(Messages.messageGuiEmcGiven(plugin, player, emcValue, totalEmc, stackAmount, burnRate));
     }
 
     public static void removePlayerEmc(EquivalencyTech plugin, Player player, Double emcValue) {

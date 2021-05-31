@@ -44,9 +44,9 @@ public class EQItems {
         return redMatter;
     }
 
-    private Map<String, ItemStack> eqItems;
-    public Map<String, ItemStack> getEqItems() {
-        return eqItems;
+    private final Map<String, ItemStack> eqItemMap;
+    public Map<String, ItemStack> getEqItemMap() {
+        return eqItemMap;
     }
 
     public EQItems(EquivalencyTech plugin) {
@@ -58,13 +58,13 @@ public class EQItems {
         darkMatter = new DarkMatter(plugin);
         redMatter = new RedMatter(plugin);
 
-        eqItems = new HashMap<>();
-        eqItems.put(transmutationOrb.getItem().getItemMeta().getDisplayName(), transmutationOrb.getClone());
-        eqItems.put(alchemicalCoal.getItem().getItemMeta().getDisplayName(), alchemicalCoal.getClone());
-        eqItems.put(mobiusFuel.getItem().getItemMeta().getDisplayName(), mobiusFuel.getClone());
-        eqItems.put(aeternalisFuel.getItem().getItemMeta().getDisplayName(), aeternalisFuel.getClone());
-        eqItems.put(darkMatter.getItem().getItemMeta().getDisplayName(), darkMatter.getClone());
-        eqItems.put(redMatter.getItem().getItemMeta().getDisplayName(), redMatter.getClone());
+        eqItemMap = new HashMap<>();
+        eqItemMap.put(transmutationOrb.getItem().getItemMeta().getDisplayName(), transmutationOrb.getClone());
+        eqItemMap.put(alchemicalCoal.getItem().getItemMeta().getDisplayName(), alchemicalCoal.getClone());
+        eqItemMap.put(mobiusFuel.getItem().getItemMeta().getDisplayName(), mobiusFuel.getClone());
+        eqItemMap.put(aeternalisFuel.getItem().getItemMeta().getDisplayName(), aeternalisFuel.getClone());
+        eqItemMap.put(darkMatter.getItem().getItemMeta().getDisplayName(), darkMatter.getClone());
+        eqItemMap.put(redMatter.getItem().getItemMeta().getDisplayName(), redMatter.getClone());
     }
 
 

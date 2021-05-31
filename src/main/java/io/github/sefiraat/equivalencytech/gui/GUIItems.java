@@ -1,9 +1,12 @@
-package io.github.sefiraat.equivalencytech.statics;
+package io.github.sefiraat.equivalencytech.gui;
 
 import dev.dbassett.skullcreator.SkullCreator;
 import io.github.sefiraat.equivalencytech.EquivalencyTech;
 import io.github.sefiraat.equivalencytech.configuration.ConfigStrings;
 import io.github.sefiraat.equivalencytech.misc.Utils;
+import io.github.sefiraat.equivalencytech.statics.Colours;
+import io.github.sefiraat.equivalencytech.statics.Config;
+import io.github.sefiraat.equivalencytech.statics.SkullTextures;
 import me.mattstudios.mfgui.gui.guis.GuiItem;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Material;
@@ -27,7 +30,7 @@ public class GUIItems {
         ItemMeta im = i.getItemMeta();
         im.setDisplayName(guiDisplayNameInfo(plugin));
         im.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-        im.setLore(guiDisplayLoreInfo(plugin, player, Config.getLearnedItems(plugin, player).size(), plugin.getEmcDefinitions().getEmcExtended().size()));
+        im.setLore(guiDisplayLoreInfo(plugin, player));
         i.setItemMeta(im);
         g.setItemStack(i);
         g.setAction(event -> event.setCancelled(true));
@@ -113,8 +116,10 @@ public class GUIItems {
         return ChatColor.RED + plugin.getConfigClass().getStrings().getGuiInfoName();
     }
 
-    public static List<String> guiDisplayLoreInfo(EquivalencyTech plugin, Player player, int recipesKnown, int recipesTotal) {
+    public static List<String> guiDisplayLoreInfo(EquivalencyTech plugin, Player player) {
         List<String> l = new ArrayList<>();
+        int recipesKnown = Config.getLearnedItemAmount(plugin, player);
+        int recipesTotal = Utils.totalRecipes(plugin);
         l.add("" + ChatColor.GOLD + ChatColor.BOLD + plugin.getConfigClass().getStrings().getGuiInfoRecipes() + ": " + ChatColor.WHITE + recipesKnown + "/" + recipesTotal);
         l.add("");
         l.add("" + ChatColor.GOLD + ChatColor.BOLD + "EMC: " + ChatColor.WHITE + Config.getPlayerEmc(plugin, player));

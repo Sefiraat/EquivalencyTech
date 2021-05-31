@@ -9,6 +9,8 @@ import org.bukkit.Material;
 import org.bukkit.inventory.*;
 
 import javax.annotation.Nullable;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.List;
@@ -39,8 +41,10 @@ public class EmcDefinitions {
     private void fillBase(EquivalencyTech plugin) {
         Map<String, Double> h = plugin.getConfigClass().getEmc().getEmcBaseValues();
         for (Map.Entry<String, Double> entry : h.entrySet()) {
-            emcBase.put(Material.matchMaterial(entry.getKey()), entry.getValue());
-            DebugLogging.logEmcBaseValueLoaded(plugin, entry.getKey(), entry.getValue());
+            if (entry.getValue() > 0) {
+                emcBase.put(Material.matchMaterial(entry.getKey()), entry.getValue());
+                DebugLogging.logEmcBaseValueLoaded(plugin, entry.getKey(), entry.getValue());
+            }
         }
     }
 
@@ -53,11 +57,9 @@ public class EmcDefinitions {
     private Double specialCaseNetheriteIngot() {
         return (emcBase.get(Material.GOLD_INGOT) * 4) + (emcBase.get(Material.NETHERITE_SCRAP) * 4);
     }
-
     private Double specialCaseDriedKelp() {
         return emcBase.get(Material.KELP);
     }
-
     private Double specialCaseBoneMeal() {
         return emcBase.get(Material.BONE) / 3;
     }
@@ -69,7 +71,7 @@ public class EmcDefinitions {
                 Double emcValue = getEmcValue(plugin, i, 1);
                 if (emcValue != null) {
                     DebugLogging.logEmcPosted(plugin, emcValue, 1);
-                    emcExtended.put(i.getType(), emcValue);
+                    emcExtended.put(i.getType(), roundDown(emcValue,2));
                 } else {
                     DebugLogging.logEmcNull(plugin, 1);
                 }
@@ -89,7 +91,7 @@ public class EmcDefinitions {
                 }
             }
             DebugLogging.logBoring(plugin, checkedItem.getItemMeta().getDisplayName() + " added to EQ for : " + itemAmount);
-            emcEQ.put(checkedItem.getItemMeta().getDisplayName(), itemAmount);
+            emcEQ.put(checkedItem.getItemMeta().getDisplayName(), roundDown(itemAmount,2));
         }
     }
 
@@ -99,9 +101,9 @@ public class EmcDefinitions {
             DebugLogging.logEQStart(plugin, nestLevel, itemStack);
             if (ContainerStorage.isCrafting(itemStack, plugin)) {
                 double amount = 0D;
-                DebugLogging.logEQisCrafting(plugin, nestLevel, itemStack);
-                if (emcEQ.containsKey(itemStack)) {
-                    amount = getEmcEQ().get(itemStack);
+                DebugLogging.logEQisCrafting(plugin, nestLevel);
+                if (emcEQ.containsKey(itemStack.getItemMeta().getDisplayName())) {
+                    amount = getEmcEQ().get(itemStack.getItemMeta().getDisplayName());
                     DebugLogging.logEmcIsRegisteredExtended(plugin, amount, nestLevel);
                 } else {
                     List<ItemStack> itemStacks = Recipes.getEQRecipe(plugin, itemStack);
@@ -119,7 +121,7 @@ public class EmcDefinitions {
                 }
                 return amount;
             } else {
-                DebugLogging.logEQisNotCrafting(plugin, nestLevel, itemStack);
+                DebugLogging.logEQisNotCrafting(plugin, nestLevel);
                 return getEmcValue(plugin, itemStack, nestLevel + 1);
             }
         } else {
@@ -157,6 +159,12 @@ public class EmcDefinitions {
         }
         DebugLogging.logEmcRecipeResult(plugin, eVal, nestLevel);
         return eVal;
+    }
+
+    private Double roundDown(Double value, int places) {
+        BigDecimal decimal = new BigDecimal(value);
+        decimal = decimal.setScale(places, RoundingMode.DOWN);
+        return decimal.doubleValue();
     }
 
     @Nullable

@@ -64,8 +64,8 @@ public final class Messages {
         return PREFIX + Colours.THEME_PASSIVE_CONGRATULATE + plugin.getConfigClass().getStrings().getGuiItemLearned();
     }
 
-    public static String messageGuiEmcGiven(EquivalencyTech plugin, Player player, double emcBase, double emcTotal, int itemAmt) {
-        return PREFIX + SUCCESS + "+" + emcTotal + " EMC " + PASSIVE + "(" + emcBase + " * " + itemAmt + ") : " + NOTICE + " [EMC : " + Config.getPlayerEmc(plugin, player) + "]";
+    public static String messageGuiEmcGiven(EquivalencyTech plugin, Player player, double emcBase, double emcTotal, int itemAmt, int burnRate) {
+        return PREFIX + SUCCESS + "+" + emcTotal + " EMC " + PASSIVE + "(" + emcBase + " * " + itemAmt + ")" + ERROR + " burn rate = " + burnRate + "%" + NOTICE+ " : [EMC : " + Config.getPlayerEmc(plugin, player) + "]";
     }
 
     public static String messageGuiEmcRemoved(EquivalencyTech plugin, Player player, double emcBase, double emcTotal, int itemAmt) {

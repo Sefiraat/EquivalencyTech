@@ -13,8 +13,14 @@ public class ConfigEMC {
         return emcBaseValues;
     }
 
+    private final int burnRate;
+    public int getBurnRate() {
+        return burnRate;
+    }
+
     public ConfigEMC(EquivalencyTech plugin) {
         loadBaseEmcValues(plugin);
+        burnRate = plugin.getConfig().getInt("EMC_VALUES.BURN_RATE");
     }
 
     private void loadBaseEmcValues(EquivalencyTech plugin) {

@@ -15,6 +15,10 @@ import java.util.Map;
 
 public class Recipes {
 
+    private Recipes() {
+        throw new IllegalStateException("Utility class");
+    }
+
     public static Recipe recipeCoal1(EquivalencyTech plugin) {
         ItemStack i = plugin.getEqItems().getAlchemicalCoal().getClone();
         NamespacedKey key = new NamespacedKey(plugin, "coal1");
@@ -24,7 +28,7 @@ public class Recipes {
         return r;
     }
 
-    public static List<ItemStack> recipeCoal1Check(EquivalencyTech plugin) {
+    public static List<ItemStack> recipeCoal1Check() {
         List<ItemStack> itemStacks = new ArrayList<>();
         itemStacks.add(new ItemStack(Material.COAL));
         itemStacks.add(new ItemStack(Material.COAL));
@@ -208,7 +212,7 @@ public class Recipes {
 
     public static Map<List<ItemStack>, ItemStack> getEQRecipes(EquivalencyTech plugin) {
         Map<List<ItemStack>, ItemStack> recipes = new HashMap<>();
-        recipes.put(recipeCoal1Check(plugin), plugin.getEqItems().getAlchemicalCoal().getClone());
+        recipes.put(recipeCoal1Check(), plugin.getEqItems().getAlchemicalCoal().getClone());
         recipes.put(recipeCoal2Check(plugin), plugin.getEqItems().getMobiusFuel().getClone());
         recipes.put(recipeCoal3Check(plugin), plugin.getEqItems().getAeternalisFuel().getClone());
         recipes.put(recipeDarkMatterCheck(plugin), plugin.getEqItems().getDarkMatter().getClone());
@@ -219,7 +223,7 @@ public class Recipes {
 
     public static List<ItemStack> getEQRecipe(EquivalencyTech plugin, ItemStack itemStack) {
         if (itemStack.equals(plugin.getEqItems().getAlchemicalCoal().getItem())) {
-            return recipeCoal1Check(plugin);
+            return recipeCoal1Check();
         } else if (itemStack.equals(plugin.getEqItems().getMobiusFuel().getItem())) {
             return recipeCoal2Check(plugin);
         } else if (itemStack.equals(plugin.getEqItems().getAeternalisFuel().getItem())) {
@@ -231,7 +235,7 @@ public class Recipes {
         } else if (itemStack.equals(plugin.getEqItems().getTransmutationOrb().getItem())) {
             return recipeTransmutationOrbCheck(plugin);
         }
-        return null;
+        return new ArrayList<>();
     }
 
 }

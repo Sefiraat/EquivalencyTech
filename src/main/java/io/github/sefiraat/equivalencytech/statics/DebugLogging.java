@@ -94,19 +94,19 @@ public class DebugLogging {
 
     public static void logEQStart(EquivalencyTech plugin, Integer nestLevel, ItemStack itemStack) {
         if (plugin.getConfigClass().getBools().getDebuggingLogs()) {
-            plugin.getLogger().log(Level.INFO,"{0}EQ Recipe check starting : ItemStack is : {1}", new Object[]{NEST.repeat(nestLevel), itemStack.getType().toString()});
+            plugin.getLogger().log(Level.INFO,"{0}EQ Recipe check starting : ItemStack is : {1}", new Object[]{NEST.repeat(nestLevel), itemStack.getType()});
         }
     }
 
-    public static void logEQisCrafting(EquivalencyTech plugin, Integer nestLevel, ItemStack itemStack) {
+    public static void logEQisCrafting(EquivalencyTech plugin, Integer nestLevel) {
         if (plugin.getConfigClass().getBools().getDebuggingLogs()) {
             plugin.getLogger().log(Level.INFO,"{0}ItemStack is a EQ craftable - ", new Object[]{NEST.repeat(nestLevel), });
         }
     }
 
-    public static void logEQisNotCrafting(EquivalencyTech plugin, Integer nestLevel, ItemStack itemStack) {
+    public static void logEQisNotCrafting(EquivalencyTech plugin, Integer nestLevel) {
         if (plugin.getConfigClass().getBools().getDebuggingLogs()) {
-            plugin.getLogger().log(Level.INFO,"{0}ItemStack is NOT EQ craftable - moving to extended/base - ", new Object[]{NEST.repeat(nestLevel), itemStack.getType().toString()});
+            plugin.getLogger().log(Level.INFO,"{0}ItemStack is NOT EQ craftable - moving to extended/base - ", new Object[]{NEST.repeat(nestLevel)});
         }
     }
 

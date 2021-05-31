@@ -7,6 +7,9 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 public class Utils {
 
     private Utils() {
@@ -33,6 +36,18 @@ public class Utils {
     public static void givePlayerOrb(EquivalencyTech plugin, Player player) {
         player.getPlayer().getInventory().addItem(plugin.getEqItems().getTransmutationOrb().getClone());
         player.getPlayer().sendMessage(Messages.messageCommandOrbGiven(plugin));
+    }
+
+    public static double roundDown(double number, int places) {
+        BigDecimal value = new BigDecimal(number);
+        value = value.setScale(places, RoundingMode.DOWN);
+        return value.doubleValue();
+    }
+
+    public static int totalRecipes(EquivalencyTech plugin) {
+        int recExtended = plugin.getEmcDefinitions().getEmcExtended().size();
+        int recEQ = plugin.getEmcDefinitions().getEmcEQ().size();
+        return recExtended + recEQ;
     }
 
 }
