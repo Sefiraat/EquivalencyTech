@@ -15,6 +15,8 @@ The plugin currently features:
   * This key item lets users input their unwanted items to convert them to EMC.
   * The first time a new item is added, it is 'learned'.
   * Learned items can be synthesized using stored EMC.
+* Slimefun
+  * If Slimefun is installed, this plugin's recipes will be added to the Slimefun Guide. **this plugin does not require Slimefun to run**
 
 ## Planned Features
 * Automation
