@@ -5,7 +5,6 @@ import io.github.sefiraat.equivalencytech.EquivalencyTech;
 import io.github.sefiraat.equivalencytech.configuration.ConfigStrings;
 import io.github.sefiraat.equivalencytech.misc.Utils;
 import io.github.sefiraat.equivalencytech.statics.Config;
-import io.github.sefiraat.equivalencytech.statics.ContainerStorage;
 import io.github.sefiraat.equivalencytech.statics.Messages;
 import io.github.sefiraat.equivalencytech.statics.SkullTextures;
 import me.mattstudios.mfgui.gui.guis.GuiItem;

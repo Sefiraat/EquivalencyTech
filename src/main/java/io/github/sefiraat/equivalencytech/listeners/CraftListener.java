@@ -27,8 +27,6 @@ public class CraftListener implements Listener {
 
         if (e.getView().getPlayer() instanceof Player) {
 
-            Player player = (Player) e.getView().getPlayer();
-
             if (e.getRecipe() != null && e.getRecipe().getResult().getType() == Material.PLAYER_HEAD) {
                 ItemStack[] contents = e.getInventory().getMatrix();
                 List<ItemStack> contentLayer = new ArrayList<>();
@@ -38,7 +36,6 @@ public class CraftListener implements Listener {
                     if (itemStack != null) {
                         clone = itemStack.clone();
                         clone.setAmount(1);
-                        player.sendMessage(clone.getType().toString());
                     }
                     contentLayer.add(clone);
                 }

@@ -5,7 +5,6 @@ import io.github.sefiraat.equivalencytech.misc.Utils;
 import io.github.sefiraat.equivalencytech.statics.Config;
 import io.github.sefiraat.equivalencytech.statics.ContainerStorage;
 import io.github.sefiraat.equivalencytech.statics.Messages;
-import jdk.jshell.execution.Util;
 import me.mattstudios.mfgui.gui.components.ItemBuilder;
 import me.mattstudios.mfgui.gui.guis.GuiItem;
 import me.mattstudios.mfgui.gui.guis.PaginatedGui;
@@ -139,21 +138,15 @@ public class GuiTransmutationOrb extends PaginatedGui {
             return;
         }
 
-        Double emcValue;
-
         Material material = itemStack.getType();
-        if (isEQ) {
-            String itemName = itemStack.getItemMeta().getDisplayName();
-            emcValue = plugin.getEmcDefinitions().getEmcEQ().get(itemName);
-        } else {
-            emcValue = plugin.getEmcDefinitions().getEmcValue(material);
-        }
+        Double emcValue = Utils.getEMC(plugin, itemStack);
+
         boolean mustClose = false;
         if (emcValue != null) {
             double totalEmc = emcValue * itemStack.getAmount();
             String entryName;
             if (isEQ) {
-                entryName = itemStack.getItemMeta().getDisplayName();
+                entryName = Utils.eqNameConfig(itemStack.getItemMeta().getDisplayName());
             } else {
                 entryName = material.toString();
             }
@@ -202,7 +195,7 @@ public class GuiTransmutationOrb extends PaginatedGui {
         String itemName;
 
         if (isEQ) {
-            itemName = clickedItem.getItemMeta().getDisplayName();
+            itemName = Utils.eqNameConfig(clickedItem.getItemMeta().getDisplayName());
         } else {
             itemName = clickedItem.getType().toString();
         }
@@ -235,7 +228,7 @@ public class GuiTransmutationOrb extends PaginatedGui {
         Double emcValue = Utils.getEMC(plugin, clickedItem);
 
         if (isEQ) {
-            itemName = e.getCurrentItem().getItemMeta().getDisplayName();
+            itemName = Utils.eqNameConfig(e.getCurrentItem().getItemMeta().getDisplayName());
         } else {
             itemName = material.toString();
         }
