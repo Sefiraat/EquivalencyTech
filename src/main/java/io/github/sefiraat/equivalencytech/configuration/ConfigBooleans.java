@@ -3,7 +3,7 @@ package io.github.sefiraat.equivalencytech.configuration;
 import io.github.sefiraat.equivalencytech.EquivalencyTech;
 import org.bukkit.configuration.file.FileConfiguration;
 
-public class ConfigBooleans {
+public final class ConfigBooleans {
 
     private final boolean debuggingLogs;
 

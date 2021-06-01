@@ -1,4 +1,4 @@
-package io.github.sefiraat.equivalencytech.items;
+package io.github.sefiraat.equivalencytech.item.builders;
 
 import dev.dbassett.skullcreator.SkullCreator;
 import io.github.sefiraat.equivalencytech.EquivalencyTech;

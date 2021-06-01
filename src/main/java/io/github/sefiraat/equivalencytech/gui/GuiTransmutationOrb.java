@@ -1,8 +1,8 @@
 package io.github.sefiraat.equivalencytech.gui;
 
 import io.github.sefiraat.equivalencytech.EquivalencyTech;
+import io.github.sefiraat.equivalencytech.configuration.ConfigMain;
 import io.github.sefiraat.equivalencytech.misc.Utils;
-import io.github.sefiraat.equivalencytech.statics.Config;
 import io.github.sefiraat.equivalencytech.statics.ContainerStorage;
 import io.github.sefiraat.equivalencytech.statics.Messages;
 import me.mattstudios.mfgui.gui.components.ItemBuilder;
@@ -50,7 +50,7 @@ public class GuiTransmutationOrb extends PaginatedGui {
         gui.setItem(GuiTransmutationOrb.ARRAY_FILLER_SLOTS, GUIItems.guiOrbBorder(plugin));
         gui.setItem(GuiTransmutationOrb.INFO_SLOT, GUIItems.guiOrbInfo(plugin, player));
 
-        List<String> learnedItems = Config.getLearnedItems(plugin, player);
+        List<String> learnedItems = ConfigMain.getLearnedItems(plugin, player);
 
         int leftOverSlots = GuiTransmutationOrb.PAGE_SIZE - (learnedItems.size() % GuiTransmutationOrb.PAGE_SIZE);
 
@@ -150,12 +150,12 @@ public class GuiTransmutationOrb extends PaginatedGui {
             } else {
                 entryName = material.toString();
             }
-                if (!Config.getLearnedItems(plugin, player).contains(entryName)) {
-                    Config.addLearnedItem(plugin, player, entryName);
+                if (!ConfigMain.getLearnedItems(plugin, player).contains(entryName)) {
+                    ConfigMain.addLearnedItem(plugin, player, entryName);
                     player.sendMessage(Messages.messageGuiItemLearned(plugin));
                     mustClose = true;
                 }
-            Config.addPlayerEmc(plugin, player, emcValue, totalEmc, itemStack.getAmount());
+            ConfigMain.addPlayerEmc(plugin, player, emcValue, totalEmc, itemStack.getAmount());
             itemStack.setAmount(0);
         } else {
             player.sendMessage(Messages.msgCmdEmcNone(plugin));
@@ -190,7 +190,7 @@ public class GuiTransmutationOrb extends PaginatedGui {
 
         ItemStack clickedItem = e.getCurrentItem();
         boolean isEQ = ContainerStorage.isCrafting(clickedItem, plugin);
-        double playerEmc = Config.getPlayerEmc(plugin, player);
+        double playerEmc = ConfigMain.getPlayerEmc(plugin, player);
         Double emcValue = Utils.getEMC(plugin, clickedItem);
         String itemName;
 
@@ -208,7 +208,7 @@ public class GuiTransmutationOrb extends PaginatedGui {
                 itemStack = new ItemStack(e.getCurrentItem().getType());
             }
             player.getInventory().addItem(itemStack);
-            Config.removePlayerEmc(plugin, player, emcValue);
+            ConfigMain.removePlayerEmc(plugin, player, emcValue);
             player.sendMessage(Messages.messageGuiEmcRemoved(plugin, player, emcValue, emcValue, 1));
         } else {
             player.sendMessage(Messages.messageGuiEmcNotEnough(plugin, player));
@@ -218,7 +218,7 @@ public class GuiTransmutationOrb extends PaginatedGui {
     private static void emcWithdrawStack(InventoryClickEvent e, EquivalencyTech plugin) {
 
         Player player = (Player) e.getWhoClicked();
-        double playerEmc = Config.getPlayerEmc(plugin, player);
+        double playerEmc = ConfigMain.getPlayerEmc(plugin, player);
         ItemStack clickedItem = e.getCurrentItem();
         Material material = clickedItem.getType();
 
@@ -260,7 +260,7 @@ public class GuiTransmutationOrb extends PaginatedGui {
 
             itemStack.setAmount(amount);
             player.getInventory().addItem(itemStack);
-            Config.removePlayerEmc(plugin, player, emcValueStack);
+            ConfigMain.removePlayerEmc(plugin, player, emcValueStack);
             player.sendMessage(Messages.messageGuiEmcRemoved(plugin, player, emcValue, emcValueStack, amount));
         }
     }

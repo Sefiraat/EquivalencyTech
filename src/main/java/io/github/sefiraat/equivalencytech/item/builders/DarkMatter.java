@@ -1,4 +1,4 @@
-package io.github.sefiraat.equivalencytech.items;
+package io.github.sefiraat.equivalencytech.item.builders;
 
 import dev.dbassett.skullcreator.SkullCreator;
 import io.github.sefiraat.equivalencytech.EquivalencyTech;
@@ -13,7 +13,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AeternalisFuel {
+public class DarkMatter {
 
     private final ItemStack item;
     private final EquivalencyTech plugin;
@@ -21,6 +21,7 @@ public class AeternalisFuel {
     public ItemStack getItemClone() {
         return item.clone();
     }
+
     public ItemStack getItem() {
         return item;
     }
@@ -29,22 +30,22 @@ public class AeternalisFuel {
         return plugin;
     }
 
-    public AeternalisFuel(EquivalencyTech plugin) {
+    public DarkMatter(EquivalencyTech plugin) {
 
         this.plugin = plugin;
 
         ConfigStrings c = plugin.getConfigClass().getStrings();
 
-        item = SkullCreator. itemFromBase64(SkullTextures.ITEM_AETERNALIS_FUEL);
+        item = SkullCreator. itemFromBase64(SkullTextures.ITEM_DARK_MATTER);
         ItemMeta im = item.getItemMeta();
-        im.setDisplayName(Messages.THEME_ITEM_NAME_GENERAL + c.getItemAeternalisFuelName());
+        im.setDisplayName(Messages.THEME_ITEM_NAME_GENERAL + c.getItemDarkMatterName());
         List<String> lore = new ArrayList<>();
         lore.add("");
         lore.add(ChatColor.GRAY + c.getGeneralCraftingItem());
         im.setLore(lore);
         item.setItemMeta(im);
 
-        ContainerStorage.makeAeternalisFuel(item, plugin);
+        ContainerStorage.makeDarkMatter(item, plugin);
         ContainerStorage.makeCrafting(item, plugin);
     }
 

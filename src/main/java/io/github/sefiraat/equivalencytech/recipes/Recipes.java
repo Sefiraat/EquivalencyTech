@@ -1,4 +1,4 @@
-package io.github.sefiraat.equivalencytech.statics;
+package io.github.sefiraat.equivalencytech.recipes;
 
 import io.github.sefiraat.equivalencytech.EquivalencyTech;
 import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
@@ -13,10 +13,19 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public final class Recipes {
+public class Recipes {
 
-    private Recipes() {
-        throw new IllegalStateException("Utility class");
+    public Recipes(EquivalencyTech plugin) {
+        addRecipes(plugin);
+    }
+
+    private void addRecipes(EquivalencyTech plugin) {
+        plugin.getServer().addRecipe(Recipes.recipeCoal1(plugin));
+        plugin.getServer().addRecipe(Recipes.recipeCoal2(plugin));
+        plugin.getServer().addRecipe(Recipes.recipeCoal3(plugin));
+        plugin.getServer().addRecipe(Recipes.recipeDarkMatter(plugin));
+        plugin.getServer().addRecipe(Recipes.recipeRedMatter(plugin));
+        plugin.getServer().addRecipe(Recipes.recipeTransmutationOrb(plugin));
     }
 
     public static Recipe recipeCoal1(EquivalencyTech plugin) {

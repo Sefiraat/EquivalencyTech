@@ -1,7 +1,8 @@
-package io.github.sefiraat.equivalencytech.misc;
+package io.github.sefiraat.equivalencytech.item;
 
 import io.github.sefiraat.equivalencytech.EquivalencyTech;
-import io.github.sefiraat.equivalencytech.items.*;
+import io.github.sefiraat.equivalencytech.item.builders.*;
+import io.github.sefiraat.equivalencytech.misc.Utils;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.HashMap;

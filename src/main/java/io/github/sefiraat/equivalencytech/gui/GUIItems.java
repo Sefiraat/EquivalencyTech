@@ -2,9 +2,9 @@ package io.github.sefiraat.equivalencytech.gui;
 
 import dev.dbassett.skullcreator.SkullCreator;
 import io.github.sefiraat.equivalencytech.EquivalencyTech;
+import io.github.sefiraat.equivalencytech.configuration.ConfigMain;
 import io.github.sefiraat.equivalencytech.configuration.ConfigStrings;
 import io.github.sefiraat.equivalencytech.misc.Utils;
-import io.github.sefiraat.equivalencytech.statics.Config;
 import io.github.sefiraat.equivalencytech.statics.Messages;
 import io.github.sefiraat.equivalencytech.statics.SkullTextures;
 import me.mattstudios.mfgui.gui.guis.GuiItem;
@@ -96,11 +96,11 @@ public class GUIItems {
 
     public static List<String> guiDisplayLoreInfo(EquivalencyTech plugin, Player player) {
         List<String> l = new ArrayList<>();
-        int recipesKnown = Config.getLearnedItemAmount(plugin, player);
+        int recipesKnown = ConfigMain.getLearnedItemAmount(plugin, player);
         int recipesTotal = Utils.totalRecipes(plugin);
         l.add("" + ChatColor.GOLD + ChatColor.BOLD + plugin.getConfigClass().getStrings().getGuiInfoRecipes() + ": " + ChatColor.WHITE + recipesKnown + "/" + recipesTotal);
         l.add("");
-        l.add("" + ChatColor.GOLD + ChatColor.BOLD + "EMC: " + ChatColor.WHITE + Config.getPlayerEmc(plugin, player));
+        l.add("" + ChatColor.GOLD + ChatColor.BOLD + "EMC: " + ChatColor.WHITE + ConfigMain.getPlayerEmc(plugin, player));
         return l;
     }
 

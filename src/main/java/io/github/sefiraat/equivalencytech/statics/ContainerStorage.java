@@ -19,10 +19,6 @@ public final class ContainerStorage {
     public static final String CS_IS_DRK = "is_drk";
     public static final String CS_IS_RED = "is_red";
 
-    private ContainerStorage() {
-        throw new IllegalStateException("Utility class");
-    }
-
     public static boolean containerHasData(ItemStack i, NamespacedKey key, PersistentDataType<?, ?> type) {
         if (i != null && i.hasItemMeta()) {
             ItemMeta im = i.getItemMeta();
@@ -163,4 +159,9 @@ public final class ContainerStorage {
         NamespacedKey key = new NamespacedKey(plugin.getInstance(), CS_IS_RED);
         setData(i, key, 1);
     }
+
+    private ContainerStorage() {
+        throw new IllegalStateException("Utility class");
+    }
+
 }

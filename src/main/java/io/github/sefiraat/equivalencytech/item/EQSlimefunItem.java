@@ -1,4 +1,4 @@
-package io.github.sefiraat.equivalencytech.misc;
+package io.github.sefiraat.equivalencytech.item;
 
 import io.github.thebusybiscuit.slimefun4.core.attributes.NotConfigurable;
 import io.github.thebusybiscuit.slimefun4.core.attributes.NotPlaceable;

@@ -2,7 +2,8 @@ package io.github.sefiraat.equivalencytech.misc;
 
 import dev.dbassett.skullcreator.SkullCreator;
 import io.github.sefiraat.equivalencytech.EquivalencyTech;
-import io.github.sefiraat.equivalencytech.statics.Recipes;
+import io.github.sefiraat.equivalencytech.item.EQSlimefunItem;
+import io.github.sefiraat.equivalencytech.recipes.Recipes;
 import io.github.sefiraat.equivalencytech.statics.SkullTextures;
 import io.github.thebusybiscuit.slimefun4.api.SlimefunAddon;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;

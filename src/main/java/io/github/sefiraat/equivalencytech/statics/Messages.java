@@ -1,6 +1,7 @@
 package io.github.sefiraat.equivalencytech.statics;
 
 import io.github.sefiraat.equivalencytech.EquivalencyTech;
+import io.github.sefiraat.equivalencytech.configuration.ConfigMain;
 import io.github.sefiraat.equivalencytech.misc.Utils;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Material;
@@ -57,7 +58,7 @@ public final class Messages {
     }
 
     public static String messageCommandEmc(EquivalencyTech plugin, Player player) {
-        return PREFIX + THEME_NOTICE + "You have " + THEME_SUCCESS + Config.getPlayerEmc(plugin, player) + THEME_NOTICE + " EMC.";
+        return PREFIX + THEME_NOTICE + "You have " + THEME_SUCCESS + ConfigMain.getPlayerEmc(plugin, player) + THEME_NOTICE + " EMC.";
     }
 
     // GUI
@@ -67,15 +68,15 @@ public final class Messages {
     }
 
     public static String messageGuiEmcGiven(EquivalencyTech plugin, Player player, double emcBase, double emcTotal, int itemAmt, int burnRate) {
-        return PREFIX + THEME_SUCCESS + "+" + emcTotal + " EMC " + THEME_PASSIVE + "(" + emcBase + " * " + itemAmt + ")" + THEME_ERROR + " burn rate = " + burnRate + "%" + THEME_NOTICE + " : [EMC : " + Config.getPlayerEmc(plugin, player) + "]";
+        return PREFIX + THEME_SUCCESS + "+" + emcTotal + " EMC " + THEME_PASSIVE + "(" + emcBase + " * " + itemAmt + ")" + THEME_ERROR + " burn rate = " + burnRate + "%" + THEME_NOTICE + " : [EMC : " + ConfigMain.getPlayerEmc(plugin, player) + "]";
     }
 
     public static String messageGuiEmcRemoved(EquivalencyTech plugin, Player player, double emcBase, double emcTotal, int itemAmt) {
-        return PREFIX + THEME_ERROR + "-" + emcTotal + " EMC " + THEME_PASSIVE + "(" + emcBase + " * " + itemAmt + ") : " + THEME_NOTICE + " [EMC : " + Config.getPlayerEmc(plugin, player) + "]";
+        return PREFIX + THEME_ERROR + "-" + emcTotal + " EMC " + THEME_PASSIVE + "(" + emcBase + " * " + itemAmt + ") : " + THEME_NOTICE + " [EMC : " + ConfigMain.getPlayerEmc(plugin, player) + "]";
     }
 
     public static String messageGuiEmcNotEnough(EquivalencyTech plugin, Player player) {
-        return PREFIX + THEME_ERROR + plugin.getConfigClass().getStrings().getGuiNotEnoughEmc() + THEME_NOTICE + " [EMC : " + Config.getPlayerEmc(plugin, player) + "]";
+        return PREFIX + THEME_ERROR + plugin.getConfigClass().getStrings().getGuiNotEnoughEmc() + THEME_NOTICE + " [EMC : " + ConfigMain.getPlayerEmc(plugin, player) + "]";
     }
 
     public static String messageGuiNoSpace(EquivalencyTech plugin) {

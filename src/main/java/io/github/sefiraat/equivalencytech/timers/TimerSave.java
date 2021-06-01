@@ -13,6 +13,6 @@ public class TimerSave extends BukkitRunnable {
 
     @Override
     public void run() {
-        plugin.saveAdditionalConfigs();
+        plugin.getConfigClass().saveAdditionalConfigs();
     }
 }

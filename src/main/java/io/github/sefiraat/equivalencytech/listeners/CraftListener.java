@@ -1,8 +1,8 @@
 package io.github.sefiraat.equivalencytech.listeners;
 
 import io.github.sefiraat.equivalencytech.EquivalencyTech;
+import io.github.sefiraat.equivalencytech.recipes.Recipes;
 import io.github.sefiraat.equivalencytech.statics.ContainerStorage;
-import io.github.sefiraat.equivalencytech.statics.Recipes;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
