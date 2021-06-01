@@ -1,7 +1,6 @@
 package io.github.sefiraat.equivalencytech.gui;
 
 import io.github.sefiraat.equivalencytech.EquivalencyTech;
-import io.github.sefiraat.equivalencytech.statics.Colours;
 import io.github.sefiraat.equivalencytech.statics.Config;
 import io.github.sefiraat.equivalencytech.statics.ContainerStorage;
 import io.github.sefiraat.equivalencytech.statics.Messages;
@@ -42,7 +41,7 @@ public class GuiTransmutationOrb extends PaginatedGui {
         GuiTransmutationOrb gui = new GuiTransmutationOrb(
                 6,
                 GuiTransmutationOrb.PAGE_SIZE,
-                Colours.THEME_EMC_PURPLE + plugin.getConfigClass().getStrings().getItemTransmutationOrbName(),
+                Messages.THEME_EMC_PURPLE + plugin.getConfigClass().getStrings().getItemTransmutationOrbName(),
                 plugin,
                 player
         );

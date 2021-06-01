@@ -2,7 +2,7 @@ package io.github.sefiraat.equivalencytech;
 
 import co.aikar.commands.PaperCommandManager;
 import io.github.sefiraat.equivalencytech.commands.Commands;
-import io.github.sefiraat.equivalencytech.configuration.Config;
+import io.github.sefiraat.equivalencytech.configuration.ConfigMain;
 import io.github.sefiraat.equivalencytech.listeners.CraftListener;
 import io.github.sefiraat.equivalencytech.listeners.OrbOpenListener;
 import io.github.sefiraat.equivalencytech.misc.EQItems;
@@ -26,30 +26,32 @@ public class EquivalencyTech extends JavaPlugin {
     private EquivalencyTech instance;
     private PaperCommandManager commandManager;
 
-    private Config configClass;
+    private ConfigMain configMainClass;
     private EmcDefinitions emcDefinitions;
     private EQItems eqItems;
 
     private boolean isUnitTest = false;
 
-    private boolean mcMMO = false;
     private boolean slimefun = false;
     private SlimefunEQAddon slimefunAddon;
 
     private File learnedItemsConfigFile;
+    private FileConfiguration learnedItemsConfig;
+    private File playerEMCConfigFile;
+    private FileConfiguration playerEMCConfig;
+
     public File getLearnedItemsConfigFile() {
         return learnedItemsConfigFile;
     }
-    private FileConfiguration learnedItemsConfig;
+
     public FileConfiguration getLearnedItemsConfig() {
         return learnedItemsConfig;
     }
 
-    private File playerEMCConfigFile;
     public File getPlayerEMCConfigFile() {
         return playerEMCConfigFile;
     }
-    private FileConfiguration playerEMCConfig;
+
     public FileConfiguration getPlayerEMCConfig() {
         return playerEMCConfig;
     }
@@ -57,26 +59,27 @@ public class EquivalencyTech extends JavaPlugin {
     public PaperCommandManager getCommandManager() {
         return commandManager;
     }
+
     public EquivalencyTech getInstance() {
         return instance;
     }
 
-    public Config getConfigClass() {
-        return configClass;
+    public ConfigMain getConfigClass() {
+        return configMainClass;
     }
+
     public EmcDefinitions getEmcDefinitions() {
         return emcDefinitions;
     }
+
     public EQItems getEqItems() {
         return eqItems;
     }
 
-    public boolean isMcMMO() {
-        return mcMMO;
-    }
     public boolean isSlimefun() {
         return slimefun;
     }
+
     public SlimefunEQAddon getSlimefunAddon() {
         return slimefunAddon;
     }
@@ -108,7 +111,7 @@ public class EquivalencyTech extends JavaPlugin {
 
         new OrbOpenListener(this.getInstance());
 
-        configClass = new Config(this.getInstance());
+        configMainClass = new ConfigMain(this.getInstance());
         eqItems = new EQItems(this.getInstance());
         emcDefinitions = new EmcDefinitions(this.getInstance());
 
@@ -153,6 +156,11 @@ public class EquivalencyTech extends JavaPlugin {
         createEmcConfig();
     }
 
+    public void saveAdditionalConfigs() {
+        saveEmcConfig();
+        saveLearnedConfig();
+    }
+
     private void createLearnedConfig() {
         learnedItemsConfigFile = new File(getDataFolder(), "learned_items.yml");
         if (!learnedItemsConfigFile.exists()) {
@@ -167,7 +175,7 @@ public class EquivalencyTech extends JavaPlugin {
         }
     }
 
-    public void saveLearnedConfig() {
+    private void saveLearnedConfig() {
         try {
             learnedItemsConfig.save(learnedItemsConfigFile);
         } catch (IOException e) {
@@ -189,7 +197,7 @@ public class EquivalencyTech extends JavaPlugin {
         }
     }
 
-    public void saveEmcConfig() {
+    private void saveEmcConfig() {
         try {
             playerEMCConfig.save(playerEMCConfigFile);
         } catch (IOException e) {

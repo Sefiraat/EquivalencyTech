@@ -6,6 +6,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 public class ConfigBooleans {
 
     private final boolean debuggingLogs;
+
     public boolean getDebuggingLogs() {
         return debuggingLogs;
     }

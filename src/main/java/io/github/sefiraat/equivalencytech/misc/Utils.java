@@ -34,12 +34,12 @@ public class Utils {
     }
 
     public static void givePlayerOrb(EquivalencyTech plugin, Player player) {
-        player.getPlayer().getInventory().addItem(plugin.getEqItems().getTransmutationOrb().getClone());
+        player.getPlayer().getInventory().addItem(plugin.getEqItems().getTransmutationOrb().getItemClone());
         player.getPlayer().sendMessage(Messages.messageCommandOrbGiven(plugin));
     }
 
     public static double roundDown(double number, int places) {
-        BigDecimal value = new BigDecimal(number);
+        BigDecimal value = BigDecimal.valueOf(number);
         value = value.setScale(places, RoundingMode.DOWN);
         return value.doubleValue();
     }

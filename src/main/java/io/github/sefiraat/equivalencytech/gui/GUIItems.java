@@ -4,8 +4,8 @@ import dev.dbassett.skullcreator.SkullCreator;
 import io.github.sefiraat.equivalencytech.EquivalencyTech;
 import io.github.sefiraat.equivalencytech.configuration.ConfigStrings;
 import io.github.sefiraat.equivalencytech.misc.Utils;
-import io.github.sefiraat.equivalencytech.statics.Colours;
 import io.github.sefiraat.equivalencytech.statics.Config;
+import io.github.sefiraat.equivalencytech.statics.Messages;
 import io.github.sefiraat.equivalencytech.statics.SkullTextures;
 import me.mattstudios.mfgui.gui.guis.GuiItem;
 import net.md_5.bungee.api.ChatColor;
@@ -41,7 +41,7 @@ public class GUIItems {
         GuiItem g = new GuiItem(Material.GRAY_STAINED_GLASS_PANE);
         ItemStack i = g.getItemStack();
         ItemMeta im = i.getItemMeta();
-        im.setDisplayName(Colours.THEME_PASSIVE_GRAY + plugin.getConfigClass().getStrings().getGuiBorderName());
+        im.setDisplayName(Messages.THEME_PASSIVE_GRAY + plugin.getConfigClass().getStrings().getGuiBorderName());
         im.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         i.setItemMeta(im);
         g.setItemStack(i);
@@ -53,7 +53,7 @@ public class GUIItems {
         GuiItem g = new GuiItem(Material.LIGHT_GRAY_STAINED_GLASS_PANE);
         ItemStack i = g.getItemStack();
         ItemMeta im = i.getItemMeta();
-        im.setDisplayName(Colours.THEME_PASSIVE_GRAY + plugin.getConfigClass().getStrings().getGuiFillerName());
+        im.setDisplayName(Messages.THEME_PASSIVE_GRAY + plugin.getConfigClass().getStrings().getGuiFillerName());
         im.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         i.setItemMeta(im);
         g.setItemStack(i);
@@ -94,10 +94,10 @@ public class GUIItems {
     public static List<String> getEmcItemLore(EquivalencyTech plugin, Material material) {
         ConfigStrings c = plugin.getConfigClass().getStrings();
         List<String> lore = new ArrayList<>();
-        lore.add(Colours.THEME_EMC_PURPLE + "EMC: " + Utils.getEMC(plugin, material));
+        lore.add(Messages.THEME_EMC_PURPLE + "EMC: " + Utils.getEMC(plugin, material));
         lore.add("");
-        lore.add(Colours.THEME_CLICK_INSTRUCTION + "Left Click: " + ChatColor.WHITE + c.getGuiEntryLeftClick());
-        lore.add(Colours.THEME_CLICK_INSTRUCTION + "Right Click: " + ChatColor.WHITE + c.getGuiEntryRightClick());
+        lore.add(Messages.THEME_CLICK_INSTRUCTION + "Left Click: " + ChatColor.WHITE + c.getGuiEntryLeftClick());
+        lore.add(Messages.THEME_CLICK_INSTRUCTION + "Right Click: " + ChatColor.WHITE + c.getGuiEntryRightClick());
         return lore;
     }
 
@@ -105,10 +105,10 @@ public class GUIItems {
     public static List<String> getEmcItemLore(EquivalencyTech plugin, ItemStack itemStack) {
         ConfigStrings c = plugin.getConfigClass().getStrings();
         List<String> lore = new ArrayList<>();
-        lore.add(Colours.THEME_EMC_PURPLE + "EMC: " + Utils.getEmcEq(plugin, itemStack));
+        lore.add(Messages.THEME_EMC_PURPLE + "EMC: " + Utils.getEmcEq(plugin, itemStack));
         lore.add("");
-        lore.add(Colours.THEME_CLICK_INSTRUCTION + "Left Click: " + ChatColor.WHITE + c.getGuiEntryLeftClick());
-        lore.add(Colours.THEME_CLICK_INSTRUCTION + "Right Click: " + ChatColor.WHITE + c.getGuiEntryRightClick());
+        lore.add(Messages.THEME_CLICK_INSTRUCTION + "Left Click: " + ChatColor.WHITE + c.getGuiEntryLeftClick());
+        lore.add(Messages.THEME_CLICK_INSTRUCTION + "Right Click: " + ChatColor.WHITE + c.getGuiEntryRightClick());
         return lore;
     }
 

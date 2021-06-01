@@ -1,6 +1,6 @@
 package io.github.sefiraat.equivalencytech.statics;
 
-public class SkullTextures {
+public final class SkullTextures {
 
     private SkullTextures() {
         throw new IllegalStateException("Utility class");

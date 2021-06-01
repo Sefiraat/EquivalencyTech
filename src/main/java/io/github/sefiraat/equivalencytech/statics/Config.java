@@ -8,7 +8,7 @@ import org.bukkit.entity.Player;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Config {
+public final class Config {
 
     private Config() {
         throw new IllegalStateException("Utility class");
@@ -17,6 +17,11 @@ public class Config {
     public static void addLearnedItem(EquivalencyTech plugin, Player player, String itemName) {
         FileConfiguration c = plugin.getLearnedItemsConfig();
         c.set(player.getUniqueId().toString() + "." + itemName, true);
+    }
+
+    public static void removeLearnedItem(EquivalencyTech plugin, Player player, String itemName) {
+        FileConfiguration c = plugin.getLearnedItemsConfig();
+        c.set(player.getUniqueId().toString() + "." + itemName, null);
     }
 
     public static List<String> getLearnedItems(EquivalencyTech plugin, Player player) {

@@ -9,11 +9,12 @@ import java.util.Map;
 public class ConfigEMC {
 
     private Map<String, Double> emcBaseValues;
+    private final int burnRate;
+
     public Map<String, Double> getEmcBaseValues() {
         return emcBaseValues;
     }
 
-    private final int burnRate;
     public int getBurnRate() {
         return burnRate;
     }

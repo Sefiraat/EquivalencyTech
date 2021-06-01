@@ -9,7 +9,15 @@ import org.bukkit.persistence.PersistentDataType;
 
 import java.util.Objects;
 
-public class ContainerStorage {
+public final class ContainerStorage {
+
+    public static final String CS_IS_TRANSMUTATION_ORB = "is_orb";
+    public static final String CS_IS_CRAFTING = "is_craft";
+    public static final String CS_IS_COAL_1 = "is_coal_1";
+    public static final String CS_IS_COAL_2 = "is_coal_2";
+    public static final String CS_IS_COAL_3 = "is_coal_3";
+    public static final String CS_IS_DRK = "is_drk";
+    public static final String CS_IS_RED = "is_red";
 
     private ContainerStorage() {
         throw new IllegalStateException("Utility class");
@@ -87,72 +95,72 @@ public class ContainerStorage {
     }
 
     public static boolean isTransmutationOrb(ItemStack i, EquivalencyTech plugin) {
-        NamespacedKey key = new NamespacedKey(plugin.getInstance(), Constants.CS_IS_TRANSMUTATION_ORB);
+        NamespacedKey key = new NamespacedKey(plugin.getInstance(), CS_IS_TRANSMUTATION_ORB);
         return containerHasData(i, key, PersistentDataType.INTEGER);
     }
 
     public static void makeTransmutationOrb(ItemStack i, EquivalencyTech plugin) {
-        NamespacedKey key = new NamespacedKey(plugin.getInstance(), Constants.CS_IS_TRANSMUTATION_ORB);
+        NamespacedKey key = new NamespacedKey(plugin.getInstance(), CS_IS_TRANSMUTATION_ORB);
         setData(i, key, 1);
     }
 
     public static boolean isCrafting(ItemStack i, EquivalencyTech plugin) {
-        NamespacedKey key = new NamespacedKey(plugin.getInstance(), Constants.CS_IS_CRAFTING);
+        NamespacedKey key = new NamespacedKey(plugin.getInstance(), CS_IS_CRAFTING);
         return containerHasData(i, key, PersistentDataType.INTEGER);
     }
 
     public static void makeCrafting(ItemStack i, EquivalencyTech plugin) {
-        NamespacedKey key = new NamespacedKey(plugin.getInstance(), Constants.CS_IS_CRAFTING);
+        NamespacedKey key = new NamespacedKey(plugin.getInstance(), CS_IS_CRAFTING);
         setData(i, key, 1);
     }
 
     public static boolean isAlchemicalCoal(ItemStack i, EquivalencyTech plugin) {
-        NamespacedKey key = new NamespacedKey(plugin.getInstance(), Constants.CS_IS_COAL_1);
+        NamespacedKey key = new NamespacedKey(plugin.getInstance(), CS_IS_COAL_1);
         return containerHasData(i, key, PersistentDataType.INTEGER);
     }
 
     public static void makeAlchemicalCoal(ItemStack i, EquivalencyTech plugin) {
-        NamespacedKey key = new NamespacedKey(plugin.getInstance(), Constants.CS_IS_COAL_1);
+        NamespacedKey key = new NamespacedKey(plugin.getInstance(), CS_IS_COAL_1);
         setData(i, key, 1);
     }
 
     public static boolean isMobiusFuel(ItemStack i, EquivalencyTech plugin) {
-        NamespacedKey key = new NamespacedKey(plugin.getInstance(), Constants.CS_IS_COAL_2);
+        NamespacedKey key = new NamespacedKey(plugin.getInstance(), CS_IS_COAL_2);
         return containerHasData(i, key, PersistentDataType.INTEGER);
     }
 
     public static void makeMobiusFuel(ItemStack i, EquivalencyTech plugin) {
-        NamespacedKey key = new NamespacedKey(plugin.getInstance(), Constants.CS_IS_COAL_2);
+        NamespacedKey key = new NamespacedKey(plugin.getInstance(), CS_IS_COAL_2);
         setData(i, key, 1);
     }
 
     public static boolean isAeternalisFuel(ItemStack i, EquivalencyTech plugin) {
-        NamespacedKey key = new NamespacedKey(plugin.getInstance(), Constants.CS_IS_COAL_3);
+        NamespacedKey key = new NamespacedKey(plugin.getInstance(), CS_IS_COAL_3);
         return containerHasData(i, key, PersistentDataType.INTEGER);
     }
 
     public static void makeAeternalisFuel(ItemStack i, EquivalencyTech plugin) {
-        NamespacedKey key = new NamespacedKey(plugin.getInstance(), Constants.CS_IS_COAL_3);
+        NamespacedKey key = new NamespacedKey(plugin.getInstance(), CS_IS_COAL_3);
         setData(i, key, 1);
     }
 
     public static boolean isDarkMatter(ItemStack i, EquivalencyTech plugin) {
-        NamespacedKey key = new NamespacedKey(plugin.getInstance(), Constants.CS_IS_DRK);
+        NamespacedKey key = new NamespacedKey(plugin.getInstance(), CS_IS_DRK);
         return containerHasData(i, key, PersistentDataType.INTEGER);
     }
 
     public static void makeDarkMatter(ItemStack i, EquivalencyTech plugin) {
-        NamespacedKey key = new NamespacedKey(plugin.getInstance(), Constants.CS_IS_DRK);
+        NamespacedKey key = new NamespacedKey(plugin.getInstance(), CS_IS_DRK);
         setData(i, key, 1);
     }
 
     public static boolean isRedMatter(ItemStack i, EquivalencyTech plugin) {
-        NamespacedKey key = new NamespacedKey(plugin.getInstance(), Constants.CS_IS_RED);
+        NamespacedKey key = new NamespacedKey(plugin.getInstance(), CS_IS_RED);
         return containerHasData(i, key, PersistentDataType.INTEGER);
     }
 
     public static void makeRedMatter(ItemStack i, EquivalencyTech plugin) {
-        NamespacedKey key = new NamespacedKey(plugin.getInstance(), Constants.CS_IS_RED);
+        NamespacedKey key = new NamespacedKey(plugin.getInstance(), CS_IS_RED);
         setData(i, key, 1);
     }
 }

@@ -15,7 +15,7 @@ import javax.annotation.Nonnull;
 
 public class OrbOpenListener implements Listener {
 
-    final EquivalencyTech plugin;
+    private final EquivalencyTech plugin;
 
     public OrbOpenListener(@Nonnull EquivalencyTech plugin) {
         plugin.getServer().getPluginManager().registerEvents(this, plugin);

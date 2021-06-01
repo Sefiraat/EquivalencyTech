@@ -15,7 +15,7 @@ import java.util.List;
 
 public class CraftListener implements Listener {
 
-    EquivalencyTech plugin;
+    private final EquivalencyTech plugin;
 
     public CraftListener(EquivalencyTech plugin) {
         this.plugin = plugin;
@@ -46,19 +46,19 @@ public class CraftListener implements Listener {
 
                 if (contentlayer.equals(Recipes.recipeCoal2Check(plugin))) {
                     player.sendMessage("coal2");
-                    e.getInventory().setResult(plugin.getEqItems().getMobiusFuel().getClone());
+                    e.getInventory().setResult(plugin.getEqItems().getMobiusFuel().getItemClone());
                 } else if (contentlayer.equals(Recipes.recipeCoal3Check(plugin))) {
                     player.sendMessage("coal3");
-                    e.getInventory().setResult(plugin.getEqItems().getAeternalisFuel().getClone());
+                    e.getInventory().setResult(plugin.getEqItems().getAeternalisFuel().getItemClone());
                 } else if (contentlayer.equals(Recipes.recipeDarkMatterCheck(plugin))) {
                     player.sendMessage("dark");
-                    e.getInventory().setResult(plugin.getEqItems().getDarkMatter().getClone());
+                    e.getInventory().setResult(plugin.getEqItems().getDarkMatter().getItemClone());
                 } else if (contentlayer.equals(Recipes.recipeRedMatterCheck(plugin))) {
                     player.sendMessage("red");
-                    e.getInventory().setResult(plugin.getEqItems().getRedMatter().getClone());
+                    e.getInventory().setResult(plugin.getEqItems().getRedMatter().getItemClone());
                 } else if (contentlayer.equals(Recipes.recipeTransmutationOrbCheck(plugin))) {
                     player.sendMessage("orb");
-                    e.getInventory().setResult(plugin.getEqItems().getTransmutationOrb().getClone());
+                    e.getInventory().setResult(plugin.getEqItems().getTransmutationOrb().getItemClone());
                 } else if (contentsEQ(contentlayer)) {
                     e.getInventory().setResult(new ItemStack(Material.AIR));
                 }

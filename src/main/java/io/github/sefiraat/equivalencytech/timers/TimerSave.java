@@ -13,7 +13,6 @@ public class TimerSave extends BukkitRunnable {
 
     @Override
     public void run() {
-        plugin.saveLearnedConfig();
-        plugin.saveEmcConfig();
+        plugin.saveAdditionalConfigs();
     }
 }

@@ -17,6 +17,7 @@ import org.bukkit.inventory.ItemStack;
 public class Commands extends BaseCommand {
 
     private final EquivalencyTech plugin;
+
     public EquivalencyTech getPlugin() {
         return plugin;
     }

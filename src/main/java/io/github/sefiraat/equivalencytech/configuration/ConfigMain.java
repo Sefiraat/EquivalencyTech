@@ -2,7 +2,7 @@ package io.github.sefiraat.equivalencytech.configuration;
 
 import io.github.sefiraat.equivalencytech.EquivalencyTech;
 
-public class Config {
+public class ConfigMain {
 
     private final ConfigStrings strings;
     private final ConfigEMC emc;
@@ -18,7 +18,7 @@ public class Config {
         return bools;
     }
 
-    public Config(EquivalencyTech plugin) {
+    public ConfigMain(EquivalencyTech plugin) {
         strings = new ConfigStrings(plugin);
         emc = new ConfigEMC(plugin);
         bools = new ConfigBooleans(plugin);

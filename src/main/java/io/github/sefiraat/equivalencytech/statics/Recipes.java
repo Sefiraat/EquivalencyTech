@@ -13,14 +13,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Recipes {
+public final class Recipes {
 
     private Recipes() {
         throw new IllegalStateException("Utility class");
     }
 
     public static Recipe recipeCoal1(EquivalencyTech plugin) {
-        ItemStack i = plugin.getEqItems().getAlchemicalCoal().getClone();
+        ItemStack i = plugin.getEqItems().getAlchemicalCoal().getItemClone();
         NamespacedKey key = new NamespacedKey(plugin, "coal1");
         ShapedRecipe r = new ShapedRecipe(key, i);
         r.shape("NNN","NN ","   ");
@@ -43,7 +43,7 @@ public class Recipes {
     }
 
     public static Recipe recipeCoal2(EquivalencyTech plugin) {
-        ItemStack i = plugin.getEqItems().getMobiusFuel().getClone();
+        ItemStack i = plugin.getEqItems().getMobiusFuel().getItemClone();
         NamespacedKey key = new NamespacedKey(plugin, "coal2");
         ShapedRecipe r = new ShapedRecipe(key, i);
         r.shape("NNN","NN ","   ");
@@ -53,11 +53,11 @@ public class Recipes {
 
     public static List<ItemStack> recipeCoal2Check(EquivalencyTech plugin) {
         List<ItemStack> itemStacks = new ArrayList<>();
-        itemStacks.add(plugin.getEqItems().getAlchemicalCoal().getClone());
-        itemStacks.add(plugin.getEqItems().getAlchemicalCoal().getClone());
-        itemStacks.add(plugin.getEqItems().getAlchemicalCoal().getClone());
-        itemStacks.add(plugin.getEqItems().getAlchemicalCoal().getClone());
-        itemStacks.add(plugin.getEqItems().getAlchemicalCoal().getClone());
+        itemStacks.add(plugin.getEqItems().getAlchemicalCoal().getItemClone());
+        itemStacks.add(plugin.getEqItems().getAlchemicalCoal().getItemClone());
+        itemStacks.add(plugin.getEqItems().getAlchemicalCoal().getItemClone());
+        itemStacks.add(plugin.getEqItems().getAlchemicalCoal().getItemClone());
+        itemStacks.add(plugin.getEqItems().getAlchemicalCoal().getItemClone());
         itemStacks.add(null);
         itemStacks.add(null);
         itemStacks.add(null);
@@ -66,7 +66,7 @@ public class Recipes {
     }
 
     public static Recipe recipeCoal3(EquivalencyTech plugin) {
-        ItemStack i = plugin.getEqItems().getAeternalisFuel().getClone();
+        ItemStack i = plugin.getEqItems().getAeternalisFuel().getItemClone();
         NamespacedKey key = new NamespacedKey(plugin, "coal3");
         ShapedRecipe r = new ShapedRecipe(key, i);
         r.shape("NNN","NN ","   ");
@@ -76,11 +76,11 @@ public class Recipes {
 
     public static List<ItemStack> recipeCoal3Check(EquivalencyTech plugin) {
         List<ItemStack> itemStacks = new ArrayList<>();
-        itemStacks.add(plugin.getEqItems().getMobiusFuel().getClone());
-        itemStacks.add(plugin.getEqItems().getMobiusFuel().getClone());
-        itemStacks.add(plugin.getEqItems().getMobiusFuel().getClone());
-        itemStacks.add(plugin.getEqItems().getMobiusFuel().getClone());
-        itemStacks.add(plugin.getEqItems().getMobiusFuel().getClone());
+        itemStacks.add(plugin.getEqItems().getMobiusFuel().getItemClone());
+        itemStacks.add(plugin.getEqItems().getMobiusFuel().getItemClone());
+        itemStacks.add(plugin.getEqItems().getMobiusFuel().getItemClone());
+        itemStacks.add(plugin.getEqItems().getMobiusFuel().getItemClone());
+        itemStacks.add(plugin.getEqItems().getMobiusFuel().getItemClone());
         itemStacks.add(null);
         itemStacks.add(null);
         itemStacks.add(null);
@@ -90,7 +90,7 @@ public class Recipes {
 
 
     public static Recipe recipeDarkMatter(EquivalencyTech plugin) {
-        ItemStack i = plugin.getEqItems().getDarkMatter().getClone();
+        ItemStack i = plugin.getEqItems().getDarkMatter().getItemClone();
         NamespacedKey key = new NamespacedKey(plugin, "darkmatter");
         ShapedRecipe r = new ShapedRecipe(key, i);
         r.shape("NNN","NEN","NNN");
@@ -101,20 +101,20 @@ public class Recipes {
 
     public static List<ItemStack> recipeDarkMatterCheck(EquivalencyTech plugin) {
         List<ItemStack> itemStacks = new ArrayList<>();
-        itemStacks.add(plugin.getEqItems().getAeternalisFuel().getClone());
-        itemStacks.add(plugin.getEqItems().getAeternalisFuel().getClone());
-        itemStacks.add(plugin.getEqItems().getAeternalisFuel().getClone());
-        itemStacks.add(plugin.getEqItems().getAeternalisFuel().getClone());
+        itemStacks.add(plugin.getEqItems().getAeternalisFuel().getItemClone());
+        itemStacks.add(plugin.getEqItems().getAeternalisFuel().getItemClone());
+        itemStacks.add(plugin.getEqItems().getAeternalisFuel().getItemClone());
+        itemStacks.add(plugin.getEqItems().getAeternalisFuel().getItemClone());
         itemStacks.add(new ItemStack(Material.NETHERITE_BLOCK));
-        itemStacks.add(plugin.getEqItems().getAeternalisFuel().getClone());
-        itemStacks.add(plugin.getEqItems().getAeternalisFuel().getClone());
-        itemStacks.add(plugin.getEqItems().getAeternalisFuel().getClone());
-        itemStacks.add(plugin.getEqItems().getAeternalisFuel().getClone());
+        itemStacks.add(plugin.getEqItems().getAeternalisFuel().getItemClone());
+        itemStacks.add(plugin.getEqItems().getAeternalisFuel().getItemClone());
+        itemStacks.add(plugin.getEqItems().getAeternalisFuel().getItemClone());
+        itemStacks.add(plugin.getEqItems().getAeternalisFuel().getItemClone());
         return itemStacks;
     }
 
     public static Recipe recipeRedMatter(EquivalencyTech plugin) {
-        ItemStack i = plugin.getEqItems().getDarkMatter().getClone();
+        ItemStack i = plugin.getEqItems().getDarkMatter().getItemClone();
         NamespacedKey key = new NamespacedKey(plugin, "redmatter");
         ShapedRecipe r = new ShapedRecipe(key, i);
         r.shape("NNN","EEE","NNN");
@@ -125,20 +125,20 @@ public class Recipes {
 
     public static List<ItemStack> recipeRedMatterCheck(EquivalencyTech plugin) {
         List<ItemStack> itemStacks = new ArrayList<>();
-        itemStacks.add(plugin.getEqItems().getAeternalisFuel().getClone());
-        itemStacks.add(plugin.getEqItems().getAeternalisFuel().getClone());
-        itemStacks.add(plugin.getEqItems().getAeternalisFuel().getClone());
-        itemStacks.add(plugin.getEqItems().getDarkMatter().getClone());
-        itemStacks.add(plugin.getEqItems().getDarkMatter().getClone());
-        itemStacks.add(plugin.getEqItems().getDarkMatter().getClone());
-        itemStacks.add(plugin.getEqItems().getAeternalisFuel().getClone());
-        itemStacks.add(plugin.getEqItems().getAeternalisFuel().getClone());
-        itemStacks.add(plugin.getEqItems().getAeternalisFuel().getClone());
+        itemStacks.add(plugin.getEqItems().getAeternalisFuel().getItemClone());
+        itemStacks.add(plugin.getEqItems().getAeternalisFuel().getItemClone());
+        itemStacks.add(plugin.getEqItems().getAeternalisFuel().getItemClone());
+        itemStacks.add(plugin.getEqItems().getDarkMatter().getItemClone());
+        itemStacks.add(plugin.getEqItems().getDarkMatter().getItemClone());
+        itemStacks.add(plugin.getEqItems().getDarkMatter().getItemClone());
+        itemStacks.add(plugin.getEqItems().getAeternalisFuel().getItemClone());
+        itemStacks.add(plugin.getEqItems().getAeternalisFuel().getItemClone());
+        itemStacks.add(plugin.getEqItems().getAeternalisFuel().getItemClone());
         return itemStacks;
     }
 
     public static Recipe recipeTransmutationOrb(EquivalencyTech plugin) {
-        ItemStack i = plugin.getEqItems().getDarkMatter().getClone();
+        ItemStack i = plugin.getEqItems().getDarkMatter().getItemClone();
         NamespacedKey key = new NamespacedKey(plugin, "t_orb");
         ShapedRecipe r = new ShapedRecipe(key, i);
         r.shape("BDB","DRD","BDB");
@@ -151,13 +151,13 @@ public class Recipes {
     public static List<ItemStack> recipeTransmutationOrbCheck(EquivalencyTech plugin) {
         List<ItemStack> itemStacks = new ArrayList<>();
         itemStacks.add(new ItemStack(Material.DIAMOND_BLOCK));
-        itemStacks.add(plugin.getEqItems().getDarkMatter().getClone());
+        itemStacks.add(plugin.getEqItems().getDarkMatter().getItemClone());
         itemStacks.add(new ItemStack(Material.DIAMOND_BLOCK));
-        itemStacks.add(plugin.getEqItems().getDarkMatter().getClone());
-        itemStacks.add(plugin.getEqItems().getRedMatter().getClone());
-        itemStacks.add(plugin.getEqItems().getDarkMatter().getClone());
+        itemStacks.add(plugin.getEqItems().getDarkMatter().getItemClone());
+        itemStacks.add(plugin.getEqItems().getRedMatter().getItemClone());
+        itemStacks.add(plugin.getEqItems().getDarkMatter().getItemClone());
         itemStacks.add(new ItemStack(Material.DIAMOND_BLOCK));
-        itemStacks.add(plugin.getEqItems().getDarkMatter().getClone());
+        itemStacks.add(plugin.getEqItems().getDarkMatter().getItemClone());
         itemStacks.add(new ItemStack(Material.DIAMOND_BLOCK));
         return itemStacks;
     }
@@ -212,12 +212,12 @@ public class Recipes {
 
     public static Map<List<ItemStack>, ItemStack> getEQRecipes(EquivalencyTech plugin) {
         Map<List<ItemStack>, ItemStack> recipes = new HashMap<>();
-        recipes.put(recipeCoal1Check(), plugin.getEqItems().getAlchemicalCoal().getClone());
-        recipes.put(recipeCoal2Check(plugin), plugin.getEqItems().getMobiusFuel().getClone());
-        recipes.put(recipeCoal3Check(plugin), plugin.getEqItems().getAeternalisFuel().getClone());
-        recipes.put(recipeDarkMatterCheck(plugin), plugin.getEqItems().getDarkMatter().getClone());
-        recipes.put(recipeRedMatterCheck(plugin), plugin.getEqItems().getRedMatter().getClone());
-        recipes.put(recipeTransmutationOrbCheck(plugin), plugin.getEqItems().getTransmutationOrb().getClone());
+        recipes.put(recipeCoal1Check(), plugin.getEqItems().getAlchemicalCoal().getItemClone());
+        recipes.put(recipeCoal2Check(plugin), plugin.getEqItems().getMobiusFuel().getItemClone());
+        recipes.put(recipeCoal3Check(plugin), plugin.getEqItems().getAeternalisFuel().getItemClone());
+        recipes.put(recipeDarkMatterCheck(plugin), plugin.getEqItems().getDarkMatter().getItemClone());
+        recipes.put(recipeRedMatterCheck(plugin), plugin.getEqItems().getRedMatter().getItemClone());
+        recipes.put(recipeTransmutationOrbCheck(plugin), plugin.getEqItems().getTransmutationOrb().getItemClone());
         return recipes;
     }
 

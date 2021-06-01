@@ -10,11 +10,12 @@ public class ConfigStrings {
     // General
 
     private final String generalNoInvSpace;
+    private final String generalCraftingItem;
+
     public String getGeneralNoInvSpace() {
         return generalNoInvSpace;
     }
 
-    private final String generalCraftingItem;
     public String getGeneralCraftingItem() {
         return generalCraftingItem;
     }
@@ -22,26 +23,27 @@ public class ConfigStrings {
     // Commands
 
     private final String commandSubcommand;
+    private final String commandEmcMustHold;
+    private final String commandEmcNone;
+    private final String commandSelectItem;
+    private final String commandOrbGiven;
+
     public String getCommandSubcommand() {
         return commandSubcommand;
     }
 
-    private final String commandEmcMustHold;
     public String getCommandEmcMustHold() {
         return commandEmcMustHold;
     }
 
-    private final String commandEmcNone;
     public String getCommandEmcNone() {
         return commandEmcNone;
     }
 
-    private final String commandSelectItem;
     public String getCommandSelectItem() {
         return commandSelectItem;
     }
 
-    private final String commandOrbGiven;
     public String getCommandOrbGiven() {
         return commandOrbGiven;
     }
@@ -49,41 +51,42 @@ public class ConfigStrings {
     // Items
 
     private final String itemTransmutationOrbName;
+    private final List<String> itemTransmutationOrbLore;
+    private final String itemRightClickToOpen;
+    private final String itemAlchemicalCoalName;
+    private final String itemMobiusFuelName;
+    private final String itemAeternalisFuelName;
+    private final String itemDarkMatterName;
+    private final String itemRedMatterName;
+
     public String getItemTransmutationOrbName() {
         return itemTransmutationOrbName;
     }
 
-    private final List<String> itemTransmutationOrbLore;
     public List<String> getItemTransmutationOrbLore() {
         return itemTransmutationOrbLore;
     }
 
-    private final String itemRightClickToOpen;
     public String getItemRightClickToOpen() {
         return itemRightClickToOpen;
     }
 
-    private final String itemAlchemicalCoalName;
     public String getItemAlchemicalCoalName() {
         return itemAlchemicalCoalName;
     }
 
-    private final String itemMobiusFuelName;
     public String getItemMobiusFuelName() {
         return itemMobiusFuelName;
     }
 
-    private final String itemAeternalisFuelName;
     public String getItemAeternalisFuelName() {
         return itemAeternalisFuelName;
     }
 
-    private final String itemDarkMatterName;
     public String getItemDarkMatterName() {
         return itemDarkMatterName;
     }
 
-    private final String itemRedMatterName;
     public String getItemRedMatterName() {
         return itemRedMatterName;
     }
@@ -91,46 +94,47 @@ public class ConfigStrings {
     // GUI
 
     private final String guiBorderName;
+    private final String guiFillerName;
+    private final String guiItemLearned;
+    private final String guiInfoName;
+    private final String guiInfoRecipes;
+    private final String guiEntryLeftClick;
+    private final String guiEntryRightClick;
+    private final String guiNotEnoughEmc;
+    private final String guiItemMeta;
+
     public String getGuiBorderName() {
         return guiBorderName;
     }
 
-    private final String guiFillerName;
     public String getGuiFillerName() {
         return guiFillerName;
     }
 
-    private final String guiItemLearned;
     public String getGuiItemLearned() {
         return guiItemLearned;
     }
 
-    private final String guiInfoName;
     public String getGuiInfoName() {
         return guiInfoName;
     }
 
-    private final String guiInfoRecipes;
     public String getGuiInfoRecipes() {
         return guiInfoRecipes;
     }
 
-    private final String guiEntryLeftClick;
     public String getGuiEntryLeftClick() {
         return guiEntryLeftClick;
     }
 
-    private final String guiEntryRightClick;
     public String getGuiEntryRightClick() {
         return guiEntryRightClick;
     }
 
-    private final String guiNotEnoughEmc;
     public String getGuiNotEnoughEmc() {
         return guiNotEnoughEmc;
     }
 
-    private final String guiItemMeta;
     public String getGuiItemMeta() {
         return guiItemMeta;
     }

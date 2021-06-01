@@ -41,27 +41,27 @@ public class SlimefunEQAddon implements SlimefunAddon {
 
         // Items
         // Coal 1
-        SlimefunItemStack coal1Stack = new SlimefunItemStack( "EQ_COAL_1", plugin.getEqItems().getAlchemicalCoal().getClone());
+        SlimefunItemStack coal1Stack = new SlimefunItemStack( "EQ_COAL_1", plugin.getEqItems().getAlchemicalCoal().getItemClone());
         SlimefunItem coal1Item = new EQSlimefunItem(eqCategory, coal1Stack, new RecipeType(MinecraftRecipe.SHAPED_CRAFTING), Recipes.getSFRecipeCoal1());
         coal1Item.register(this);
         // Coal 2
-        SlimefunItemStack coal2Stack = new SlimefunItemStack( "EQ_COAL_2", plugin.getEqItems().getMobiusFuel().getClone());
+        SlimefunItemStack coal2Stack = new SlimefunItemStack( "EQ_COAL_2", plugin.getEqItems().getMobiusFuel().getItemClone());
         SlimefunItem coal2Item = new EQSlimefunItem(eqCategory, coal2Stack, new RecipeType(MinecraftRecipe.SHAPED_CRAFTING), Recipes.getSFRecipeCoal2(coal1Stack));
         coal2Item.register(this);
         // Coal 3
-        SlimefunItemStack coal3Stack = new SlimefunItemStack( "EQ_COAL_3", plugin.getEqItems().getAeternalisFuel().getClone());
+        SlimefunItemStack coal3Stack = new SlimefunItemStack( "EQ_COAL_3", plugin.getEqItems().getAeternalisFuel().getItemClone());
         SlimefunItem coal3Item = new EQSlimefunItem(eqCategory, coal3Stack, new RecipeType(MinecraftRecipe.SHAPED_CRAFTING), Recipes.getSFRecipeCoal3(coal2Stack));
         coal3Item.register(this);
         // Dark Matter
-        SlimefunItemStack darkStack = new SlimefunItemStack( "EQ_DARK_MATTER", plugin.getEqItems().getDarkMatter().getClone());
+        SlimefunItemStack darkStack = new SlimefunItemStack( "EQ_DARK_MATTER", plugin.getEqItems().getDarkMatter().getItemClone());
         SlimefunItem darkItem = new EQSlimefunItem(eqCategory, darkStack, new RecipeType(MinecraftRecipe.SHAPED_CRAFTING), Recipes.getSFRecipeDarkMatter(coal3Stack));
         darkItem.register(this);
         // Red Matter
-        SlimefunItemStack redStack = new SlimefunItemStack( "EQ_RED_MATTER", plugin.getEqItems().getRedMatter().getClone());
+        SlimefunItemStack redStack = new SlimefunItemStack( "EQ_RED_MATTER", plugin.getEqItems().getRedMatter().getItemClone());
         SlimefunItem redItem = new EQSlimefunItem(eqCategory, redStack, new RecipeType(MinecraftRecipe.SHAPED_CRAFTING), Recipes.getSFRecipeRedMatter(coal3Stack, darkStack));
         redItem.register(this);
         // Transmutation Orb
-        SlimefunItemStack orbStack = new SlimefunItemStack( "EQ_T_ORB", plugin.getEqItems().getTransmutationOrb().getClone());
+        SlimefunItemStack orbStack = new SlimefunItemStack( "EQ_T_ORB", plugin.getEqItems().getTransmutationOrb().getItemClone());
         SlimefunItem orbItem = new EQSlimefunItem(eqCategory, orbStack, new RecipeType(MinecraftRecipe.SHAPED_CRAFTING), Recipes.getSFRecipeTransmutationOrb(darkStack, redStack));
         orbItem.register(this);
 
