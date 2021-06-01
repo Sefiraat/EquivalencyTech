@@ -2,6 +2,7 @@ package io.github.sefiraat.equivalencytech.misc;
 
 import io.github.sefiraat.equivalencytech.EquivalencyTech;
 import io.github.sefiraat.equivalencytech.items.*;
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.HashMap;
@@ -60,12 +61,12 @@ public class EQItems {
         redMatter = new RedMatter(plugin);
 
         eqItemMap = new HashMap<>();
-        eqItemMap.put(transmutationOrb.getItem().getItemMeta().getDisplayName(), transmutationOrb.getItemClone());
-        eqItemMap.put(alchemicalCoal.getItem().getItemMeta().getDisplayName(), alchemicalCoal.getItemClone());
-        eqItemMap.put(mobiusFuel.getItem().getItemMeta().getDisplayName(), mobiusFuel.getItemClone());
-        eqItemMap.put(aeternalisFuel.getItem().getItemMeta().getDisplayName(), aeternalisFuel.getItemClone());
-        eqItemMap.put(darkMatter.getItem().getItemMeta().getDisplayName(), darkMatter.getItemClone());
-        eqItemMap.put(redMatter.getItem().getItemMeta().getDisplayName(), redMatter.getItemClone());
+        eqItemMap.put(ChatColor.stripColor(transmutationOrb.getItem().getItemMeta().getDisplayName()), transmutationOrb.getItemClone());
+        eqItemMap.put(ChatColor.stripColor(alchemicalCoal.getItem().getItemMeta().getDisplayName()), alchemicalCoal.getItemClone());
+        eqItemMap.put(ChatColor.stripColor(mobiusFuel.getItem().getItemMeta().getDisplayName()), mobiusFuel.getItemClone());
+        eqItemMap.put(ChatColor.stripColor(aeternalisFuel.getItem().getItemMeta().getDisplayName()), aeternalisFuel.getItemClone());
+        eqItemMap.put(ChatColor.stripColor(darkMatter.getItem().getItemMeta().getDisplayName()), darkMatter.getItemClone());
+        eqItemMap.put(ChatColor.stripColor(redMatter.getItem().getItemMeta().getDisplayName()), redMatter.getItemClone());
     }
 
 

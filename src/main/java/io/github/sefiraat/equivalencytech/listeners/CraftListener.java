@@ -30,9 +30,8 @@ public class CraftListener implements Listener {
             Player player = (Player) e.getView().getPlayer();
 
             if (e.getRecipe() != null && e.getRecipe().getResult().getType() == Material.PLAYER_HEAD) {
-                player.sendMessage("output valid");
                 ItemStack[] contents = e.getInventory().getMatrix();
-                List<ItemStack> contentlayer = new ArrayList<>();
+                List<ItemStack> contentLayer = new ArrayList<>();
 
                 for (ItemStack itemStack : contents) {
                     ItemStack clone = null;
@@ -41,32 +40,23 @@ public class CraftListener implements Listener {
                         clone.setAmount(1);
                         player.sendMessage(clone.getType().toString());
                     }
-                    contentlayer.add(clone);
+                    contentLayer.add(clone);
                 }
 
-                if (contentlayer.equals(Recipes.recipeCoal2Check(plugin))) {
-                    player.sendMessage("coal2");
+                if (contentLayer.equals(Recipes.recipeCoal2Check(plugin))) {
                     e.getInventory().setResult(plugin.getEqItems().getMobiusFuel().getItemClone());
-                } else if (contentlayer.equals(Recipes.recipeCoal3Check(plugin))) {
-                    player.sendMessage("coal3");
+                } else if (contentLayer.equals(Recipes.recipeCoal3Check(plugin))) {
                     e.getInventory().setResult(plugin.getEqItems().getAeternalisFuel().getItemClone());
-                } else if (contentlayer.equals(Recipes.recipeDarkMatterCheck(plugin))) {
-                    player.sendMessage("dark");
+                } else if (contentLayer.equals(Recipes.recipeDarkMatterCheck(plugin))) {
                     e.getInventory().setResult(plugin.getEqItems().getDarkMatter().getItemClone());
-                } else if (contentlayer.equals(Recipes.recipeRedMatterCheck(plugin))) {
-                    player.sendMessage("red");
+                } else if (contentLayer.equals(Recipes.recipeRedMatterCheck(plugin))) {
                     e.getInventory().setResult(plugin.getEqItems().getRedMatter().getItemClone());
-                } else if (contentlayer.equals(Recipes.recipeTransmutationOrbCheck(plugin))) {
-                    player.sendMessage("orb");
+                } else if (contentLayer.equals(Recipes.recipeTransmutationOrbCheck(plugin))) {
                     e.getInventory().setResult(plugin.getEqItems().getTransmutationOrb().getItemClone());
-                } else if (contentsEQ(contentlayer)) {
+                } else if (contentsEQ(contentLayer)) {
                     e.getInventory().setResult(new ItemStack(Material.AIR));
                 }
-
             }
-
-
-
         }
     }
 

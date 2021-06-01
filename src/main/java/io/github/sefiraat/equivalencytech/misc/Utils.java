@@ -1,6 +1,7 @@
 package io.github.sefiraat.equivalencytech.misc;
 
 import io.github.sefiraat.equivalencytech.EquivalencyTech;
+import io.github.sefiraat.equivalencytech.statics.ContainerStorage;
 import io.github.sefiraat.equivalencytech.statics.Messages;
 import org.apache.commons.lang.WordUtils;
 import org.bukkit.Material;
@@ -16,12 +17,13 @@ public class Utils {
         throw new IllegalStateException("Utility class");
     }
 
-    public static Double getEMC(EquivalencyTech plugin, Material m) {
-        return plugin.getEmcDefinitions().getEmcExtended().get(m);
-    }
-
-    public static Double getEmcEq(EquivalencyTech plugin, ItemStack i) {
-        return plugin.getEmcDefinitions().getEmcEQ().get(i.getItemMeta().getDisplayName());
+    public static Double getEMC(EquivalencyTech plugin, ItemStack itemStack) {
+        if (ContainerStorage.isCrafting(itemStack, plugin)) {
+            ItemStack eqStack = plugin.getEqItems().getEqItemMap().get(itemStack.getItemMeta().getDisplayName());
+            return plugin.getEmcDefinitions().getEmcEQ().get(eqStack.getItemMeta().getDisplayName());
+        } else {
+            return plugin.getEmcDefinitions().getEmcExtended().get(itemStack.getType());
+        }
     }
 
     public static String toTitleCase(String string) {

@@ -5,6 +5,7 @@ import io.github.sefiraat.equivalencytech.EquivalencyTech;
 import io.github.sefiraat.equivalencytech.configuration.ConfigStrings;
 import io.github.sefiraat.equivalencytech.misc.Utils;
 import io.github.sefiraat.equivalencytech.statics.Config;
+import io.github.sefiraat.equivalencytech.statics.ContainerStorage;
 import io.github.sefiraat.equivalencytech.statics.Messages;
 import io.github.sefiraat.equivalencytech.statics.SkullTextures;
 import me.mattstudios.mfgui.gui.guis.GuiItem;
@@ -61,28 +62,17 @@ public class GUIItems {
         return g;
     }
 
-    public static GuiItem guiEMCItem(EquivalencyTech plugin, Material material) {
-
-        GuiItem g = new GuiItem(material);
-        ItemStack i = g.getItemStack();
-        ItemMeta im = i.getItemMeta();
-        String itemName = Utils.materialFriendlyName(material);
-
-        im.setDisplayName(ChatColor.WHITE + itemName);
-        im.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-
-        im.setLore(getEmcItemLore(plugin, material));
-        i.setItemMeta(im);
-        g.setItemStack(i);
-        return g;
-    }
-
-    public static GuiItem guiEMCItem(EquivalencyTech plugin, ItemStack itemStack) {
+    public static GuiItem guiEMCItem(EquivalencyTech plugin, ItemStack itemStack, boolean isVanilla) {
 
         GuiItem g = new GuiItem(itemStack);
         ItemMeta im = itemStack.getItemMeta();
 
-        im.setDisplayName(ChatColor.WHITE + im.getDisplayName());
+        if (isVanilla) {
+            im.setDisplayName(ChatColor.WHITE + Utils.materialFriendlyName(itemStack.getType()));
+        } else {
+            im.setDisplayName(ChatColor.WHITE + ChatColor.stripColor(im.getDisplayName()));
+        }
+
         im.addItemFlags(ItemFlag.HIDE_ENCHANTS);
 
         im.setLore(getEmcItemLore(plugin, itemStack));
@@ -91,21 +81,10 @@ public class GUIItems {
         return g;
     }
 
-    public static List<String> getEmcItemLore(EquivalencyTech plugin, Material material) {
-        ConfigStrings c = plugin.getConfigClass().getStrings();
-        List<String> lore = new ArrayList<>();
-        lore.add(Messages.THEME_EMC_PURPLE + "EMC: " + Utils.getEMC(plugin, material));
-        lore.add("");
-        lore.add(Messages.THEME_CLICK_INSTRUCTION + "Left Click: " + ChatColor.WHITE + c.getGuiEntryLeftClick());
-        lore.add(Messages.THEME_CLICK_INSTRUCTION + "Right Click: " + ChatColor.WHITE + c.getGuiEntryRightClick());
-        return lore;
-    }
-
-
     public static List<String> getEmcItemLore(EquivalencyTech plugin, ItemStack itemStack) {
         ConfigStrings c = plugin.getConfigClass().getStrings();
         List<String> lore = new ArrayList<>();
-        lore.add(Messages.THEME_EMC_PURPLE + "EMC: " + Utils.getEmcEq(plugin, itemStack));
+        lore.add(Messages.THEME_EMC_PURPLE + "EMC: " + Utils.getEMC(plugin, itemStack));
         lore.add("");
         lore.add(Messages.THEME_CLICK_INSTRUCTION + "Left Click: " + ChatColor.WHITE + c.getGuiEntryLeftClick());
         lore.add(Messages.THEME_CLICK_INSTRUCTION + "Right Click: " + ChatColor.WHITE + c.getGuiEntryRightClick());

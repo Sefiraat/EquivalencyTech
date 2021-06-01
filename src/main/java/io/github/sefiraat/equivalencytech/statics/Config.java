@@ -2,6 +2,7 @@ package io.github.sefiraat.equivalencytech.statics;
 
 import io.github.sefiraat.equivalencytech.EquivalencyTech;
 import io.github.sefiraat.equivalencytech.misc.Utils;
+import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 
@@ -16,7 +17,7 @@ public final class Config {
 
     public static void addLearnedItem(EquivalencyTech plugin, Player player, String itemName) {
         FileConfiguration c = plugin.getLearnedItemsConfig();
-        c.set(player.getUniqueId().toString() + "." + itemName, true);
+        c.set(player.getUniqueId().toString() + "." + ChatColor.stripColor(itemName), true);
     }
 
     public static void removeLearnedItem(EquivalencyTech plugin, Player player, String itemName) {
