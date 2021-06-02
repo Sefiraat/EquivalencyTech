@@ -20,9 +20,9 @@ The plugin currently features:
 
 ## Planned Features
 * Automation
-  * Condenser Chest
+  * Dissolution Chest
     * Any items input into the chest are dissolved into EMC. Starting at a 50% return on EMC ranging to 100% through upgrades
-  * Synthesizer Chest
+  * Condenser Chest
     * After being assigned an item, synthesizes items using the assigning player's EMC periodically into the chest. This will be upgradable to increase the rate at which items are generated.
 * Slimefun
   * As at this first release, only vanilla items + EquiTech items can be condensed / synthesized. A Future update will allow for Slimefun core items to also be added.
