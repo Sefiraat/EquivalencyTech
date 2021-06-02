@@ -7,6 +7,7 @@ public class ManagerEvents {
     private final OrbOpenListener orbOpenListener;
     private final CraftListener craftListener;
     private final DissolutionChestListener dissolutionChestListener;
+    private final PlayerJoinListener playerJoinListener;
 
     public OrbOpenListener getOrbOpenListener() {
         return orbOpenListener;
@@ -20,10 +21,15 @@ public class ManagerEvents {
         return dissolutionChestListener;
     }
 
+    public PlayerJoinListener getPlayerJoinListener() {
+        return playerJoinListener;
+    }
+
     public ManagerEvents(EquivalencyTech plugin) {
         orbOpenListener = new OrbOpenListener(plugin);
         craftListener = new CraftListener(plugin);
         dissolutionChestListener = new DissolutionChestListener(plugin);
+        playerJoinListener = new PlayerJoinListener(plugin);
     }
 
 }

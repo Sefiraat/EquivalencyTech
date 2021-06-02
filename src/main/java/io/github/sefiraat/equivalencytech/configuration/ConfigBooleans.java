@@ -10,6 +10,7 @@ public final class ConfigBooleans {
     public boolean getDebuggingLogs() {
         return configuration.getBoolean("DEBUG.SHOW_DEBUGGING_LOGS");
     }
+    public boolean getEMC2DisableWarning() {return configuration.getBoolean("DISABLE_EMC2_WARNING");}
 
     public ConfigBooleans(EquivalencyTech plugin) {
         configuration = plugin.getConfig();

@@ -12,7 +12,7 @@ public class ConfigStrings {
     // region General
 
     public String getGeneralNoInvSpace() {
-        return configuration.getString("MESSAGES.COMMANDS.GENERAL_NO_INVENTORY_SPACE");
+        return configuration.getString("MESSAGES.GENERAL_NO_INVENTORY_SPACE");
     }
 
     public String getGeneralCraftingItem() {
@@ -24,23 +24,23 @@ public class ConfigStrings {
     // region Commands
 
     public String getCommandSubcommand() {
-        return configuration.getString("TEXTS.MESSAGES.COMMANDS.COMMAND_SUBCOMMAND");
+        return configuration.getString("MESSAGES.COMMAND_SUBCOMMAND");
     }
 
     public String getCommandEmcMustHold() {
-        return configuration.getString("MESSAGES.COMMANDS.COMMAND_EMC_ITEM_MUST_HOLD");
+        return configuration.getString("MESSAGES.COMMAND_EMC_ITEM_MUST_HOLD");
     }
 
     public String getCommandEmcNone() {
-        return configuration.getString("MESSAGES.COMMANDS.COMMAND_EMC_NONE");
+        return configuration.getString("MESSAGES.COMMAND_EMC_NONE");
     }
 
     public String getCommandSelectItem() {
-        return configuration.getString("MESSAGES.COMMANDS.COMMAND_SELECT_ITEM");
+        return configuration.getString("MESSAGES.COMMAND_SELECT_ITEM");
     }
 
     public String getCommandOrbGiven() {
-        return configuration.getString("MESSAGES.COMMANDS.COMMAND_TRANSMUTATION_ORB_GIVEN");
+        return configuration.getString("MESSAGES.COMMAND_TRANSMUTATION_ORB_GIVEN");
     }
 
     // endregion
@@ -132,11 +132,11 @@ public class ConfigStrings {
     // region Events
 
     public String getEventDisAdjPlacement() {
-        return configuration.getString("MESSAGES.COMMANDS.EVENT_PLACE_DCHEST_ADJACENT");
+        return configuration.getString("MESSAGES.EVENT_PLACE_DCHEST_ADJACENT");
     }
 
     public String getEventCantOpenNotOwner() {
-        return configuration.getString("MESSAGES.COMMANDS.EVENT_CANT_OPEN_NOT_OWNER");
+        return configuration.getString("MESSAGES.EVENT_CANT_OPEN_NOT_OWNER");
     }
 
 

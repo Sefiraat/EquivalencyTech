@@ -5,7 +5,7 @@ import io.github.sefiraat.equivalencytech.commands.Commands;
 import io.github.sefiraat.equivalencytech.configuration.ConfigMain;
 import io.github.sefiraat.equivalencytech.item.EQItems;
 import io.github.sefiraat.equivalencytech.listeners.ManagerEvents;
-import io.github.sefiraat.equivalencytech.misc.SlimefunEQAddon;
+import io.github.sefiraat.equivalencytech.misc.ManagerSupportedPlugins;
 import io.github.sefiraat.equivalencytech.recipes.EmcDefinitions;
 import io.github.sefiraat.equivalencytech.recipes.Recipes;
 import io.github.sefiraat.equivalencytech.runnables.ManagerRunnables;
@@ -27,11 +27,9 @@ public class EquivalencyTech extends JavaPlugin {
     private Recipes recipes;
     private ManagerEvents managerEvents;
     private ManagerRunnables managerRunnables;
+    private ManagerSupportedPlugins managerSupportedPlugins;
 
     private boolean isUnitTest = false;
-
-    private boolean slimefun = false;
-    private SlimefunEQAddon slimefunAddon;
 
     public PaperCommandManager getCommandManager() {
         return commandManager;
@@ -65,12 +63,8 @@ public class EquivalencyTech extends JavaPlugin {
         return managerRunnables;
     }
 
-    public boolean isSlimefun() {
-        return slimefun;
-    }
-
-    public SlimefunEQAddon getSlimefunAddon() {
-        return slimefunAddon;
+    public ManagerSupportedPlugins getManagerSupportedPlugins() {
+        return managerSupportedPlugins;
     }
 
     public EquivalencyTech() {
@@ -100,14 +94,9 @@ public class EquivalencyTech extends JavaPlugin {
         recipes = new Recipes(this.getInstance());
         managerEvents = new ManagerEvents(this.getInstance());
         managerRunnables = new ManagerRunnables(this.getInstance());
+        managerSupportedPlugins = new ManagerSupportedPlugins(this.getInstance());
 
         registerCommands();
-
-        slimefun = getServer().getPluginManager().isPluginEnabled("Slimefun");
-
-        if (isSlimefun()) {
-            slimefunAddon = new SlimefunEQAddon(this.getInstance());
-        }
 
         if (!isUnitTest) {
             int pluginId = 11527;

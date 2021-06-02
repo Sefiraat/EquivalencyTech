@@ -7,6 +7,10 @@ import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
+import java.text.MessageFormat;
+import java.util.ArrayList;
+import java.util.List;
+
 public final class Messages {
 
     public static final String PREFIX = "" + ChatColor.GRAY + "[EMCTech] ";
@@ -100,6 +104,18 @@ public final class Messages {
 
     public static String messageEventCantOpenNotOwner(EquivalencyTech plugin) {
         return PREFIX + THEME_ERROR + plugin.getConfigMainClass().getStrings().getEventCantOpenNotOwner();
+    }
+
+    public static List<String> messageEMC2Installed(EquivalencyTech plugin) {
+        List<String> message = new ArrayList<>();
+        message.add(THEME_ERROR + "You have both EquiTech and EMC2 installed.");
+        message.add(THEME_NOTICE + "Be warned that this may cause issues. Visit the sites below for more. This message does NOT mean you need to remove EMC2/EquiTech.");
+        message.add("");
+        message.add(THEME_NOTICE + "Disable this message in the EquiTech config.");
+        message.add("");
+        message.add( THEME_WARNING + "https://github.com/Sefiraat/EquivalencyTech/");
+        message.add(THEME_WARNING + "https://github.com/Seggan/EMC2");
+        return message;
     }
 
     // endregion
