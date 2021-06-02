@@ -1,18 +1,18 @@
-package io.github.sefiraat.equivalencytech.timers;
+package io.github.sefiraat.equivalencytech.runnables;
 
 import io.github.sefiraat.equivalencytech.EquivalencyTech;
 import org.bukkit.scheduler.BukkitRunnable;
 
-public class TimerSave extends BukkitRunnable {
+public class RunnableSave extends BukkitRunnable {
 
     public final EquivalencyTech plugin;
 
-    public TimerSave(EquivalencyTech plugin) {
+    public RunnableSave(EquivalencyTech plugin) {
         this.plugin = plugin;
     }
 
     @Override
     public void run() {
-        plugin.getConfigClass().saveAdditionalConfigs();
+        plugin.getConfigMainClass().saveAdditionalConfigs();
     }
 }

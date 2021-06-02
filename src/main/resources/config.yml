@@ -241,6 +241,8 @@ MESSAGES:
     COMMAND_EMC_NONE: "This item cannot be condensed into EMC"
     COMMAND_TRANSMUTATION_ORB_GIVEN: "You have been given a Transmutation Orb"
     GENERAL_NO_INVENTORY_SPACE: "You do not have enough space for this item"
+    EVENT_CANT_OPEN_NOT_OWNER: "You cannot open an EMC block that is owned by another player."
+    EVENT_PLACE_DCHEST_ADJACENT: "You cannot place a Dissolution Chest next to one another."
 ITEMS:
   GENERAL_CRAFTING_ITEM: "Crafting Ingredient"
   TRANSMUTATION_ORB_NAME: "Transmutation Orb"
@@ -256,6 +258,11 @@ ITEMS:
   AETERNALIS_FUEL_NAME: "Aeternalis Fuel"
   DARK_MATTER_NAME: "Dark Matter"
   RED_MATTER_NAME: "Red Matter"
+  DISSOLUTION_CHEST_NAME: "Dissolution Chest"
+  DISSOLUTION_CHEST_LORE:
+    - "This chest can break down it's contents"
+    - "into EMC that is added into the placing"
+    - "player's EMC pool."
 GUI:
   SLOT_BORDER_NAME: "EquiTech"
   SLOT_FILLER_NAME: "No recipe here"

@@ -34,7 +34,7 @@ public class AlchemicalCoal {
 
         this.plugin = plugin;
 
-        ConfigStrings c = plugin.getConfigClass().getStrings();
+        ConfigStrings c = plugin.getConfigMainClass().getStrings();
 
         item = SkullCreator. itemFromBase64(SkullTextures.ITEM_ALCHEMICAL_COAL);
         ItemMeta im = item.getItemMeta();
@@ -46,7 +46,7 @@ public class AlchemicalCoal {
         item.setItemMeta(im);
 
         ContainerStorage.makeAlchemicalCoal(item, plugin);
-        ContainerStorage.makeCrafting(item, plugin);
+        ContainerStorage.makeCraftable(item, plugin);
 
     }
 

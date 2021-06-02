@@ -33,7 +33,7 @@ public class AeternalisFuel {
 
         this.plugin = plugin;
 
-        ConfigStrings c = plugin.getConfigClass().getStrings();
+        ConfigStrings c = plugin.getConfigMainClass().getStrings();
 
         item = SkullCreator. itemFromBase64(SkullTextures.ITEM_AETERNALIS_FUEL);
         ItemMeta im = item.getItemMeta();
@@ -45,7 +45,7 @@ public class AeternalisFuel {
         item.setItemMeta(im);
 
         ContainerStorage.makeAeternalisFuel(item, plugin);
-        ContainerStorage.makeCrafting(item, plugin);
+        ContainerStorage.makeCraftable(item, plugin);
     }
 
 }

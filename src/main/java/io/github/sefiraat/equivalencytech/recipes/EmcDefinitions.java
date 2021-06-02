@@ -1,7 +1,6 @@
 package io.github.sefiraat.equivalencytech.recipes;
 
 import io.github.sefiraat.equivalencytech.EquivalencyTech;
-import io.github.sefiraat.equivalencytech.recipes.Recipes;
 import io.github.sefiraat.equivalencytech.statics.ContainerStorage;
 import io.github.sefiraat.equivalencytech.statics.DebugLogs;
 import org.bukkit.Bukkit;
@@ -42,7 +41,7 @@ public class EmcDefinitions {
     }
 
     private void fillBase(EquivalencyTech plugin) {
-        Map<String, Double> h = plugin.getConfigClass().getEmc().getEmcBaseValues();
+        Map<String, Double> h = plugin.getConfigMainClass().getEmc().getEmcBaseValues();
         for (Map.Entry<String, Double> entry : h.entrySet()) {
             if (entry.getValue() > 0) {
                 emcBase.put(Material.matchMaterial(entry.getKey()), entry.getValue());
@@ -103,7 +102,7 @@ public class EmcDefinitions {
     private Double getEQEmcValue(EquivalencyTech plugin, ItemStack itemStack, Integer nestLevel) {
         if (itemStack != null) {
             DebugLogs.logEQStart(plugin, nestLevel, itemStack);
-            if (ContainerStorage.isCrafting(itemStack, plugin)) {
+            if (ContainerStorage.isCraftable(itemStack, plugin)) {
                 double amount = 0D;
                 DebugLogs.logEQisCrafting(plugin, nestLevel);
                 if (emcEQ.containsKey(itemStack.getItemMeta().getDisplayName())) {
@@ -192,14 +191,18 @@ public class EmcDefinitions {
         } else if (recipe instanceof StonecuttingRecipe) {
             StonecuttingRecipe stonecuttingRecipe = (StonecuttingRecipe) recipe;
             return checkStoneCutter(plugin, stonecuttingRecipe, nestLevel);
+        } else if (recipe instanceof SmithingRecipe) {
+            SmithingRecipe smithingRecipe = (SmithingRecipe) recipe;
+            return checkSmithing(plugin, smithingRecipe, nestLevel);
         }
 
-        return eVal;
+        return null;
     }
 
+    @Nullable
     private  Double checkShaped(EquivalencyTech plugin, ShapedRecipe recipe, int nestLevel) {
         DebugLogs.logRecipeType(plugin, "Shaped", nestLevel);
-        Double eVal= 0D;
+        double eVal= 0D;
         for (ItemStack i2 : recipe.getIngredientMap().values()) {
             if (i2 != null) {
                 Double prVal = 0D;
@@ -221,6 +224,7 @@ public class EmcDefinitions {
         return eVal;
     }
 
+    @Nullable
     private Double checkShapeless(EquivalencyTech plugin, ShapelessRecipe recipe, int nestLevel) {
         DebugLogs.logRecipeType(plugin, "Shapeless", nestLevel);
         Double eVal = 0D;
@@ -241,6 +245,7 @@ public class EmcDefinitions {
         return eVal;
     }
 
+    @Nullable
     private Double checkFurnace(EquivalencyTech plugin, FurnaceRecipe recipe, int nestLevel) {
         DebugLogs.logRecipeType(plugin, "Furnace", nestLevel);
         Double prVal;
@@ -257,6 +262,7 @@ public class EmcDefinitions {
         }
     }
 
+    @Nullable
     private Double checkStoneCutter(EquivalencyTech plugin, StonecuttingRecipe recipe, int nestLevel) {
         DebugLogs.logRecipeType(plugin, "Stonecutting", nestLevel);
         Double prVal;
@@ -267,6 +273,26 @@ public class EmcDefinitions {
                 return prVal / recipe.getResult().getAmount();
             } else {
                 return prVal;
+            }
+        } else {
+            return null;
+        }
+    }
+
+    @Nullable
+    private Double checkSmithing(EquivalencyTech plugin, SmithingRecipe recipe, int nestLevel) {
+        DebugLogs.logRecipeType(plugin, "Smithing", nestLevel);
+        Double baseVal;
+        Double additionVal;
+        baseVal = getEmcValue(plugin, recipe.getBase().getItemStack(), nestLevel + 1);
+        additionVal = getEmcValue(plugin, recipe.getAddition().getItemStack(), nestLevel + 1);
+        if (baseVal != null && additionVal != null) {
+            double combinedVal = (baseVal + additionVal);
+            if (recipe.getResult().getAmount() > 1) {
+                DebugLogs.logRecipeMultipleOutputs(plugin, baseVal, recipe.getResult().getAmount(), nestLevel);
+                return combinedVal / recipe.getResult().getAmount();
+            } else {
+                return combinedVal;
             }
         } else {
             return null;

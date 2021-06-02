@@ -157,6 +157,7 @@ public class Recipes {
         return r;
     }
 
+
     public static List<ItemStack> recipeTransmutationOrbCheck(EquivalencyTech plugin) {
         List<ItemStack> itemStacks = new ArrayList<>();
         itemStacks.add(new ItemStack(Material.DIAMOND_BLOCK));
@@ -169,6 +170,31 @@ public class Recipes {
         itemStacks.add(plugin.getEqItems().getDarkMatter().getItemClone());
         itemStacks.add(new ItemStack(Material.DIAMOND_BLOCK));
         return itemStacks;
+    }
+
+    public static List<ItemStack> recipeDissolutionChestCheck(EquivalencyTech plugin) {
+        List<ItemStack> itemStacks = new ArrayList<>();
+        itemStacks.add(plugin.getEqItems().getMobiusFuel().getItemClone());
+        itemStacks.add(plugin.getEqItems().getMobiusFuel().getItemClone());
+        itemStacks.add(plugin.getEqItems().getMobiusFuel().getItemClone());
+        itemStacks.add(new ItemStack(Material.DIAMOND_BLOCK));
+        itemStacks.add(new ItemStack(Material.CHEST));
+        itemStacks.add(new ItemStack(Material.DIAMOND_BLOCK));
+        itemStacks.add(plugin.getEqItems().getMobiusFuel().getItemClone());
+        itemStacks.add(plugin.getEqItems().getMobiusFuel().getItemClone());
+        itemStacks.add(plugin.getEqItems().getMobiusFuel().getItemClone());
+        return itemStacks;
+    }
+
+    public static Recipe recipeDissolutionChest(EquivalencyTech plugin) {
+        ItemStack i = plugin.getEqItems().getDarkMatter().getItemClone();
+        NamespacedKey key = new NamespacedKey(plugin, "d_chest");
+        ShapedRecipe r = new ShapedRecipe(key, i);
+        r.shape("MMM","DCD","MMM");
+        r.setIngredient('m', Material.PLAYER_HEAD);
+        r.setIngredient('D', Material.DIAMOND_BLOCK);
+        r.setIngredient('C', Material.CHEST);
+        return r;
     }
 
     public static ItemStack[] getSFRecipeCoal1() {
@@ -216,6 +242,14 @@ public class Recipes {
                 new ItemStack(Material.DIAMOND_BLOCK),  darkMatterStack,    new ItemStack(Material.DIAMOND_BLOCK),
                 darkMatterStack,                        redMatterStack,     darkMatterStack,
                 new ItemStack(Material.DIAMOND_BLOCK),  darkMatterStack,    new ItemStack(Material.DIAMOND_BLOCK)
+        };
+    }
+
+    public static ItemStack[] getSFRecipeDissolutionChest(SlimefunItemStack mobiusStack) {
+        return new ItemStack[] {
+                mobiusStack,                            mobiusStack,                    mobiusStack,
+                new ItemStack(Material.DIAMOND_BLOCK),  new ItemStack(Material.CHEST),  new ItemStack(Material.DIAMOND_BLOCK),
+                mobiusStack,                            mobiusStack,                    mobiusStack
         };
     }
 

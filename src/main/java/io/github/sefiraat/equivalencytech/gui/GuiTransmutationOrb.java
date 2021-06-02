@@ -42,7 +42,7 @@ public class GuiTransmutationOrb extends PaginatedGui {
         GuiTransmutationOrb gui = new GuiTransmutationOrb(
                 6,
                 GuiTransmutationOrb.PAGE_SIZE,
-                Messages.THEME_EMC_PURPLE + plugin.getConfigClass().getStrings().getItemTransmutationOrbName(),
+                Messages.THEME_EMC_PURPLE + plugin.getConfigMainClass().getStrings().getItemTransmutationOrbName(),
                 plugin,
                 player
         );
@@ -50,7 +50,7 @@ public class GuiTransmutationOrb extends PaginatedGui {
         gui.setItem(GuiTransmutationOrb.ARRAY_FILLER_SLOTS, GUIItems.guiOrbBorder(plugin));
         gui.setItem(GuiTransmutationOrb.INFO_SLOT, GUIItems.guiOrbInfo(plugin, player));
 
-        List<String> learnedItems = ConfigMain.getLearnedItems(plugin, player);
+        List<String> learnedItems = ConfigMain.getLearnedItems(plugin, player.getUniqueId().toString());
 
         int leftOverSlots = GuiTransmutationOrb.PAGE_SIZE - (learnedItems.size() % GuiTransmutationOrb.PAGE_SIZE);
 
@@ -131,7 +131,7 @@ public class GuiTransmutationOrb extends PaginatedGui {
             itemStack = player.getItemOnCursor();
         }
 
-        boolean isEQ = ContainerStorage.isCrafting(itemStack, plugin);
+        boolean isEQ = ContainerStorage.isCraftable(itemStack, plugin);
 
         if (itemStack.hasItemMeta() && !isEQ) {
             player.sendMessage(Messages.messageGuiItemMeta(plugin));
@@ -150,11 +150,11 @@ public class GuiTransmutationOrb extends PaginatedGui {
             } else {
                 entryName = material.toString();
             }
-                if (!ConfigMain.getLearnedItems(plugin, player).contains(entryName)) {
-                    ConfigMain.addLearnedItem(plugin, player, entryName);
-                    player.sendMessage(Messages.messageGuiItemLearned(plugin));
-                    mustClose = true;
-                }
+            if (!ConfigMain.getLearnedItems(plugin, player.getUniqueId().toString()).contains(entryName)) {
+                ConfigMain.addLearnedItem(plugin, player.getUniqueId().toString(), entryName);
+                player.sendMessage(Messages.messageGuiItemLearned(plugin));
+                mustClose = true;
+            }
             ConfigMain.addPlayerEmc(plugin, player, emcValue, totalEmc, itemStack.getAmount());
             itemStack.setAmount(0);
         } else {
@@ -189,7 +189,7 @@ public class GuiTransmutationOrb extends PaginatedGui {
         }
 
         ItemStack clickedItem = e.getCurrentItem();
-        boolean isEQ = ContainerStorage.isCrafting(clickedItem, plugin);
+        boolean isEQ = ContainerStorage.isCraftable(clickedItem, plugin);
         double playerEmc = ConfigMain.getPlayerEmc(plugin, player);
         Double emcValue = Utils.getEMC(plugin, clickedItem);
         String itemName;
@@ -222,7 +222,7 @@ public class GuiTransmutationOrb extends PaginatedGui {
         ItemStack clickedItem = e.getCurrentItem();
         Material material = clickedItem.getType();
 
-        boolean isEQ = ContainerStorage.isCrafting(e.getCurrentItem(), plugin);
+        boolean isEQ = ContainerStorage.isCraftable(e.getCurrentItem(), plugin);
 
         String itemName;
         Double emcValue = Utils.getEMC(plugin, clickedItem);

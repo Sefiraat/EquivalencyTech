@@ -5,17 +5,14 @@ import org.bukkit.configuration.file.FileConfiguration;
 
 public final class ConfigBooleans {
 
-    private final boolean debuggingLogs;
+    FileConfiguration configuration;
 
     public boolean getDebuggingLogs() {
-        return debuggingLogs;
+        return configuration.getBoolean("DEBUG.SHOW_DEBUGGING_LOGS");
     }
 
     public ConfigBooleans(EquivalencyTech plugin) {
-
-        FileConfiguration c = plugin.getConfig();
-
-        debuggingLogs = c.getBoolean("DEBUG.SHOW_DEBUGGING_LOGS");
+        configuration = plugin.getConfig();
     }
 
 }

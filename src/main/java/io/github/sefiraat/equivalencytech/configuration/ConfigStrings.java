@@ -7,166 +7,143 @@ import java.util.List;
 
 public class ConfigStrings {
 
-    // General
+    FileConfiguration configuration;
 
-    private final String generalNoInvSpace;
-    private final String generalCraftingItem;
+    // region General
 
     public String getGeneralNoInvSpace() {
-        return generalNoInvSpace;
+        return configuration.getString("MESSAGES.COMMANDS.GENERAL_NO_INVENTORY_SPACE");
     }
 
     public String getGeneralCraftingItem() {
-        return generalCraftingItem;
+        return configuration.getString("ITEMS.GENERAL_CRAFTING_ITEM");
     }
 
-    // Commands
+    // endregion
 
-    private final String commandSubcommand;
-    private final String commandEmcMustHold;
-    private final String commandEmcNone;
-    private final String commandSelectItem;
-    private final String commandOrbGiven;
+    // region Commands
 
     public String getCommandSubcommand() {
-        return commandSubcommand;
+        return configuration.getString("TEXTS.MESSAGES.COMMANDS.COMMAND_SUBCOMMAND");
     }
 
     public String getCommandEmcMustHold() {
-        return commandEmcMustHold;
+        return configuration.getString("MESSAGES.COMMANDS.COMMAND_EMC_ITEM_MUST_HOLD");
     }
 
     public String getCommandEmcNone() {
-        return commandEmcNone;
+        return configuration.getString("MESSAGES.COMMANDS.COMMAND_EMC_NONE");
     }
 
     public String getCommandSelectItem() {
-        return commandSelectItem;
+        return configuration.getString("MESSAGES.COMMANDS.COMMAND_SELECT_ITEM");
     }
 
     public String getCommandOrbGiven() {
-        return commandOrbGiven;
+        return configuration.getString("MESSAGES.COMMANDS.COMMAND_TRANSMUTATION_ORB_GIVEN");
     }
 
-    // Items
+    // endregion
 
-    private final String itemTransmutationOrbName;
-    private final List<String> itemTransmutationOrbLore;
-    private final String itemRightClickToOpen;
-    private final String itemAlchemicalCoalName;
-    private final String itemMobiusFuelName;
-    private final String itemAeternalisFuelName;
-    private final String itemDarkMatterName;
-    private final String itemRedMatterName;
+    // region Items
 
     public String getItemTransmutationOrbName() {
-        return itemTransmutationOrbName;
+        return configuration.getString("ITEMS.TRANSMUTATION_ORB_NAME");
     }
 
     public List<String> getItemTransmutationOrbLore() {
-        return itemTransmutationOrbLore;
+        return configuration.getStringList("ITEMS.TRANSMUTATION_ORB_LORE");
     }
 
     public String getItemRightClickToOpen() {
-        return itemRightClickToOpen;
+        return configuration.getString("ITEMS.TRANSMUTATION_ORB_INFO");
     }
 
     public String getItemAlchemicalCoalName() {
-        return itemAlchemicalCoalName;
+        return configuration.getString("ITEMS.ALCHEMICAL_COAL_NAME");
     }
 
     public String getItemMobiusFuelName() {
-        return itemMobiusFuelName;
+        return configuration.getString("ITEMS.MOBIUS_FUEL_NAME");
     }
 
     public String getItemAeternalisFuelName() {
-        return itemAeternalisFuelName;
+        return configuration.getString("ITEMS.AETERNALIS_FUEL_NAME");
     }
 
     public String getItemDarkMatterName() {
-        return itemDarkMatterName;
+        return configuration.getString("ITEMS.DARK_MATTER_NAME");
     }
 
     public String getItemRedMatterName() {
-        return itemRedMatterName;
+        return configuration.getString("ITEMS.RED_MATTER_NAME");
     }
 
-    // GUI
+    public String getItemDissolutionChestName() {
+        return configuration.getString("ITEMS.DISSOLUTION_CHEST_NAME");
+    }
 
-    private final String guiBorderName;
-    private final String guiFillerName;
-    private final String guiItemLearned;
-    private final String guiInfoName;
-    private final String guiInfoRecipes;
-    private final String guiEntryLeftClick;
-    private final String guiEntryRightClick;
-    private final String guiNotEnoughEmc;
-    private final String guiItemMeta;
+    public List<String> getItemDissolutionChestLore() {
+        return configuration.getStringList("ITEMS.DISSOLUTION_CHEST_LORE");
+    }
+
+    // endregion
+
+    // region GUI
 
     public String getGuiBorderName() {
-        return guiBorderName;
+        return configuration.getString("GUI.SLOT_BORDER_NAME");
     }
 
     public String getGuiFillerName() {
-        return guiFillerName;
+        return configuration.getString("GUI.SLOT_FILLER_NAME");
     }
 
     public String getGuiItemLearned() {
-        return guiItemLearned;
+        return configuration.getString("GUI.ORB_ITEM_ADDED");
     }
 
     public String getGuiInfoName() {
-        return guiInfoName;
+        return configuration.getString("GUI.EMC_INFO_NAME");
     }
 
     public String getGuiInfoRecipes() {
-        return guiInfoRecipes;
+        return configuration.getString("GUI.EMC_INFO_LORE_RECIPES");
     }
 
     public String getGuiEntryLeftClick() {
-        return guiEntryLeftClick;
+        return configuration.getString("GUI.EMC_ITEM_WITHDRAW_ONE");
     }
 
     public String getGuiEntryRightClick() {
-        return guiEntryRightClick;
+        return configuration.getString("GUI.EMC_ITEM_WITHDRAW_STACK");
     }
 
     public String getGuiNotEnoughEmc() {
-        return guiNotEnoughEmc;
+        return configuration.getString("GUI.EMC_NOT_ENOUGH");
     }
 
     public String getGuiItemMeta() {
-        return guiItemMeta;
+        return configuration.getString("GUI.EMC_ITEM_META");
     }
 
+    // endregion
+
+    // region Events
+
+    public String getEventDisAdjPlacement() {
+        return configuration.getString("MESSAGES.COMMANDS.EVENT_PLACE_DCHEST_ADJACENT");
+    }
+
+    public String getEventCantOpenNotOwner() {
+        return configuration.getString("MESSAGES.COMMANDS.EVENT_CANT_OPEN_NOT_OWNER");
+    }
+
+
+    // endregion
+
     public ConfigStrings(EquivalencyTech plugin) {
-
-        FileConfiguration c = plugin.getConfig();
-
-        generalNoInvSpace = c.getString("MESSAGES.COMMANDS.GENERAL_NO_INVENTORY_SPACE");
-        generalCraftingItem = c.getString("ITEMS.GENERAL_CRAFTING_ITEM");
-        commandSubcommand = c.getString("TEXTS.MESSAGES.COMMANDS.COMMAND_SUBCOMMAND");
-        commandEmcMustHold = c.getString("MESSAGES.COMMANDS.COMMAND_EMC_ITEM_MUST_HOLD");
-        commandEmcNone = c.getString("MESSAGES.COMMANDS.COMMAND_EMC_NONE");
-        commandSelectItem = c.getString("MESSAGES.COMMANDS.COMMAND_SELECT_ITEM");
-        commandOrbGiven = c.getString("MESSAGES.COMMANDS.COMMAND_TRANSMUTATION_ORB_GIVEN");
-        itemTransmutationOrbName = c.getString("ITEMS.TRANSMUTATION_ORB_NAME");
-        itemTransmutationOrbLore = c.getStringList("ITEMS.TRANSMUTATION_ORB_LORE");
-        itemRightClickToOpen = c.getString("ITEMS.TRANSMUTATION_ORB_INFO");
-        itemAlchemicalCoalName = c.getString("ITEMS.ALCHEMICAL_COAL_NAME");
-        itemMobiusFuelName = c.getString("ITEMS.MOBIUS_FUEL_NAME");
-        itemAeternalisFuelName = c.getString("ITEMS.AETERNALIS_FUEL_NAME");
-        itemDarkMatterName = c.getString("ITEMS.DARK_MATTER_NAME");
-        itemRedMatterName = c.getString("ITEMS.RED_MATTER_NAME");
-        guiBorderName = c.getString("GUI.SLOT_BORDER_NAME");
-        guiFillerName = c.getString("GUI.SLOT_FILLER_NAME");
-        guiItemLearned = c.getString("GUI.ORB_ITEM_ADDED");
-        guiInfoName = c.getString("GUI.EMC_INFO_NAME");
-        guiInfoRecipes = c.getString("GUI.EMC_INFO_LORE_RECIPES");
-        guiEntryLeftClick = c.getString("GUI.EMC_ITEM_WITHDRAW_ONE");
-        guiEntryRightClick = c.getString("GUI.EMC_ITEM_WITHDRAW_STACK");
-        guiNotEnoughEmc = c.getString("GUI.EMC_NOT_ENOUGH");
-        guiItemMeta = c.getString("GUI.EMC_ITEM_META");
+        configuration = plugin.getConfig();
     }
 
 }

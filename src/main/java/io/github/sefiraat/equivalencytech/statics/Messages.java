@@ -27,15 +27,16 @@ public final class Messages {
         throw new IllegalStateException("Utility class");
     }
 
-    // Commands
+    // region Commands
+
     public static String msgCmdSubcommand(EquivalencyTech plugin) {
-        return PREFIX + THEME_NOTICE + plugin.getConfigClass().getStrings().getCommandSubcommand();
+        return PREFIX + THEME_NOTICE + plugin.getConfigMainClass().getStrings().getCommandSubcommand();
     }
     public static String msgCmdEmcMustHold(EquivalencyTech plugin) {
-        return PREFIX + THEME_WARNING + plugin.getConfigClass().getStrings().getCommandEmcMustHold();
+        return PREFIX + THEME_WARNING + plugin.getConfigMainClass().getStrings().getCommandEmcMustHold();
     }
     public static String msgCmdEmcNone(EquivalencyTech plugin) {
-        return PREFIX + THEME_WARNING + plugin.getConfigClass().getStrings().getCommandEmcNone();
+        return PREFIX + THEME_WARNING + plugin.getConfigMainClass().getStrings().getCommandEmcNone();
     }
     public static String msgCmdEmcDisplay(Material m, Double emc) {
         return PREFIX + THEME_WARNING + Utils.materialFriendlyName(m) + " x 1 = EMC " + emc;
@@ -50,21 +51,23 @@ public final class Messages {
         return PREFIX + THEME_WARNING + s + " x " + amount + " = EMC " + emc;
     }
     public static String messageCommandSelectItem(EquivalencyTech plugin) {
-        return PREFIX + THEME_NOTICE + plugin.getConfigClass().getStrings().getCommandSelectItem();
+        return PREFIX + THEME_NOTICE + plugin.getConfigMainClass().getStrings().getCommandSelectItem();
     }
 
     public static String messageCommandOrbGiven(EquivalencyTech plugin) {
-        return PREFIX + THEME_NOTICE + plugin.getConfigClass().getStrings().getCommandOrbGiven();
+        return PREFIX + THEME_NOTICE + plugin.getConfigMainClass().getStrings().getCommandOrbGiven();
     }
 
     public static String messageCommandEmc(EquivalencyTech plugin, Player player) {
         return PREFIX + THEME_NOTICE + "You have " + THEME_SUCCESS + ConfigMain.getPlayerEmc(plugin, player) + THEME_NOTICE + " EMC.";
     }
 
-    // GUI
+    // endregion
+
+    // region GUI
 
     public static String messageGuiItemLearned(EquivalencyTech plugin) {
-        return PREFIX + THEME_PASSIVE_CONGRATULATE + plugin.getConfigClass().getStrings().getGuiItemLearned();
+        return PREFIX + THEME_PASSIVE_CONGRATULATE + plugin.getConfigMainClass().getStrings().getGuiItemLearned();
     }
 
     public static String messageGuiEmcGiven(EquivalencyTech plugin, Player player, double emcBase, double emcTotal, int itemAmt, int burnRate) {
@@ -76,15 +79,29 @@ public final class Messages {
     }
 
     public static String messageGuiEmcNotEnough(EquivalencyTech plugin, Player player) {
-        return PREFIX + THEME_ERROR + plugin.getConfigClass().getStrings().getGuiNotEnoughEmc() + THEME_NOTICE + " [EMC : " + ConfigMain.getPlayerEmc(plugin, player) + "]";
+        return PREFIX + THEME_ERROR + plugin.getConfigMainClass().getStrings().getGuiNotEnoughEmc() + THEME_NOTICE + " [EMC : " + ConfigMain.getPlayerEmc(plugin, player) + "]";
     }
 
     public static String messageGuiNoSpace(EquivalencyTech plugin) {
-        return PREFIX + THEME_ERROR + plugin.getConfigClass().getStrings().getGeneralNoInvSpace();
+        return PREFIX + THEME_ERROR + plugin.getConfigMainClass().getStrings().getGeneralNoInvSpace();
     }
 
     public static String messageGuiItemMeta(EquivalencyTech plugin) {
-        return PREFIX + THEME_ERROR + plugin.getConfigClass().getStrings().getGuiItemMeta();
+        return PREFIX + THEME_ERROR + plugin.getConfigMainClass().getStrings().getGuiItemMeta();
     }
+
+    // endregion
+
+    // region Events
+
+    public static String messageEventDChestMisPlace(EquivalencyTech plugin) {
+        return PREFIX + THEME_ERROR + plugin.getConfigMainClass().getStrings().getEventDisAdjPlacement();
+    }
+
+    public static String messageEventCantOpenNotOwner(EquivalencyTech plugin) {
+        return PREFIX + THEME_ERROR + plugin.getConfigMainClass().getStrings().getEventCantOpenNotOwner();
+    }
+
+    // endregion
 
 }

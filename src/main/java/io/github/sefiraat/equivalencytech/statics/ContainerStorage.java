@@ -18,6 +18,7 @@ public final class ContainerStorage {
     public static final String CS_IS_COAL_3 = "is_coal_3";
     public static final String CS_IS_DRK = "is_drk";
     public static final String CS_IS_RED = "is_red";
+    public static final String CS_IS_DISCST = "is_dis_chest";
 
     public static boolean containerHasData(ItemStack i, NamespacedKey key, PersistentDataType<?, ?> type) {
         if (i != null && i.hasItemMeta()) {
@@ -100,12 +101,12 @@ public final class ContainerStorage {
         setData(i, key, 1);
     }
 
-    public static boolean isCrafting(ItemStack i, EquivalencyTech plugin) {
+    public static boolean isCraftable(ItemStack i, EquivalencyTech plugin) {
         NamespacedKey key = new NamespacedKey(plugin.getInstance(), CS_IS_CRAFTING);
         return containerHasData(i, key, PersistentDataType.INTEGER);
     }
 
-    public static void makeCrafting(ItemStack i, EquivalencyTech plugin) {
+    public static void makeCraftable(ItemStack i, EquivalencyTech plugin) {
         NamespacedKey key = new NamespacedKey(plugin.getInstance(), CS_IS_CRAFTING);
         setData(i, key, 1);
     }
@@ -157,6 +158,16 @@ public final class ContainerStorage {
 
     public static void makeRedMatter(ItemStack i, EquivalencyTech plugin) {
         NamespacedKey key = new NamespacedKey(plugin.getInstance(), CS_IS_RED);
+        setData(i, key, 1);
+    }
+
+    public static boolean isDisChest(ItemStack i, EquivalencyTech plugin) {
+        NamespacedKey key = new NamespacedKey(plugin.getInstance(), CS_IS_DISCST);
+        return containerHasData(i, key, PersistentDataType.INTEGER);
+    }
+
+    public static void makeDisChest(ItemStack i, EquivalencyTech plugin) {
+        NamespacedKey key = new NamespacedKey(plugin.getInstance(), CS_IS_DISCST);
         setData(i, key, 1);
     }
 

@@ -17,6 +17,7 @@ public class EQItems {
     private final AeternalisFuel aeternalisFuel;
     private final DarkMatter darkMatter;
     private final RedMatter redMatter;
+    private final DissolutionChest dissolutionChest;
     private final Map<String, ItemStack> eqItemMap;
 
     public EquivalencyTech getPlugin() {
@@ -47,6 +48,10 @@ public class EQItems {
         return redMatter;
     }
 
+    public DissolutionChest getDissolutionChest() {
+        return dissolutionChest;
+    }
+
     public Map<String, ItemStack> getEqItemMap() {
         return eqItemMap;
     }
@@ -59,6 +64,7 @@ public class EQItems {
         aeternalisFuel = new AeternalisFuel(plugin);
         darkMatter = new DarkMatter(plugin);
         redMatter = new RedMatter(plugin);
+        dissolutionChest = new DissolutionChest(plugin);
 
         eqItemMap = new HashMap<>();
         eqItemMap.put(Utils.eqNameConfig(transmutationOrb.getItem().getItemMeta().getDisplayName()), transmutationOrb.getItemClone());
@@ -67,6 +73,8 @@ public class EQItems {
         eqItemMap.put(Utils.eqNameConfig(aeternalisFuel.getItem().getItemMeta().getDisplayName()), aeternalisFuel.getItemClone());
         eqItemMap.put(Utils.eqNameConfig(darkMatter.getItem().getItemMeta().getDisplayName()), darkMatter.getItemClone());
         eqItemMap.put(Utils.eqNameConfig(redMatter.getItem().getItemMeta().getDisplayName()), redMatter.getItemClone());
+        eqItemMap.put(Utils.eqNameConfig(dissolutionChest.getItem().getItemMeta().getDisplayName()), dissolutionChest.getItemClone());
+
     }
 
 

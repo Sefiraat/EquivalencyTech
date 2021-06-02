@@ -19,7 +19,7 @@ public class Utils {
     }
 
     public static Double getEMC(EquivalencyTech plugin, ItemStack itemStack) {
-        if (ContainerStorage.isCrafting(itemStack, plugin)) {
+        if (ContainerStorage.isCraftable(itemStack, plugin)) {
             ItemStack eqStack = plugin.getEqItems().getEqItemMap().get(eqNameConfig(itemStack.getItemMeta().getDisplayName()));
             return plugin.getEmcDefinitions().getEmcEQ().get(eqStack.getItemMeta().getDisplayName());
         } else {
@@ -42,6 +42,11 @@ public class Utils {
 
     public static void givePlayerOrb(EquivalencyTech plugin, Player player) {
         player.getPlayer().getInventory().addItem(plugin.getEqItems().getTransmutationOrb().getItemClone());
+        player.getPlayer().sendMessage(Messages.messageCommandOrbGiven(plugin));
+    }
+
+    public static void givePlayerDChest(EquivalencyTech plugin, Player player) {
+        player.getPlayer().getInventory().addItem(plugin.getEqItems().getDissolutionChest().getItemClone());
         player.getPlayer().sendMessage(Messages.messageCommandOrbGiven(plugin));
     }
 

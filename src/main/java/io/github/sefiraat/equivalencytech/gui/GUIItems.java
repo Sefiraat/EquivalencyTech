@@ -41,7 +41,7 @@ public class GUIItems {
         GuiItem g = new GuiItem(Material.GRAY_STAINED_GLASS_PANE);
         ItemStack i = g.getItemStack();
         ItemMeta im = i.getItemMeta();
-        im.setDisplayName(Messages.THEME_PASSIVE_GRAY + plugin.getConfigClass().getStrings().getGuiBorderName());
+        im.setDisplayName(Messages.THEME_PASSIVE_GRAY + plugin.getConfigMainClass().getStrings().getGuiBorderName());
         im.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         i.setItemMeta(im);
         g.setItemStack(i);
@@ -53,7 +53,7 @@ public class GUIItems {
         GuiItem g = new GuiItem(Material.LIGHT_GRAY_STAINED_GLASS_PANE);
         ItemStack i = g.getItemStack();
         ItemMeta im = i.getItemMeta();
-        im.setDisplayName(Messages.THEME_PASSIVE_GRAY + plugin.getConfigClass().getStrings().getGuiFillerName());
+        im.setDisplayName(Messages.THEME_PASSIVE_GRAY + plugin.getConfigMainClass().getStrings().getGuiFillerName());
         im.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         i.setItemMeta(im);
         g.setItemStack(i);
@@ -81,7 +81,7 @@ public class GUIItems {
     }
 
     public static List<String> getEmcItemLore(EquivalencyTech plugin, ItemStack itemStack) {
-        ConfigStrings c = plugin.getConfigClass().getStrings();
+        ConfigStrings c = plugin.getConfigMainClass().getStrings();
         List<String> lore = new ArrayList<>();
         lore.add(Messages.THEME_EMC_PURPLE + "EMC: " + Utils.getEMC(plugin, itemStack));
         lore.add("");
@@ -91,14 +91,14 @@ public class GUIItems {
     }
 
     public static String guiDisplayNameInfo(EquivalencyTech plugin) {
-        return ChatColor.RED + plugin.getConfigClass().getStrings().getGuiInfoName();
+        return ChatColor.RED + plugin.getConfigMainClass().getStrings().getGuiInfoName();
     }
 
     public static List<String> guiDisplayLoreInfo(EquivalencyTech plugin, Player player) {
         List<String> l = new ArrayList<>();
         int recipesKnown = ConfigMain.getLearnedItemAmount(plugin, player);
         int recipesTotal = Utils.totalRecipes(plugin);
-        l.add("" + ChatColor.GOLD + ChatColor.BOLD + plugin.getConfigClass().getStrings().getGuiInfoRecipes() + ": " + ChatColor.WHITE + recipesKnown + "/" + recipesTotal);
+        l.add("" + ChatColor.GOLD + ChatColor.BOLD + plugin.getConfigMainClass().getStrings().getGuiInfoRecipes() + ": " + ChatColor.WHITE + recipesKnown + "/" + recipesTotal);
         l.add("");
         l.add("" + ChatColor.GOLD + ChatColor.BOLD + "EMC: " + ChatColor.WHITE + ConfigMain.getPlayerEmc(plugin, player));
         return l;

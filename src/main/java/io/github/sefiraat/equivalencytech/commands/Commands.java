@@ -43,7 +43,7 @@ public class Commands extends BaseCommand {
                 Player player = (Player) sender;
                 ItemStack i = player.getInventory().getItemInMainHand();
                 if (i.getType() != Material.AIR) {
-                    if (ContainerStorage.isCrafting(i, plugin)) {
+                    if (ContainerStorage.isCraftable(i, plugin)) {
                         if (plugin.getEmcDefinitions().getEmcEQ().containsKey(i.getItemMeta().getDisplayName())) {
                             player.sendMessage(Messages.msgCmdEmcDisplay(i.getItemMeta().getDisplayName(), Utils.getEMC(plugin, i)));
                             player.sendMessage(Messages.msgCmdEmcDisplayStack(i.getItemMeta().getDisplayName(), i.getAmount(), Utils.getEMC(plugin, i) * i.getAmount()));
@@ -91,11 +91,18 @@ public class Commands extends BaseCommand {
         }
 
         @Subcommand("TransmutationOrb")
-        @CommandPermission("EquivalencyTech.Admin")
         @CommandCompletion("@players")
-        public void onGiveItemDank(CommandSender sender, OnlinePlayer player) {
+        public void onGiveItemOrb(CommandSender sender, OnlinePlayer player) {
             if (sender instanceof Player) {
                 Utils.givePlayerOrb(plugin, player.getPlayer());
+            }
+        }
+
+        @Subcommand("DissolutionChest")
+        @CommandCompletion("@players")
+        public void onGiveItemDChest(CommandSender sender, OnlinePlayer player) {
+            if (sender instanceof Player) {
+                Utils.givePlayerDChest(plugin, player.getPlayer());
             }
         }
     }

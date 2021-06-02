@@ -3,13 +3,12 @@ package io.github.sefiraat.equivalencytech;
 import co.aikar.commands.PaperCommandManager;
 import io.github.sefiraat.equivalencytech.commands.Commands;
 import io.github.sefiraat.equivalencytech.configuration.ConfigMain;
-import io.github.sefiraat.equivalencytech.listeners.CraftListener;
-import io.github.sefiraat.equivalencytech.listeners.OrbOpenListener;
 import io.github.sefiraat.equivalencytech.item.EQItems;
-import io.github.sefiraat.equivalencytech.recipes.EmcDefinitions;
+import io.github.sefiraat.equivalencytech.listeners.ManagerEvents;
 import io.github.sefiraat.equivalencytech.misc.SlimefunEQAddon;
+import io.github.sefiraat.equivalencytech.recipes.EmcDefinitions;
 import io.github.sefiraat.equivalencytech.recipes.Recipes;
-import io.github.sefiraat.equivalencytech.timers.TimerSave;
+import io.github.sefiraat.equivalencytech.runnables.ManagerRunnables;
 import org.bstats.bukkit.Metrics;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -26,6 +25,8 @@ public class EquivalencyTech extends JavaPlugin {
     private EmcDefinitions emcDefinitions;
     private EQItems eqItems;
     private Recipes recipes;
+    private ManagerEvents managerEvents;
+    private ManagerRunnables managerRunnables;
 
     private boolean isUnitTest = false;
 
@@ -40,7 +41,7 @@ public class EquivalencyTech extends JavaPlugin {
         return instance;
     }
 
-    public ConfigMain getConfigClass() {
+    public ConfigMain getConfigMainClass() {
         return configMainClass;
     }
 
@@ -54,6 +55,14 @@ public class EquivalencyTech extends JavaPlugin {
 
     public Recipes getRecipes() {
         return recipes;
+    }
+
+    public ManagerEvents getManagerEvents() {
+        return managerEvents;
+    }
+
+    public ManagerRunnables getManagerRunnables() {
+        return managerRunnables;
     }
 
     public boolean isSlimefun() {
@@ -89,12 +98,10 @@ public class EquivalencyTech extends JavaPlugin {
         eqItems = new EQItems(this.getInstance());
         emcDefinitions = new EmcDefinitions(this.getInstance());
         recipes = new Recipes(this.getInstance());
+        managerEvents = new ManagerEvents(this.getInstance());
+        managerRunnables = new ManagerRunnables(this.getInstance());
 
-        setupRunnables();
         registerCommands();
-
-        new OrbOpenListener(this.getInstance());
-        new CraftListener(this.getInstance());
 
         slimefun = getServer().getPluginManager().isPluginEnabled("Slimefun");
 
@@ -120,10 +127,7 @@ public class EquivalencyTech extends JavaPlugin {
         commandManager.registerCommand(new Commands(this.getInstance()));
     }
 
-    private void setupRunnables() {
-        TimerSave timerSave = new TimerSave(this.instance);
-        timerSave.runTaskTimer(this.instance, 0, 100L);
-    }
+
 
 
 

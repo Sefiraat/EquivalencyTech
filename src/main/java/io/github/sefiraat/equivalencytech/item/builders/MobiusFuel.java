@@ -34,7 +34,7 @@ public class MobiusFuel {
 
         this.plugin = plugin;
 
-        ConfigStrings c = plugin.getConfigClass().getStrings();
+        ConfigStrings c = plugin.getConfigMainClass().getStrings();
 
         item = SkullCreator. itemFromBase64(SkullTextures.ITEM_MOBIUS_FUEL);
         ItemMeta im = item.getItemMeta();
@@ -46,7 +46,7 @@ public class MobiusFuel {
         item.setItemMeta(im);
 
         ContainerStorage.makeMobiusFuel(item, plugin);
-        ContainerStorage.makeCrafting(item, plugin);
+        ContainerStorage.makeCraftable(item, plugin);
 
     }
 
