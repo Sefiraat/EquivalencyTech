@@ -378,7 +378,7 @@ public class ConfigMain {
 
     public static boolean isOwnerDChest(EquivalencyTech plugin, Player player, Integer id) {
         FileConfiguration c = plugin.getConfigMainClass().dChestConfig;
-        return c.get(id + ".OWNING_PLAYER").equals(player.getUniqueId());
+        return c.getString(id + ".OWNING_PLAYER").equals(player.getUniqueId().toString());
     }
 
     public static String getOwnerDChest(EquivalencyTech plugin, Integer id) {
@@ -459,7 +459,7 @@ public class ConfigMain {
 
     public static boolean isOwnerCChest(EquivalencyTech plugin, Player player, Integer id) {
         FileConfiguration c = plugin.getConfigMainClass().cChestConfig;
-        return c.get(id + ".OWNING_PLAYER").equals(player.getUniqueId());
+        return c.getString(id + ".OWNING_PLAYER").equals(player.getUniqueId().toString());
     }
 
     public static String getOwnerCChest(EquivalencyTech plugin, Integer id) {
