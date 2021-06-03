@@ -35,5 +35,7 @@ The plugin currently features:
 * **_READ THIS ONE FIRST ->_** [Balancing](https://github.com/Sefiraat/EquivalencyTech/wiki/Balancing) **_<-READ THIS ONE FIRST_**
 * [What is EMC?](https://github.com/Sefiraat/EquivalencyTech/wiki/What-is-EMC%3F)
 * [Transmutation Orb](https://github.com/Sefiraat/EquivalencyTech/wiki/Transmutation-Orb)
+* [Dissolution Chest](https://github.com/Sefiraat/EquivalencyTech/wiki/Dissolution-Chest)
+* [Condensate Chest](https://github.com/Sefiraat/EquivalencyTech/wiki/Condensate-Chest)
 * [Crafting](https://github.com/Sefiraat/EquivalencyTech/wiki/Crafting)
 * [Commands](https://github.com/Sefiraat/EquivalencyTech/wiki/Commands)
