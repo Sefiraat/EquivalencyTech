@@ -73,4 +73,16 @@ public class Utils {
         return recExtended + recEQ;
     }
 
+    public static boolean canBeSynth(EquivalencyTech plugin, ItemStack itemStack) {
+        if (itemStack.hasItemMeta()) {
+            if (ContainerStorage.isCraftable(itemStack, plugin)) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return true;
+        }
+    }
+
 }

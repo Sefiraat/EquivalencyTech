@@ -38,7 +38,7 @@ public class RunnableEQTick extends BukkitRunnable {
                         boolean isEQ = ContainerStorage.isCraftable(itemStack, plugin);
                         Material material = itemStack.getType();
                         Double emcValue = Utils.roundDown((Utils.getEMC(plugin, itemStack) / 100) * 150, 2);
-                        if (emcValue != null) {
+                        if (emcValue != null && Utils.canBeSynth(plugin, itemStack)) {
                             String entryName;
                             if (isEQ) {
                                 entryName = Utils.eqNameConfig(itemStack.getItemMeta().getDisplayName());

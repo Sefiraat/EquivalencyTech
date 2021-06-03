@@ -10,6 +10,7 @@ import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.Chest;
+import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.EventHandler;
@@ -216,7 +217,7 @@ public class ChestPlaceListener implements Listener {
             }
             itemStack.setAmount(1);
             Double emcValue = Utils.getEMC(plugin, itemStack);
-            if (emcValue != null) {
+            if (Utils.canBeSynth(plugin, itemStack) && emcValue != null) {
                 ConfigMain.setCChestItem(plugin, conId, itemStack);
                 e.getPlayer().sendMessage(Messages.messageEventItemSet(plugin));
             } else {
@@ -227,4 +228,6 @@ public class ChestPlaceListener implements Listener {
         }
         e.setCancelled(true);
     }
+
+
 }
