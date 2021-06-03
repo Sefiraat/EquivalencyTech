@@ -15,15 +15,16 @@ The plugin currently features:
   * This key item lets users input their unwanted items to convert them to EMC.
   * The first time a new item is added, it is 'learned'.
   * Learned items can be synthesized using stored EMC.
+* Dissolution Chest
+  * Any items placed/hopped/trasnfered via cargo into this chest will slowly be dissolved into EMC added directly into the players EMC pool
+* Condensate Chest
+  * Shift + Click a Condensate chest with an item to assign it's production type. Assuming the player has enough EMC and the item can be synthesized, the items will begin production.
 * Slimefun
-  * If Slimefun is installed, this plugin's recipes will be added to the Slimefun Guide. **this plugin does not require Slimefun to run**
+  * If Slimefun is installed, this plugin's recipes will be added to the Slimefun Guide. **This plugin does not require Slimefun to run**
 
 ## Planned Features
-* Automation
-  * Dissolution Chest
-    * Any items input into the chest are dissolved into EMC. Starting at a 50% return on EMC ranging to 100% through upgrades
-  * Condenser Chest
-    * After being assigned an item, synthesizes items using the assigning player's EMC periodically into the chest. This will be upgradable to increase the rate at which items are generated.
+* Automation Upgrades
+  * Upgrades to MK2 - MK3 chests for faster throughput
 * Slimefun
   * As at this first release, only vanilla items + EquiTech items can be condensed / synthesized. A Future update will allow for Slimefun core items to also be added.
 * DankTech
@@ -36,6 +37,3 @@ The plugin currently features:
 * [Transmutation Orb](https://github.com/Sefiraat/EquivalencyTech/wiki/Transmutation-Orb)
 * [Crafting](https://github.com/Sefiraat/EquivalencyTech/wiki/Crafting)
 * [Commands](https://github.com/Sefiraat/EquivalencyTech/wiki/Commands)
-
-## Credits
-A big shout out to the owners of [mct.tantrum.org](https://mct.enjin.com/) who let me test on their server even once it was clear I barely knew what I was doing! <3
