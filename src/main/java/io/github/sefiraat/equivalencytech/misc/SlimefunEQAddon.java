@@ -67,9 +67,12 @@ public class SlimefunEQAddon implements SlimefunAddon {
         orbItem.register(this);
         // Dissolution Chest
         SlimefunItemStack dChestStack = new SlimefunItemStack( "EQ_D_CHEST", plugin.getEqItems().getDissolutionChest().getItemClone());
-        SlimefunItem dChestItem = new EQSlimefunItem(eqCategory, dChestStack, new RecipeType(MinecraftRecipe.SHAPED_CRAFTING), Recipes.getSFRecipeDissolutionChest(coal1Stack));
+        SlimefunItem dChestItem = new EQSlimefunItem(eqCategory, dChestStack, new RecipeType(MinecraftRecipe.SHAPED_CRAFTING), Recipes.getSFRecipeDissolutionChest(coal2Stack));
         dChestItem.register(this);
-
+        // Condensator Chest
+        SlimefunItemStack cChestStack = new SlimefunItemStack( "EQ_C_CHEST", plugin.getEqItems().getCondensatorChest().getItemClone());
+        SlimefunItem cChestItem = new EQSlimefunItem(eqCategory, cChestStack, new RecipeType(MinecraftRecipe.SHAPED_CRAFTING), Recipes.getSFRecipeCondensatorChest(coal3Stack, dChestStack));
+        cChestItem.register(this);
     }
 
     @NotNull

@@ -26,6 +26,8 @@ public class Recipes {
         plugin.getServer().addRecipe(Recipes.recipeDarkMatter(plugin));
         plugin.getServer().addRecipe(Recipes.recipeRedMatter(plugin));
         plugin.getServer().addRecipe(Recipes.recipeTransmutationOrb(plugin));
+        plugin.getServer().addRecipe(Recipes.recipeDissolutionChest(plugin));
+        plugin.getServer().addRecipe(Recipes.recipeCondensatorChest(plugin));
     }
 
     public static Recipe recipeCoal1(EquivalencyTech plugin) {
@@ -191,8 +193,33 @@ public class Recipes {
         NamespacedKey key = new NamespacedKey(plugin, "d_chest");
         ShapedRecipe r = new ShapedRecipe(key, i);
         r.shape("MMM","DCD","MMM");
-        r.setIngredient('m', Material.PLAYER_HEAD);
+        r.setIngredient('M', Material.PLAYER_HEAD);
         r.setIngredient('D', Material.DIAMOND_BLOCK);
+        r.setIngredient('C', Material.CHEST);
+        return r;
+    }
+
+    public static List<ItemStack> recipeCondensatorChestCheck(EquivalencyTech plugin) {
+        List<ItemStack> itemStacks = new ArrayList<>();
+        itemStacks.add(plugin.getEqItems().getAeternalisFuel().getItemClone());
+        itemStacks.add(plugin.getEqItems().getAeternalisFuel().getItemClone());
+        itemStacks.add(plugin.getEqItems().getAeternalisFuel().getItemClone());
+        itemStacks.add(new ItemStack(Material.NETHERITE_BLOCK));
+        itemStacks.add(plugin.getEqItems().getDissolutionChest().getItemClone());
+        itemStacks.add(new ItemStack(Material.NETHERITE_BLOCK));
+        itemStacks.add(plugin.getEqItems().getAeternalisFuel().getItemClone());
+        itemStacks.add(plugin.getEqItems().getAeternalisFuel().getItemClone());
+        itemStacks.add(plugin.getEqItems().getAeternalisFuel().getItemClone());
+        return itemStacks;
+    }
+
+    public static Recipe recipeCondensatorChest(EquivalencyTech plugin) {
+        ItemStack i = plugin.getEqItems().getDarkMatter().getItemClone();
+        NamespacedKey key = new NamespacedKey(plugin, "c_chest");
+        ShapedRecipe r = new ShapedRecipe(key, i);
+        r.shape("MMM","DCD","MMM");
+        r.setIngredient('M', Material.PLAYER_HEAD);
+        r.setIngredient('D', Material.NETHERITE_BLOCK);
         r.setIngredient('C', Material.CHEST);
         return r;
     }
@@ -253,6 +280,14 @@ public class Recipes {
         };
     }
 
+    public static ItemStack[] getSFRecipeCondensatorChest(SlimefunItemStack mobiusStack, SlimefunItemStack disChestStack) {
+        return new ItemStack[] {
+                mobiusStack,                            mobiusStack,    mobiusStack,
+                new ItemStack(Material.NETHERITE_BLOCK),disChestStack,  new ItemStack(Material.NETHERITE_BLOCK),
+                mobiusStack,                            mobiusStack,    mobiusStack
+        };
+    }
+
     public static Map<List<ItemStack>, ItemStack> getEQRecipes(EquivalencyTech plugin) {
         Map<List<ItemStack>, ItemStack> recipes = new HashMap<>();
         recipes.put(recipeCoal1Check(), plugin.getEqItems().getAlchemicalCoal().getItemClone());
@@ -261,6 +296,8 @@ public class Recipes {
         recipes.put(recipeDarkMatterCheck(plugin), plugin.getEqItems().getDarkMatter().getItemClone());
         recipes.put(recipeRedMatterCheck(plugin), plugin.getEqItems().getRedMatter().getItemClone());
         recipes.put(recipeTransmutationOrbCheck(plugin), plugin.getEqItems().getTransmutationOrb().getItemClone());
+        recipes.put(recipeDissolutionChestCheck(plugin), plugin.getEqItems().getDissolutionChest().getItemClone());
+        recipes.put(recipeCondensatorChestCheck(plugin), plugin.getEqItems().getCondensatorChest().getItemClone());
         return recipes;
     }
 
@@ -277,6 +314,10 @@ public class Recipes {
             return recipeRedMatterCheck(plugin);
         } else if (itemStack.equals(plugin.getEqItems().getTransmutationOrb().getItem())) {
             return recipeTransmutationOrbCheck(plugin);
+        } else if (itemStack.equals(plugin.getEqItems().getDissolutionChest().getItem())) {
+            return recipeDissolutionChestCheck(plugin);
+        } else if (itemStack.equals(plugin.getEqItems().getCondensatorChest().getItem())) {
+            return recipeCondensatorChestCheck(plugin);
         }
         return new ArrayList<>();
     }

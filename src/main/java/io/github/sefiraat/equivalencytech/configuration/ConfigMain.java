@@ -10,6 +10,7 @@ import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
 import javax.annotation.Nullable;
 import java.io.File;
@@ -33,6 +34,8 @@ public class ConfigMain {
     private FileConfiguration blockStoreConfig;
     private File dChestConfigFile;
     private FileConfiguration dChestConfig;
+    private File cChestConfigFile;
+    private FileConfiguration cChestConfig;
 
     public ConfigStrings getStrings() {
         return strings;
@@ -76,7 +79,16 @@ public class ConfigMain {
         return dChestConfig;
     }
 
+    public File getCChestConfigFile() {
+        return cChestConfigFile;
+    }
+
+    public FileConfiguration getCChestConfig() {
+        return cChestConfig;
+    }
+
     public static final String DIS_CHEST_CFG = "DIS_CHESTS";
+    public static final String CON_CHEST_CFG = "CON_CHESTS";
 
     public ConfigMain(EquivalencyTech plugin) {
 
@@ -100,6 +112,7 @@ public class ConfigMain {
         createEmcConfig();
         createBlockStoreConfig();
         createDChestConfig();
+        createCChestConfig();
     }
 
     public void saveAdditionalConfigs() {
@@ -107,6 +120,7 @@ public class ConfigMain {
         saveLearnedConfig();
         saveBlockStoreConfig();
         saveDChestConfig();
+        saveCChestConfig();
     }
 
     private void createLearnedConfig() {
@@ -197,6 +211,28 @@ public class ConfigMain {
         }
     }
 
+    private void createCChestConfig() {
+        cChestConfigFile = new File(plugin.getDataFolder(), "condensation_chests.yml");
+        if (!cChestConfigFile.exists()) {
+            cChestConfigFile.getParentFile().mkdirs();
+            plugin.saveResource("condensation_chests.yml", false);
+        }
+        cChestConfig = new YamlConfiguration();
+        try {
+            cChestConfig.load(cChestConfigFile);
+        } catch (IOException | InvalidConfigurationException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void saveCChestConfig() {
+        try {
+            cChestConfig.save(cChestConfigFile);
+        } catch (IOException e) {
+            plugin.getLogger().warning("Unable to save " + cChestConfigFile.getName());
+        }
+    }
+
     public static void addLearnedItem(EquivalencyTech plugin, String uuid, String itemName) {
         FileConfiguration c = plugin.getConfigMainClass().getLearnedItemsConfig();
         c.set(uuid + "." + ChatColor.stripColor(itemName), true);
@@ -254,6 +290,10 @@ public class ConfigMain {
         setPlayerEmc(plugin, player, getPlayerEmc(plugin, player) - emcValue);
     }
 
+    public static void removePlayerEmc(EquivalencyTech plugin, String uuid, Double emcValue) {
+        setPlayerEmc(plugin, uuid, getPlayerEmc(plugin, uuid) - emcValue);
+    }
+
     public static void setPlayerEmc(EquivalencyTech plugin, Player player, Double emcValue) {
         FileConfiguration c = plugin.getConfigMainClass().getPlayerEMCConfig();
         c.set(player.getUniqueId().toString(), emcValue);
@@ -268,7 +308,7 @@ public class ConfigMain {
         FileConfiguration c = plugin.getConfigMainClass().getPlayerEMCConfig();
         double amount = 0;
         if (c.contains(player.getUniqueId().toString())) {
-            amount = c.getDouble(player.getUniqueId().toString());
+            amount = Utils.roundDown(c.getDouble(player.getUniqueId().toString()),2);
         }
         return amount;
     }
@@ -283,7 +323,7 @@ public class ConfigMain {
     }
 
 
-    public static Integer getNextDissolutionChestID(EquivalencyTech plugin) {
+    public static Integer getNextDChestID(EquivalencyTech plugin) {
         FileConfiguration c = plugin.getConfigMainClass().blockStoreConfig;
         ConfigurationSection section = c.getConfigurationSection(DIS_CHEST_CFG);
         int nextValue = 1;
@@ -299,13 +339,13 @@ public class ConfigMain {
         return nextValue;
     }
 
-    public static void addDissolutionChestStore(EquivalencyTech plugin, Location location) {
+    public static void addDChestStore(EquivalencyTech plugin, Location location) {
         FileConfiguration c = plugin.getConfigMainClass().blockStoreConfig;
-        c.set(DIS_CHEST_CFG + "." + getNextDissolutionChestID(plugin).toString(), location);
+        c.set(DIS_CHEST_CFG + "." + getNextDChestID(plugin).toString(), location);
     }
 
     @Nullable
-    public static Integer getDissolutionChestID(EquivalencyTech plugin, Location location) {
+    public static Integer getDChestIdStore(EquivalencyTech plugin, Location location) {
         FileConfiguration c = plugin.getConfigMainClass().blockStoreConfig;
         ConfigurationSection section = c.getConfigurationSection(DIS_CHEST_CFG);
         if (section != null) {
@@ -319,7 +359,7 @@ public class ConfigMain {
         return null;
     }
 
-    public static void removeDissolutionChest(EquivalencyTech plugin, Integer id) {
+    public static void removeDChestStore(EquivalencyTech plugin, Integer id) {
         FileConfiguration c = plugin.getConfigMainClass().blockStoreConfig;
         ConfigurationSection section = c.getConfigurationSection(DIS_CHEST_CFG);
         section.set(id.toString(), null);
@@ -362,6 +402,98 @@ public class ConfigMain {
             }
         }
         return ids;
+    }
+
+    public static Integer getNextCChestID(EquivalencyTech plugin) {
+        FileConfiguration c = plugin.getConfigMainClass().blockStoreConfig;
+        ConfigurationSection section = c.getConfigurationSection(CON_CHEST_CFG);
+        int nextValue = 1;
+        if (section != null) {
+            for (String key : section.getKeys(false)) {
+                int value = Integer.parseInt(key);
+                if (value > nextValue) {
+                    nextValue = value;
+                }
+            }
+            nextValue++;
+        }
+        return nextValue;
+    }
+
+    public static void addCChestStore(EquivalencyTech plugin, Location location) {
+        FileConfiguration c = plugin.getConfigMainClass().blockStoreConfig;
+        c.set(CON_CHEST_CFG + "." + getNextCChestID(plugin).toString(), location);
+    }
+
+    @Nullable
+    public static Integer getCChestIdStore(EquivalencyTech plugin, Location location) {
+        FileConfiguration c = plugin.getConfigMainClass().blockStoreConfig;
+        ConfigurationSection section = c.getConfigurationSection(CON_CHEST_CFG);
+        if (section != null) {
+            for (String key : section.getKeys(false)) {
+                Location l = section.getLocation(key);
+                if (l.equals(location)) {
+                    return Integer.parseInt(key);
+                }
+            }
+        }
+        return null;
+    }
+
+    public static void removeCChestStore(EquivalencyTech plugin, Integer id) {
+        FileConfiguration c = plugin.getConfigMainClass().blockStoreConfig;
+        ConfigurationSection section = c.getConfigurationSection(CON_CHEST_CFG);
+        section.set(id.toString(), null);
+    }
+
+    public static void setupCChest(EquivalencyTech plugin, Integer id, Player player) {
+        FileConfiguration c = plugin.getConfigMainClass().cChestConfig;
+        c.set(id + ".OWNING_PLAYER", player.getUniqueId().toString());
+        c.set(id + ".LEVEL", 1);
+    }
+
+    public static void removeCChest(EquivalencyTech plugin, Integer id) {
+        FileConfiguration c = plugin.getConfigMainClass().cChestConfig;
+        c.set(String.valueOf(id), null);
+    }
+
+    public static boolean isOwnerCChest(EquivalencyTech plugin, Player player, Integer id) {
+        FileConfiguration c = plugin.getConfigMainClass().cChestConfig;
+        return c.get(id + ".OWNING_PLAYER").equals(player.getUniqueId());
+    }
+
+    public static String getOwnerCChest(EquivalencyTech plugin, Integer id) {
+        FileConfiguration c = plugin.getConfigMainClass().cChestConfig;
+        return c.getString(id + ".OWNING_PLAYER");
+    }
+
+    public static Location getCChestLocation(EquivalencyTech plugin, Integer id) {
+        FileConfiguration c = plugin.getConfigMainClass().blockStoreConfig;
+        ConfigurationSection section = c.getConfigurationSection(CON_CHEST_CFG);
+        return section.getLocation(id.toString());
+    }
+
+    public static List<Location> getAllCChestLocations(EquivalencyTech plugin) {
+        FileConfiguration c = plugin.getConfigMainClass().blockStoreConfig;
+        ConfigurationSection section = c.getConfigurationSection(CON_CHEST_CFG);
+        List<Location> ids = new ArrayList<>();
+        if (section != null) {
+            for (String s : section.getKeys(false)) {
+                ids.add(section.getLocation(s));
+            }
+        }
+        return ids;
+    }
+
+    @Nullable
+    public static ItemStack getCChestItem(EquivalencyTech plugin, Integer id) {
+        FileConfiguration c = plugin.getConfigMainClass().cChestConfig;
+        return c.getItemStack(id + ".ITEM");
+    }
+
+    public static void setCChestItem(EquivalencyTech plugin, Integer id, ItemStack itemStack) {
+        FileConfiguration c = plugin.getConfigMainClass().cChestConfig;
+        c.set(id + ".ITEM", itemStack);
     }
 
 }

@@ -39,8 +39,8 @@ public class ConfigStrings {
         return configuration.getString("MESSAGES.COMMAND_SELECT_ITEM");
     }
 
-    public String getCommandOrbGiven() {
-        return configuration.getString("MESSAGES.COMMAND_TRANSMUTATION_ORB_GIVEN");
+    public String getCommandItemGiven() {
+        return configuration.getString("MESSAGES.COMMAND_ITEM_GIVEN");
     }
 
     // endregion
@@ -87,6 +87,18 @@ public class ConfigStrings {
         return configuration.getStringList("ITEMS.DISSOLUTION_CHEST_LORE");
     }
 
+    public String getItemCondensatorChestName() {
+        return configuration.getString("ITEMS.CONDENSATOR_CHEST_NAME");
+    }
+
+    public List<String> getItemCondensatorChestLore() {
+        return configuration.getStringList("ITEMS.CONDENSATOR_CHEST_LORE");
+    }
+
+    public String getItemCondensatorChestSet() {
+        return configuration.getString("ITEMS.CONDENSATOR_CHEST_SET_ITEM");
+    }
+
     // endregion
 
     // region GUI
@@ -131,12 +143,20 @@ public class ConfigStrings {
 
     // region Events
 
-    public String getEventDisAdjPlacement() {
-        return configuration.getString("MESSAGES.EVENT_PLACE_DCHEST_ADJACENT");
+    public String getEventAdjPlacement() {
+        return configuration.getString("MESSAGES.EVENT_PLACE_EMC_CHEST_ADJACENT");
     }
 
     public String getEventCantOpenNotOwner() {
         return configuration.getString("MESSAGES.EVENT_CANT_OPEN_NOT_OWNER");
+    }
+
+    public String getEventItemSet() {
+        return configuration.getString("MESSAGES.EVENT_CHEST_ITEM_SET");
+    }
+
+    public String getEventItemUnset() {
+        return configuration.getString("MESSAGES.EVENT_CHEST_ITEM_UNSET");
     }
 
 

@@ -58,8 +58,8 @@ public final class Messages {
         return PREFIX + THEME_NOTICE + plugin.getConfigMainClass().getStrings().getCommandSelectItem();
     }
 
-    public static String messageCommandOrbGiven(EquivalencyTech plugin) {
-        return PREFIX + THEME_NOTICE + plugin.getConfigMainClass().getStrings().getCommandOrbGiven();
+    public static String messageCommandItemGiven(EquivalencyTech plugin, String itemName) {
+        return PREFIX + THEME_NOTICE + MessageFormat.format(plugin.getConfigMainClass().getStrings().getCommandItemGiven(), itemName);
     }
 
     public static String messageCommandEmc(EquivalencyTech plugin, Player player) {
@@ -98,12 +98,20 @@ public final class Messages {
 
     // region Events
 
-    public static String messageEventDChestMisPlace(EquivalencyTech plugin) {
-        return PREFIX + THEME_ERROR + plugin.getConfigMainClass().getStrings().getEventDisAdjPlacement();
+    public static String messageEventEMCChestPlace(EquivalencyTech plugin) {
+        return PREFIX + THEME_ERROR + plugin.getConfigMainClass().getStrings().getEventAdjPlacement();
     }
 
     public static String messageEventCantOpenNotOwner(EquivalencyTech plugin) {
         return PREFIX + THEME_ERROR + plugin.getConfigMainClass().getStrings().getEventCantOpenNotOwner();
+    }
+
+    public static String messageEventItemSet(EquivalencyTech plugin) {
+        return PREFIX + THEME_SUCCESS + plugin.getConfigMainClass().getStrings().getEventItemSet();
+    }
+
+    public static String messageEventItemUnset(EquivalencyTech plugin) {
+        return PREFIX + THEME_SUCCESS + plugin.getConfigMainClass().getStrings().getEventItemUnset();
     }
 
     public static List<String> messageEMC2Installed(EquivalencyTech plugin) {

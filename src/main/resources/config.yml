@@ -239,11 +239,12 @@ MESSAGES:
   COMMAND_SELECT_ITEM: "Please select an item type"
   COMMAND_EMC_ITEM_MUST_HOLD: "You must be holding a item to see it's EMC value"
   COMMAND_EMC_NONE: "This item cannot be condensed into EMC"
-  COMMAND_TRANSMUTATION_ORB_GIVEN: "You have been given a Transmutation Orb"
+  COMMAND_ITEM_GIVEN: "You have been given a {0}"
   GENERAL_NO_INVENTORY_SPACE: "You do not have enough space for this item"
   EVENT_CANT_OPEN_NOT_OWNER: "You cannot open an EMC block that is owned by another player."
-  EVENT_PLACE_DCHEST_ADJACENT: "You cannot place a Dissolution Chest next to one another."
-  EVENT_EMC_WARNING: true
+  EVENT_PLACE_EMC_CHEST_ADJACENT: "You cannot place a EMC Chest next to another chest."
+  EVENT_CHEST_ITEM_SET: "Item synthesis set to held item."
+  EVENT_CHEST_ITEM_UNSET: "Item synthesis stopped."
 ITEMS:
   GENERAL_CRAFTING_ITEM: "Crafting Ingredient"
   TRANSMUTATION_ORB_NAME: "Transmutation Orb"
@@ -264,6 +265,14 @@ ITEMS:
     - "This chest can break down it's contents"
     - "into EMC that is added into the placing"
     - "player's EMC pool."
+  CONDENSATOR_CHEST_NAME: "Condensate Chest"
+  CONDENSATOR_CHEST_LORE:
+    - "This chest can condense EMC back into"
+    - "items of Equivalent Value from the placing"
+    - "player's EMC pool."
+    - "Items synthesised in this manner require 50%"
+    - "more EMC."
+  CONDENSATOR_CHEST_SET_ITEM: "Shift + Right Click this chest while holding any item to set it."
 GUI:
   SLOT_BORDER_NAME: "EquiTech"
   SLOT_FILLER_NAME: "No recipe here"

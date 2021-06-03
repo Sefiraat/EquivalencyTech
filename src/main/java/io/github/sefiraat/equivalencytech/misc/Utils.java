@@ -1,6 +1,9 @@
 package io.github.sefiraat.equivalencytech.misc;
 
 import io.github.sefiraat.equivalencytech.EquivalencyTech;
+import io.github.sefiraat.equivalencytech.item.builders.CondensatorChest;
+import io.github.sefiraat.equivalencytech.item.builders.DissolutionChest;
+import io.github.sefiraat.equivalencytech.item.builders.TransmutationOrb;
 import io.github.sefiraat.equivalencytech.statics.ContainerStorage;
 import io.github.sefiraat.equivalencytech.statics.Messages;
 import net.md_5.bungee.api.ChatColor;
@@ -41,14 +44,24 @@ public class Utils {
     }
 
     public static void givePlayerOrb(EquivalencyTech plugin, Player player) {
-        player.getPlayer().getInventory().addItem(plugin.getEqItems().getTransmutationOrb().getItemClone());
-        player.getPlayer().sendMessage(Messages.messageCommandOrbGiven(plugin));
+        TransmutationOrb i = plugin.getEqItems().getTransmutationOrb();
+        player.getPlayer().getInventory().addItem(i.getItemClone());
+        player.getPlayer().sendMessage(Messages.messageCommandItemGiven(plugin, i.getItem().getItemMeta().getDisplayName()));
     }
 
     public static void givePlayerDChest(EquivalencyTech plugin, Player player) {
-        player.getPlayer().getInventory().addItem(plugin.getEqItems().getDissolutionChest().getItemClone());
-        player.getPlayer().sendMessage(Messages.messageCommandOrbGiven(plugin));
+        DissolutionChest i = plugin.getEqItems().getDissolutionChest();
+        player.getPlayer().getInventory().addItem(i.getItemClone());
+        player.getPlayer().sendMessage(Messages.messageCommandItemGiven(plugin, i.getItem().getItemMeta().getDisplayName()));
     }
+
+    public static void givePlayerCChest(EquivalencyTech plugin, Player player) {
+        CondensatorChest i = plugin.getEqItems().getCondensatorChest();
+        player.getPlayer().getInventory().addItem(i.getItemClone());
+        player.getPlayer().sendMessage(Messages.messageCommandItemGiven(plugin, i.getItem().getItemMeta().getDisplayName()));
+    }
+
+
 
     public static double roundDown(double number, int places) {
         BigDecimal value = BigDecimal.valueOf(number);

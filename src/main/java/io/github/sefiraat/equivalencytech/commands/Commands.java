@@ -105,6 +105,14 @@ public class Commands extends BaseCommand {
                 Utils.givePlayerDChest(plugin, player.getPlayer());
             }
         }
+
+        @Subcommand("CondensateChest")
+        @CommandCompletion("@players")
+        public void onGiveItemCChest(CommandSender sender, OnlinePlayer player) {
+            if (sender instanceof Player) {
+                Utils.givePlayerCChest(plugin, player.getPlayer());
+            }
+        }
     }
 
 }

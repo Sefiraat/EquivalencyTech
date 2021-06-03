@@ -1,9 +1,11 @@
 name: EquivalencyTech
-version: 1.0.1
+version: 1.1.0
 main: io.github.sefiraat.equivalencytech.EquivalencyTech
 api-version: 1.16
 softdepend:
   - Slimefun
 permissions:
-  equivalencytech.admin:
+  equitech.admin:
     description: Allows access to /et
+  equitech.bypass:
+    description: Can open/interact with EMC objects owned by other players
