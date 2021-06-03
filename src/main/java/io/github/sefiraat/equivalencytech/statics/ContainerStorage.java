@@ -19,6 +19,7 @@ public final class ContainerStorage {
     public static final String CS_IS_DRK = "is_drk";
     public static final String CS_IS_RED = "is_red";
     public static final String CS_IS_DISCST = "is_dis_chest";
+    public static final String CS_IS_CONCST = "is_con_chest";
 
     public static boolean containerHasData(ItemStack i, NamespacedKey key, PersistentDataType<?, ?> type) {
         if (i != null && i.hasItemMeta()) {
@@ -168,6 +169,16 @@ public final class ContainerStorage {
 
     public static void makeDisChest(ItemStack i, EquivalencyTech plugin) {
         NamespacedKey key = new NamespacedKey(plugin.getInstance(), CS_IS_DISCST);
+        setData(i, key, 1);
+    }
+
+    public static boolean isConChest(ItemStack i, EquivalencyTech plugin) {
+        NamespacedKey key = new NamespacedKey(plugin.getInstance(), CS_IS_CONCST);
+        return containerHasData(i, key, PersistentDataType.INTEGER);
+    }
+
+    public static void makeConChest(ItemStack i, EquivalencyTech plugin) {
+        NamespacedKey key = new NamespacedKey(plugin.getInstance(), CS_IS_CONCST);
         setData(i, key, 1);
     }
 

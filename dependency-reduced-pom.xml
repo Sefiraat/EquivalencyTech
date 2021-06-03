@@ -125,12 +125,14 @@
   <properties>
     <maven.compiler.target>1.8</maven.compiler.target>
     <sonar.projectKey>Sefiraat_EquivalencyTech</sonar.projectKey>
-    <sonar.issue.ignore.multicriteria>e1</sonar.issue.ignore.multicriteria>
+    <sonar.issue.ignore.multicriteria>e1,e2</sonar.issue.ignore.multicriteria>
     <maven.compiler.source>1.8</maven.compiler.source>
+    <sonar.issue.ignore.multicriteria.e2.ruleKey>java:S125</sonar.issue.ignore.multicriteria.e2.ruleKey>
     <sonar.host.url>https://sonarcloud.io</sonar.host.url>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <sonar.organization>sefiraat</sonar.organization>
     <sonar.issue.ignore.multicriteria.e1.resourceKey>**</sonar.issue.ignore.multicriteria.e1.resourceKey>
+    <sonar.issue.ignore.multicriteria.e2.resourceKey>**</sonar.issue.ignore.multicriteria.e2.resourceKey>
     <sonar.issue.ignore.multicriteria.e1.ruleKey>java:S6212</sonar.issue.ignore.multicriteria.e1.ruleKey>
   </properties>
 </project>

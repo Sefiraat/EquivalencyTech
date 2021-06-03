@@ -2,7 +2,6 @@ package io.github.sefiraat.equivalencytech.recipes;
 
 import io.github.sefiraat.equivalencytech.EquivalencyTech;
 import io.github.sefiraat.equivalencytech.statics.ContainerStorage;
-import io.github.sefiraat.equivalencytech.statics.DebugLogs;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.inventory.*;
@@ -85,7 +84,7 @@ public class EmcDefinitions {
     private void fillEQItems(EquivalencyTech plugin) {
         for (Map.Entry<List<ItemStack>, ItemStack> recipeMap : Recipes.getEQRecipes(plugin).entrySet()) {
             ItemStack checkedItem = recipeMap.getValue();
-            //DebugLogs.logBoring(plugin, checkedItem.getItemMeta().getDisplayName());
+            ////DebugLogs.logBoring(plugin, checkedItem.getItemMeta().getDisplayName());
             Double itemAmount = 0D;
             for (ItemStack recipeItem : recipeMap.getKey()) {
                 Double testAmount = getEQEmcValue(plugin, recipeItem, 1);
@@ -175,9 +174,7 @@ public class EmcDefinitions {
     @Nullable
     private Double checkRecipe(EquivalencyTech plugin, Recipe recipe, Integer nestLevel) {
 
-        double eVal = 0D;
-
-        DebugLogs.logCheckingRecipe(plugin, nestLevel);
+        //DebugLogs.logCheckingRecipe(plugin, nestLevel);
 
         if (recipe instanceof ShapedRecipe) {
             ShapedRecipe shapedRecipe = (ShapedRecipe) recipe;
