@@ -61,8 +61,6 @@ public class Utils {
         player.getPlayer().sendMessage(Messages.messageCommandItemGiven(plugin, i.getItem().getItemMeta().getDisplayName()));
     }
 
-
-
     public static double roundDown(double number, int places) {
         BigDecimal value = BigDecimal.valueOf(number);
         value = value.setScale(places, RoundingMode.DOWN);
