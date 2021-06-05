@@ -2,6 +2,7 @@ package io.github.sefiraat.equivalencytech.recipes;
 
 import io.github.sefiraat.equivalencytech.EquivalencyTech;
 import io.github.sefiraat.equivalencytech.statics.ContainerStorage;
+import io.github.sefiraat.equivalencytech.statics.DebugLogs;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.inventory.*;
@@ -44,7 +45,7 @@ public class EmcDefinitions {
         for (Map.Entry<String, Double> entry : h.entrySet()) {
             if (entry.getValue() > 0) {
                 emcBase.put(Material.matchMaterial(entry.getKey()), entry.getValue());
-                //DebugLogs.logEmcBaseValueLoaded(plugin, entry.getKey(), entry.getValue());
+                DebugLogs.logEmcBaseValueLoaded(plugin, entry.getKey(), entry.getValue());
             }
         }
     }
@@ -72,10 +73,10 @@ public class EmcDefinitions {
                 ItemStack i = new ItemStack(m);
                 Double emcValue = getEmcValue(plugin, i, 1);
                 if (emcValue != null) {
-                    //DebugLogs.logEmcPosted(plugin, emcValue, 1);
+                    DebugLogs.logEmcPosted(plugin, emcValue, 1);
                     emcExtended.put(i.getType(), roundDown(emcValue,2));
                 } else {
-                    //DebugLogs.logEmcNull(plugin, 1);
+                    DebugLogs.logEmcNull(plugin, 1);
                 }
             }
         }
@@ -84,7 +85,7 @@ public class EmcDefinitions {
     private void fillEQItems(EquivalencyTech plugin) {
         for (Map.Entry<List<ItemStack>, ItemStack> recipeMap : Recipes.getEQRecipes(plugin).entrySet()) {
             ItemStack checkedItem = recipeMap.getValue();
-            ////DebugLogs.logBoring(plugin, checkedItem.getItemMeta().getDisplayName());
+            DebugLogs.logBoring(plugin, checkedItem.getItemMeta().getDisplayName());
             Double itemAmount = 0D;
             for (ItemStack recipeItem : recipeMap.getKey()) {
                 Double testAmount = getEQEmcValue(plugin, recipeItem, 1);
@@ -92,7 +93,7 @@ public class EmcDefinitions {
                     itemAmount += testAmount;
                 }
             }
-            //DebugLogs.logBoring(plugin, checkedItem.getItemMeta().getDisplayName() + " added to EQ for : " + itemAmount);
+            DebugLogs.logBoring(plugin, checkedItem.getItemMeta().getDisplayName() + " added to EQ for : " + itemAmount);
             emcEQ.put(checkedItem.getItemMeta().getDisplayName(), roundDown(itemAmount,2));
         }
     }
@@ -100,13 +101,13 @@ public class EmcDefinitions {
     @Nullable
     private Double getEQEmcValue(EquivalencyTech plugin, ItemStack itemStack, Integer nestLevel) {
         if (itemStack != null) {
-            //DebugLogs.logEQStart(plugin, nestLevel, itemStack);
+            DebugLogs.logEQStart(plugin, nestLevel, itemStack);
             if (ContainerStorage.isCraftable(itemStack, plugin)) {
                 double amount = 0D;
-                //DebugLogs.logEQisCrafting(plugin, nestLevel);
+                DebugLogs.logEQisCrafting(plugin, nestLevel);
                 if (emcEQ.containsKey(itemStack.getItemMeta().getDisplayName())) {
                     amount = getEmcEQ().get(itemStack.getItemMeta().getDisplayName());
-                    //DebugLogs.logEmcIsRegisteredExtended(plugin, amount, nestLevel);
+                    DebugLogs.logEmcIsRegisteredExtended(plugin, amount, nestLevel);
                 } else {
                     List<ItemStack> itemStacks = Recipes.getEQRecipe(plugin, itemStack);
                     for (ItemStack itemStack1 : itemStacks) {
@@ -115,7 +116,7 @@ public class EmcDefinitions {
                             if (stackAmount != null) {
                                 amount += stackAmount;
                             } else {
-                                //DebugLogs.logEmcNull(plugin, nestLevel);
+                                DebugLogs.logEmcNull(plugin, nestLevel);
                                 return null;
                             }
                         }
@@ -123,7 +124,7 @@ public class EmcDefinitions {
                 }
                 return amount;
             } else {
-                //DebugLogs.logEQisNotCrafting(plugin, nestLevel);
+                DebugLogs.logEQisNotCrafting(plugin, nestLevel);
                 return getEmcValue(plugin, itemStack, nestLevel + 1);
             }
         } else {
@@ -136,32 +137,36 @@ public class EmcDefinitions {
         List<Recipe> recipeList = Bukkit.getServer().getRecipesFor(i);
         Material m = i.getType();
         Double eVal = 0D;
-        //DebugLogs.logEmcTestingItemStack(plugin, i.getType().name(), nestLevel);
+        DebugLogs.logEmcTestingItemStack(plugin, i.getType().name(), nestLevel);
+        if (nestLevel > 15) {
+            // Recipe is most likely looping and should abort. Need a better method
+            return null;
+        }
         if (emcBase.containsKey(m)) {
             // Item is in the base list (config.yml) draw from there first
-            //DebugLogs.logEmcIsBase(plugin, eVal, nestLevel);
+            DebugLogs.logEmcIsBase(plugin, eVal, nestLevel);
             return emcBase.get(m);
         } else if (emcExtended.containsKey(m)) {
             // Item is in the extended list (already registered during fillExtended)
-            //DebugLogs.logEmcIsRegisteredExtended(plugin, eVal, nestLevel);
+            DebugLogs.logEmcIsRegisteredExtended(plugin, eVal, nestLevel);
             return emcExtended.get(m);
         } else if (recipeList.isEmpty()) {
             // Recipe is not in Base and has no recipes, so it cannot be EMC'd
-            //DebugLogs.logEmcNoRecipes(plugin, nestLevel);
+            DebugLogs.logEmcNoRecipes(plugin, nestLevel);
             return null;
         } else {
             // Item not yet registered but DOES have valid recipes, lets check them out!
             for (Recipe r : Bukkit.getServer().getRecipesFor(i)) {
                 Double tempVal = checkRecipe(plugin, r,nestLevel + 1);
                 if (tempVal != null && (eVal.equals(0D) || tempVal < eVal)) {
-                    //DebugLogs.logRecipeCheaper(plugin, nestLevel);
+                    DebugLogs.logRecipeCheaper(plugin, nestLevel);
                     eVal = tempVal;
                 } else if (tempVal != null) {
-                    //DebugLogs.logRecipeNotCheaper(plugin, nestLevel);
+                    DebugLogs.logRecipeNotCheaper(plugin, nestLevel);
                 }
             }
         }
-        //DebugLogs.logEmcRecipeResult(plugin, eVal, nestLevel);
+        DebugLogs.logEmcRecipeResult(plugin, eVal, nestLevel);
         return eVal;
     }
 
@@ -174,7 +179,7 @@ public class EmcDefinitions {
     @Nullable
     private Double checkRecipe(EquivalencyTech plugin, Recipe recipe, Integer nestLevel) {
 
-        //DebugLogs.logCheckingRecipe(plugin, nestLevel);
+        DebugLogs.logCheckingRecipe(plugin, nestLevel);
 
         if (recipe instanceof ShapedRecipe) {
             ShapedRecipe shapedRecipe = (ShapedRecipe) recipe;
@@ -198,7 +203,7 @@ public class EmcDefinitions {
 
     @Nullable
     private  Double checkShaped(EquivalencyTech plugin, ShapedRecipe recipe, int nestLevel) {
-        //DebugLogs.logRecipeType(plugin, "Shaped", nestLevel);
+        DebugLogs.logRecipeType(plugin, "Shaped", nestLevel);
         double eVal= 0D;
         for (ItemStack i2 : recipe.getIngredientMap().values()) {
             if (i2 != null) {
@@ -208,7 +213,7 @@ public class EmcDefinitions {
                 }
                 if (prVal != null) {
                     if (recipe.getResult().getAmount() > 1) {
-                        //DebugLogs.logRecipeMultipleOutputs(plugin, prVal, recipe.getResult().getAmount(), nestLevel);
+                        DebugLogs.logRecipeMultipleOutputs(plugin, prVal, recipe.getResult().getAmount(), nestLevel);
                         eVal = eVal + (prVal / recipe.getResult().getAmount());
                     } else {
                         eVal = eVal + prVal;
@@ -223,14 +228,14 @@ public class EmcDefinitions {
 
     @Nullable
     private Double checkShapeless(EquivalencyTech plugin, ShapelessRecipe recipe, int nestLevel) {
-        //DebugLogs.logRecipeType(plugin, "Shapeless", nestLevel);
+        DebugLogs.logRecipeType(plugin, "Shapeless", nestLevel);
         Double eVal = 0D;
         for (ItemStack i2 : recipe.getIngredientList()) {
             Double prVal;
             prVal = getEmcValue(plugin, i2, nestLevel + 1);
             if (prVal != null) {
                 if (recipe.getResult().getAmount() > 1) {
-                    //DebugLogs.logRecipeMultipleOutputs(plugin, prVal, recipe.getResult().getAmount(), nestLevel);
+                    DebugLogs.logRecipeMultipleOutputs(plugin, prVal, recipe.getResult().getAmount(), nestLevel);
                     eVal = eVal + (prVal / recipe.getResult().getAmount());
                 } else {
                     eVal = eVal + prVal;
@@ -244,12 +249,12 @@ public class EmcDefinitions {
 
     @Nullable
     private Double checkFurnace(EquivalencyTech plugin, FurnaceRecipe recipe, int nestLevel) {
-        //DebugLogs.logRecipeType(plugin, "Furnace", nestLevel);
+        DebugLogs.logRecipeType(plugin, "Furnace", nestLevel);
         Double prVal;
         prVal = getEmcValue(plugin, recipe.getInput(), nestLevel + 1);
         if (prVal != null) {
             if (recipe.getResult().getAmount() > 1) {
-                //DebugLogs.logRecipeMultipleOutputs(plugin, prVal, recipe.getResult().getAmount(), nestLevel);
+                DebugLogs.logRecipeMultipleOutputs(plugin, prVal, recipe.getResult().getAmount(), nestLevel);
                 return prVal / recipe.getResult().getAmount();
             } else {
                 return prVal;
@@ -261,12 +266,12 @@ public class EmcDefinitions {
 
     @Nullable
     private Double checkStoneCutter(EquivalencyTech plugin, StonecuttingRecipe recipe, int nestLevel) {
-        //DebugLogs.logRecipeType(plugin, "Stonecutting", nestLevel);
+        DebugLogs.logRecipeType(plugin, "Stonecutting", nestLevel);
         Double prVal;
         prVal = getEmcValue(plugin, recipe.getInput(), nestLevel + 1);
         if (prVal != null) {
             if (recipe.getResult().getAmount() > 1) {
-                //DebugLogs.logRecipeMultipleOutputs(plugin, prVal, recipe.getResult().getAmount(), nestLevel);
+                DebugLogs.logRecipeMultipleOutputs(plugin, prVal, recipe.getResult().getAmount(), nestLevel);
                 return prVal / recipe.getResult().getAmount();
             } else {
                 return prVal;
@@ -278,7 +283,7 @@ public class EmcDefinitions {
 
     @Nullable
     private Double checkSmithing(EquivalencyTech plugin, SmithingRecipe recipe, int nestLevel) {
-        //DebugLogs.logRecipeType(plugin, "Smithing", nestLevel);
+        DebugLogs.logRecipeType(plugin, "Smithing", nestLevel);
         Double baseVal;
         Double additionVal;
         baseVal = getEmcValue(plugin, recipe.getBase().getItemStack(), nestLevel + 1);
@@ -286,7 +291,7 @@ public class EmcDefinitions {
         if (baseVal != null && additionVal != null) {
             double combinedVal = (baseVal + additionVal);
             if (recipe.getResult().getAmount() > 1) {
-                //DebugLogs.logRecipeMultipleOutputs(plugin, baseVal, recipe.getResult().getAmount(), nestLevel);
+                DebugLogs.logRecipeMultipleOutputs(plugin, baseVal, recipe.getResult().getAmount(), nestLevel);
                 return combinedVal / recipe.getResult().getAmount();
             } else {
                 return combinedVal;
