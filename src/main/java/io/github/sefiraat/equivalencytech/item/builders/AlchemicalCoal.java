@@ -45,6 +45,7 @@ public class AlchemicalCoal {
         im.setLore(lore);
         item.setItemMeta(im);
 
+        ContainerStorage.setItemID(item, plugin,"COAL1");
         ContainerStorage.makeAlchemicalCoal(item, plugin);
         ContainerStorage.makeCraftable(item, plugin);
 

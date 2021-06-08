@@ -47,6 +47,7 @@ public class TransmutationOrb {
         im.setLore(lore);
         item.setItemMeta(im);
 
+        ContainerStorage.setItemID(item, plugin,"TORB");
         ContainerStorage.makeTransmutationOrb(item, plugin);
         ContainerStorage.makeCraftable(item, plugin);
 

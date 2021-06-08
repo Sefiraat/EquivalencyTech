@@ -45,6 +45,7 @@ public class DarkMatter {
         im.setLore(lore);
         item.setItemMeta(im);
 
+        ContainerStorage.setItemID(item, plugin,"DMATTER");
         ContainerStorage.makeDarkMatter(item, plugin);
         ContainerStorage.makeCraftable(item, plugin);
     }

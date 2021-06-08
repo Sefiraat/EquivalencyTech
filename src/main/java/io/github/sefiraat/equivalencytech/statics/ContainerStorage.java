@@ -6,11 +6,13 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
 
 public final class ContainerStorage {
 
+    public static final String CS_ID = "id";
     public static final String CS_IS_TRANSMUTATION_ORB = "is_orb";
     public static final String CS_IS_CRAFTING = "is_craft";
     public static final String CS_IS_COAL_1 = "is_coal_1";
@@ -30,6 +32,7 @@ public final class ContainerStorage {
         return false;
     }
 
+    @Nullable
     public static Integer getDataInteger(ItemStack i, NamespacedKey key) {
         if (i.hasItemMeta()) {
             ItemMeta im = i.getItemMeta();
@@ -38,9 +41,10 @@ public final class ContainerStorage {
                 return Objects.requireNonNull(i.getItemMeta().getPersistentDataContainer().get(key, PersistentDataType.INTEGER));
             }
         }
-        return 0;
+        return null;
     }
 
+    @Nullable
     public static Long getDataLong(ItemStack i, NamespacedKey key) {
         if (i.hasItemMeta()) {
             ItemMeta im = i.getItemMeta();
@@ -49,7 +53,19 @@ public final class ContainerStorage {
                 return Objects.requireNonNull(i.getItemMeta().getPersistentDataContainer().get(key, PersistentDataType.LONG));
             }
         }
-        return 0L;
+        return null;
+    }
+
+    @Nullable
+    public static String getDataString(ItemStack i, NamespacedKey key) {
+        if (i.hasItemMeta()) {
+            ItemMeta im = i.getItemMeta();
+            assert im != null;
+            if (im.getPersistentDataContainer().has(key, PersistentDataType.STRING)) {
+                return Objects.requireNonNull(i.getItemMeta().getPersistentDataContainer().get(key, PersistentDataType.STRING));
+            }
+        }
+        return null;
     }
 
     public static void setData(ItemStack i, NamespacedKey key, int value) {
@@ -90,6 +106,17 @@ public final class ContainerStorage {
             c.remove(key);
             i.setItemMeta(im);
         }
+    }
+
+    public static void setItemID(ItemStack i, EquivalencyTech plugin, String string) {
+        NamespacedKey key = new NamespacedKey(plugin.getInstance(), CS_ID);
+        setData(i, key, string);
+    }
+
+    @Nullable
+    public static String getItemID(ItemStack i, EquivalencyTech plugin) {
+        NamespacedKey key = new NamespacedKey(plugin.getInstance(), CS_ID);
+        return getDataString(i, key);
     }
 
     public static boolean isTransmutationOrb(ItemStack i, EquivalencyTech plugin) {

@@ -39,7 +39,10 @@ public class CraftListener implements Listener {
                 contentLayer.add(clone);
             }
 
-            if (contentLayer.equals(Recipes.recipeCoal2Check(plugin))) {
+            if (contentLayer.equals(Recipes.recipeCoal1Check())) {
+                e.getInventory().setResult(plugin.getEqItems().getAlchemicalCoal().getItemClone());
+
+            } else if (contentLayer.equals(Recipes.recipeCoal2Check(plugin))) {
                 e.getInventory().setResult(plugin.getEqItems().getMobiusFuel().getItemClone());
 
             } else if (contentLayer.equals(Recipes.recipeCoal3Check(plugin))) {

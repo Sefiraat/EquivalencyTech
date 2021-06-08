@@ -43,6 +43,7 @@ public class DissolutionChest {
         im.setLore(lore);
         item.setItemMeta(im);
 
+        ContainerStorage.setItemID(item, plugin,"DCHEST");
         ContainerStorage.makeDisChest(item, plugin);
         ContainerStorage.makeCraftable(item, plugin);
 

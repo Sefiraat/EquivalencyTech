@@ -44,6 +44,7 @@ public class AeternalisFuel {
         im.setLore(lore);
         item.setItemMeta(im);
 
+        ContainerStorage.setItemID(item, plugin,"COAL3");
         ContainerStorage.makeAeternalisFuel(item, plugin);
         ContainerStorage.makeCraftable(item, plugin);
     }

@@ -8,6 +8,7 @@ public class ManagerEvents {
     private final CraftListener craftListener;
     private final PlayerJoinListener playerJoinListener;
     private final ChestPlaceListener chestPlaceListener;
+    private final BlockPlaceListener blockPlaceListener;
 
     public OrbOpenListener getOrbOpenListener() {
         return orbOpenListener;
@@ -25,11 +26,16 @@ public class ManagerEvents {
         return playerJoinListener;
     }
 
+    public BlockPlaceListener getBlockPlaceListener() {
+        return blockPlaceListener;
+    }
+
     public ManagerEvents(EquivalencyTech plugin) {
         orbOpenListener = new OrbOpenListener(plugin);
         craftListener = new CraftListener(plugin);
         playerJoinListener = new PlayerJoinListener(plugin);
         chestPlaceListener = new ChestPlaceListener(plugin);
+        blockPlaceListener = new BlockPlaceListener(plugin);
     }
 
 }

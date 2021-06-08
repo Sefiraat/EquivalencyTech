@@ -45,6 +45,7 @@ public class MobiusFuel {
         im.setLore(lore);
         item.setItemMeta(im);
 
+        ContainerStorage.setItemID(item, plugin,"COAL2");
         ContainerStorage.makeMobiusFuel(item, plugin);
         ContainerStorage.makeCraftable(item, plugin);
 

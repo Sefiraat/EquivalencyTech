@@ -45,6 +45,7 @@ public class RedMatter {
         im.setLore(lore);
         item.setItemMeta(im);
 
+        ContainerStorage.setItemID(item, plugin,"RMATTER");
         ContainerStorage.makeRedMatter(item, plugin);
         ContainerStorage.makeCraftable(item, plugin);
 

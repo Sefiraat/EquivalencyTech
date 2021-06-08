@@ -45,6 +45,7 @@ public class CondensatorChest {
         im.setLore(lore);
         item.setItemMeta(im);
 
+        ContainerStorage.setItemID(item, plugin,"CCHEST");
         ContainerStorage.makeConChest(item, plugin);
         ContainerStorage.makeCraftable(item, plugin);
 
