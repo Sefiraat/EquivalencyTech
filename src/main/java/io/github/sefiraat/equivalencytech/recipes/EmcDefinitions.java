@@ -43,10 +43,11 @@ public class EmcDefinitions {
     private void fillBase(EquivalencyTech plugin) {
         Map<String, Double> h = plugin.getConfigMainClass().getEmc().getEmcBaseValues();
         for (Map.Entry<String, Double> entry : h.entrySet()) {
-            if (entry.getValue() > 0) {
-                emcBase.put(Material.matchMaterial(entry.getKey()), entry.getValue());
-                DebugLogs.logEmcBaseValueLoaded(plugin, entry.getKey(), entry.getValue());
+            if (Material.matchMaterial(entry.getKey()) == null) {
+                continue;
             }
+            emcBase.put(Material.matchMaterial(entry.getKey()), entry.getValue());
+            DebugLogs.logEmcBaseValueLoaded(plugin, entry.getKey(), entry.getValue());
         }
     }
 
@@ -145,7 +146,11 @@ public class EmcDefinitions {
         if (emcBase.containsKey(m)) {
             // Item is in the base list (config.yml) draw from there first
             DebugLogs.logEmcIsBase(plugin, eVal, nestLevel);
-            return emcBase.get(m);
+            if (emcBase.get(m) == 0) {
+                return null;
+            } else {
+                return emcBase.get(m);
+            }
         } else if (emcExtended.containsKey(m)) {
             // Item is in the extended list (already registered during fillExtended)
             DebugLogs.logEmcIsRegisteredExtended(plugin, eVal, nestLevel);

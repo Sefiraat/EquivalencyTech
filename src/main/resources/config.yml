@@ -234,6 +234,11 @@ EMC_VALUES:
     BLACKSTONE: 2
     GILDED_BLACKSTONE: 16
     HONEY_BOTTLE: 1
+    PLAYER_HEAD: 0
+    RAW_IRON: 32
+    RAW_GOLD: 64
+    RAW_COPPER: 16
+    COPPER_INGOT: 32
 MESSAGES:
   COMMAND_SUBCOMMAND: "Please select a valid sub command"
   COMMAND_SELECT_ITEM: "Please select an item type"
