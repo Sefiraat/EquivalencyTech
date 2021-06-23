@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>io.github.sefiraat</groupId>
   <artifactId>EquivalencyTech</artifactId>
-  <version>1.1.5-SNAPSHOT</version>
+  <version>1.1.5</version>
   <build>
     <plugins>
       <plugin>
@@ -20,7 +20,7 @@
         <configuration>
           <relocations>
             <relocation>
-              <pattern>me.mattstudios.mfgui</pattern>
+              <pattern>dev.triumphteam.gui</pattern>
               <shadedPattern>io.github.sefiraat.equivalencytech.mfgui</shadedPattern>
             </relocation>
             <relocation>
@@ -86,6 +86,10 @@
       <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
     </repository>
     <repository>
+      <id>papermc</id>
+      <url>https://papermc.io/repo/repository/maven-public/</url>
+    </repository>
+    <repository>
       <id>jitpack.io</id>
       <url>https://jitpack.io</url>
     </repository>
@@ -101,11 +105,21 @@
       <id>skullcreator-repo</id>
       <url>https://github.com/deanveloper/SkullCreator/raw/mvn-repo/</url>
     </repository>
+    <repository>
+      <id>repo</id>
+      <url>https://repo.mattstudios.me/artifactory/public/</url>
+    </repository>
   </repositories>
   <dependencies>
     <dependency>
       <groupId>org.spigotmc</groupId>
       <artifactId>spigot-api</artifactId>
+      <version>1.17-R0.1-SNAPSHOT</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.destroystokyo.paper</groupId>
+      <artifactId>paper-api</artifactId>
       <version>1.16.5-R0.1-SNAPSHOT</version>
       <scope>provided</scope>
     </dependency>

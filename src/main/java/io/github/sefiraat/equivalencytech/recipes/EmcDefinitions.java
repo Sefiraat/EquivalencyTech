@@ -3,9 +3,23 @@ package io.github.sefiraat.equivalencytech.recipes;
 import io.github.sefiraat.equivalencytech.EquivalencyTech;
 import io.github.sefiraat.equivalencytech.statics.ContainerStorage;
 import io.github.sefiraat.equivalencytech.statics.DebugLogs;
+import io.github.thebusybiscuit.slimefun4.core.SlimefunRegistry;
+import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
+import io.github.thebusybiscuit.slimefun4.implementation.SlimefunPlugin;
+import io.github.thebusybiscuit.slimefun4.implementation.items.backpacks.SlimefunBackpack;
+import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
+import me.mrCookieSlime.Slimefun.api.Slimefun;
+import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.inventory.*;
+import org.bukkit.event.player.PlayerDropItemEvent;
+import org.bukkit.inventory.FurnaceRecipe;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.Recipe;
+import org.bukkit.inventory.ShapedRecipe;
+import org.bukkit.inventory.ShapelessRecipe;
+import org.bukkit.inventory.SmithingRecipe;
+import org.bukkit.inventory.StonecuttingRecipe;
 
 import javax.annotation.Nullable;
 import java.math.BigDecimal;
@@ -18,12 +32,10 @@ import java.util.Map;
 public class EmcDefinitions {
 
     private final Map<Material, Double> emcBase = new EnumMap<> (Material.class);
+    private final Map<String, Double> emcSFBase = new HashMap<>();
     private final Map<Material, Double> emcExtended = new EnumMap<> (Material.class);
     private final Map<String, Double> emcEQ = new HashMap<>();
-
-    public Map<Material, Double> getEmcBase() {
-        return emcBase;
-    }
+    private final Map<String, Double> emcSlimefun = new HashMap<>();
 
     public Map<Material, Double> getEmcExtended() {
         return emcExtended;
@@ -33,11 +45,16 @@ public class EmcDefinitions {
         return emcEQ;
     }
 
+    public Map<String, Double> getEmcSlimefun() {
+        return emcSlimefun;
+    }
+
     public EmcDefinitions(EquivalencyTech plugin) {
         fillBase(plugin);
         fillSpecialCases();
         fillExtended(plugin);
         fillEQItems(plugin);
+        fillSlimefun(plugin);
     }
 
     private void fillBase(EquivalencyTech plugin) {
@@ -47,6 +64,11 @@ public class EmcDefinitions {
                 continue;
             }
             emcBase.put(Material.matchMaterial(entry.getKey()), entry.getValue());
+            DebugLogs.logEmcBaseValueLoaded(plugin, entry.getKey(), entry.getValue());
+        }
+        Map<String, Double> slimefunBase = plugin.getConfigMainClass().getEmc().getEmcSlimefunValues();
+        for (Map.Entry<String, Double> entry : slimefunBase.entrySet()) {
+            emcSFBase.put(entry.getKey(), entry.getValue());
             DebugLogs.logEmcBaseValueLoaded(plugin, entry.getKey(), entry.getValue());
         }
     }
@@ -99,6 +121,69 @@ public class EmcDefinitions {
         }
     }
 
+    private void fillSlimefun(EquivalencyTech plugin) {
+        if (EquivalencyTech.getInstance().getManagerSupportedPlugins().isInstalledSlimefun()) {
+            for (SlimefunItem item : SlimefunPlugin.getRegistry().getEnabledSlimefunItems()) {
+                if (item instanceof SlimefunBackpack || !item.getAddon().getName().equals("Slimefun")) {
+                    continue;
+                }
+                DebugLogs.logBoring(plugin, item.getId() + " being checked");
+                Double emcValue = getSFEmcValue(plugin, item.getItem(), 1);
+                if (emcValue != null && emcValue != 0D) {
+                    DebugLogs.logEmcPosted(plugin, emcValue, 1);
+                    emcSlimefun.put(item.getId(), roundDown(emcValue,2));
+                } else {
+                    DebugLogs.logEmcNull(plugin, 1);
+                }
+            }
+        }
+    }
+
+    private Double getSFEmcValue(EquivalencyTech plugin, ItemStack item, Integer nestLevel) {
+        SlimefunItem sfItem = SlimefunItem.getByItem(item);
+        if (sfItem == null) { // Vanilla
+            DebugLogs.logBoring(plugin, item.getType().toString() + "> ".repeat(nestLevel) + " Vanilla - getting found vanilla value");
+            return getEmcValue(plugin, item, nestLevel + 1);
+        }
+        if (emcSFBase.containsKey(sfItem.getId())) {
+            DebugLogs.logBoring(plugin, sfItem.getId() + "> ".repeat(nestLevel) + " Item in SF Base");
+            Double emcBaseValue = emcSFBase.get(sfItem.getId());
+            if (emcBaseValue == 0) {
+                DebugLogs.logBoring(plugin, sfItem.getId() + "> ".repeat(nestLevel) + " Zero base val");
+                return null;
+            } else {
+                DebugLogs.logEmcIsBase(plugin, emcBaseValue, nestLevel);
+                return emcBaseValue;
+            }
+        }
+        if (emcSlimefun.containsKey(sfItem.getId())) { // Is Slimefun and already calculated
+            DebugLogs.logBoring(plugin, sfItem.getId() + "> ".repeat(nestLevel) + " Already calculated at : " + emcSlimefun.get(sfItem.getId()));
+            return emcSlimefun.get(sfItem.getId());
+        }
+        ItemStack[] recipe = sfItem.getRecipe();
+        Double amount = 0D;
+        if (recipe == null) {
+            DebugLogs.logBoring(plugin, sfItem.getId() + "> ".repeat(nestLevel) + " Not in base and no recipes. Nulling out.");
+            return null;
+        }
+        for (ItemStack recipeItem : recipe) {
+            if (recipeItem != null) {
+                DebugLogs.logBoring(plugin, sfItem.getId() + "> ".repeat(nestLevel) + " Checking recipe item");
+                Double stackAmount = getSFEmcValue(plugin, recipeItem, nestLevel + 1);
+                if (stackAmount == null) {
+                    DebugLogs.logBoring(plugin, sfItem.getId() + "> ".repeat(nestLevel) + " Null");
+                    return null;
+                }
+                amount += (stackAmount / sfItem.getRecipeOutput().getAmount());
+            }
+        }
+        if (amount == 0D) {
+            DebugLogs.logBoring(plugin, sfItem.getId() + "> ".repeat(nestLevel) + " Stack is null due to 0. If base items is missing?");
+            return null;
+        }
+        return amount;
+    }
+
     @Nullable
     private Double getEQEmcValue(EquivalencyTech plugin, ItemStack itemStack, Integer nestLevel) {
         if (itemStack != null) {
@@ -145,15 +230,16 @@ public class EmcDefinitions {
         }
         if (emcBase.containsKey(m)) {
             // Item is in the base list (config.yml) draw from there first
-            DebugLogs.logEmcIsBase(plugin, eVal, nestLevel);
-            if (emcBase.get(m) == 0) {
+            Double emcBaseValue = emcBase.get(m);
+            if (emcBaseValue == 0) {
                 return null;
             } else {
-                return emcBase.get(m);
+                DebugLogs.logEmcIsBase(plugin, emcBaseValue, nestLevel);
+                return emcBaseValue;
             }
         } else if (emcExtended.containsKey(m)) {
             // Item is in the extended list (already registered during fillExtended)
-            DebugLogs.logEmcIsRegisteredExtended(plugin, eVal, nestLevel);
+            DebugLogs.logEmcIsRegisteredExtended(plugin, emcExtended.get(m), nestLevel);
             return emcExtended.get(m);
         } else if (recipeList.isEmpty()) {
             // Recipe is not in Base and has no recipes, so it cannot be EMC'd

@@ -1,12 +1,19 @@
 package io.github.sefiraat.equivalencytech.commands;
 
 import co.aikar.commands.BaseCommand;
-import co.aikar.commands.annotation.*;
+import co.aikar.commands.annotation.CommandAlias;
+import co.aikar.commands.annotation.CommandCompletion;
+import co.aikar.commands.annotation.CommandPermission;
+import co.aikar.commands.annotation.Default;
+import co.aikar.commands.annotation.Description;
+import co.aikar.commands.annotation.Subcommand;
 import co.aikar.commands.bukkit.contexts.OnlinePlayer;
 import io.github.sefiraat.equivalencytech.EquivalencyTech;
 import io.github.sefiraat.equivalencytech.misc.Utils;
 import io.github.sefiraat.equivalencytech.statics.ContainerStorage;
 import io.github.sefiraat.equivalencytech.statics.Messages;
+import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
+import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -42,6 +49,19 @@ public class Commands extends BaseCommand {
             if (sender instanceof Player) {
                 Player player = (Player) sender;
                 ItemStack i = player.getInventory().getItemInMainHand();
+                SlimefunItem sfItem = null;
+                if (EquivalencyTech.getInstance().getManagerSupportedPlugins().isInstalledSlimefun()) {
+                    sfItem = SlimefunItem.getByItem(i);
+                }
+                if (sfItem != null) {
+                    if (plugin.getEmcDefinitions().getEmcSlimefun().containsKey(sfItem.getId())) {
+                        player.sendMessage(Messages.msgCmdEmcDisplay(sfItem.getId(), Utils.getEMC(plugin, i)));
+                        player.sendMessage(Messages.msgCmdEmcDisplayStack(sfItem.getId(), i.getAmount(), Utils.getEMC(plugin, i) * i.getAmount()));
+                    } else {
+                        player.sendMessage(Messages.msgCmdEmcNone(plugin));
+                    }
+                    return;
+                }
                 if (i.getType() != Material.AIR) {
                     if (ContainerStorage.isCraftable(i, plugin)) {
                         if (plugin.getEmcDefinitions().getEmcEQ().containsKey(i.getItemMeta().getDisplayName())) {

@@ -1,13 +1,13 @@
 package io.github.sefiraat.equivalencytech.gui;
 
 import dev.dbassett.skullcreator.SkullCreator;
+import dev.triumphteam.gui.guis.GuiItem;
 import io.github.sefiraat.equivalencytech.EquivalencyTech;
 import io.github.sefiraat.equivalencytech.configuration.ConfigMain;
 import io.github.sefiraat.equivalencytech.configuration.ConfigStrings;
 import io.github.sefiraat.equivalencytech.misc.Utils;
 import io.github.sefiraat.equivalencytech.statics.Messages;
 import io.github.sefiraat.equivalencytech.statics.SkullTextures;
-import me.mattstudios.mfgui.gui.guis.GuiItem;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;

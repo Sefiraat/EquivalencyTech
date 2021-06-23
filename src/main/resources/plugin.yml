@@ -1,5 +1,5 @@
 name: EquivalencyTech
-version: 1.1.5-SNAPSHOT
+version: 1.1.5
 main: io.github.sefiraat.equivalencytech.EquivalencyTech
 api-version: 1.16
 softdepend:

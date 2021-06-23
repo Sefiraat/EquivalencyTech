@@ -19,7 +19,7 @@ import java.io.File;
 
 public class EquivalencyTech extends JavaPlugin {
 
-    private EquivalencyTech instance;
+    private static EquivalencyTech instance;
     private PaperCommandManager commandManager;
 
     private ConfigMain configMainClass;
@@ -36,7 +36,7 @@ public class EquivalencyTech extends JavaPlugin {
         return commandManager;
     }
 
-    public EquivalencyTech getInstance() {
+    public static EquivalencyTech getInstance() {
         return instance;
     }
 
@@ -81,21 +81,19 @@ public class EquivalencyTech extends JavaPlugin {
     public void onEnable() {
 
         getLogger().info("########################################");
-        getLogger().info("");
         getLogger().info("             EquivalencyTech            ");
         getLogger().info("           Created by Sefiraat          ");
-        getLogger().info("");
         getLogger().info("########################################");
 
         instance = this;
 
-        configMainClass = new ConfigMain(this.getInstance());
-        eqItems = new EQItems(this.getInstance());
-        emcDefinitions = new EmcDefinitions(this.getInstance());
-        managerSupportedPlugins = new ManagerSupportedPlugins(this.getInstance());
-        recipes = new Recipes(this.getInstance());
-        managerEvents = new ManagerEvents(this.getInstance());
-        managerRunnables = new ManagerRunnables(this.getInstance());
+        configMainClass = new ConfigMain(this);
+        eqItems = new EQItems(this);
+        managerSupportedPlugins = new ManagerSupportedPlugins(this);
+        emcDefinitions = new EmcDefinitions(this);
+        recipes = new Recipes(this);
+        managerEvents = new ManagerEvents(this);
+        managerRunnables = new ManagerRunnables(this);
 
         registerCommands();
 
@@ -115,8 +113,8 @@ public class EquivalencyTech extends JavaPlugin {
     }
 
     private void registerCommands() {
-        commandManager = new PaperCommandManager(this.getInstance());
-        commandManager.registerCommand(new Commands(this.getInstance()));
+        commandManager = new PaperCommandManager(this);
+        commandManager.registerCommand(new Commands(this));
     }
 
 

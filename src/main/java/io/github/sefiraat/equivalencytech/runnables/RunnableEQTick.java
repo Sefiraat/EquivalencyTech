@@ -4,6 +4,7 @@ import io.github.sefiraat.equivalencytech.EquivalencyTech;
 import io.github.sefiraat.equivalencytech.configuration.ConfigMain;
 import io.github.sefiraat.equivalencytech.misc.Utils;
 import io.github.sefiraat.equivalencytech.statics.ContainerStorage;
+import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Chest;
@@ -16,9 +17,11 @@ import java.util.HashMap;
 public class RunnableEQTick extends BukkitRunnable {
 
     public final EquivalencyTech plugin;
+    public final boolean sf;
 
     public RunnableEQTick(EquivalencyTech plugin) {
         this.plugin = plugin;
+        sf = EquivalencyTech.getInstance().getManagerSupportedPlugins().isInstalledSlimefun();
     }
 
     @Override
@@ -36,12 +39,18 @@ public class RunnableEQTick extends BukkitRunnable {
                 for (ItemStack itemStack : inventory.getContents()) {
                     if (itemStack != null && itemStack.getType() != Material.AIR) {
                         boolean isEQ = ContainerStorage.isCraftable(itemStack, plugin);
+                        SlimefunItem sfItem = null;
+                        if (sf) {
+                            sfItem = SlimefunItem.getByItem(itemStack);
+                        }
                         Material material = itemStack.getType();
                         Double emcValue = Utils.roundDown((Utils.getEMC(plugin, itemStack) / 100) * 150, 2);
                         if (emcValue != null && Utils.canBeSynth(plugin, itemStack)) {
                             String entryName;
                             if (isEQ) {
                                 entryName = Utils.eqNameConfig(itemStack.getItemMeta().getDisplayName());
+                            } else if (sfItem != null) {
+                                entryName = sfItem.getId();
                             } else {
                                 entryName = material.toString();
                             }

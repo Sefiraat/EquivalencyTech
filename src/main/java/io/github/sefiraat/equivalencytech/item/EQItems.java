@@ -1,7 +1,14 @@
 package io.github.sefiraat.equivalencytech.item;
 
 import io.github.sefiraat.equivalencytech.EquivalencyTech;
-import io.github.sefiraat.equivalencytech.item.builders.*;
+import io.github.sefiraat.equivalencytech.item.builders.AeternalisFuel;
+import io.github.sefiraat.equivalencytech.item.builders.AlchemicalCoal;
+import io.github.sefiraat.equivalencytech.item.builders.CondensatorChest;
+import io.github.sefiraat.equivalencytech.item.builders.DarkMatter;
+import io.github.sefiraat.equivalencytech.item.builders.DissolutionChest;
+import io.github.sefiraat.equivalencytech.item.builders.MobiusFuel;
+import io.github.sefiraat.equivalencytech.item.builders.RedMatter;
+import io.github.sefiraat.equivalencytech.item.builders.TransmutationOrb;
 import io.github.sefiraat.equivalencytech.misc.Utils;
 import org.bukkit.inventory.ItemStack;
 

@@ -22,6 +22,17 @@ public class ConfigEMC {
         return h;
     }
 
+    public Map<String, Double> getEmcSlimefunValues() {
+        Map<String, Double> h = new HashMap<>();
+        ConfigurationSection c = configuration.getConfigurationSection("EMC_VALUES.SLIMEFUN");
+        assert c != null;
+        for (String s : c.getKeys(false)) {
+            Double emcValue = c.getDouble(s);
+            h.put(s, emcValue);
+        }
+        return h;
+    }
+
     public int getBurnRate() {
         return configuration.getInt("EMC_VALUES.BURN_RATE");
     }

@@ -6,6 +6,7 @@ import io.github.sefiraat.equivalencytech.item.builders.DissolutionChest;
 import io.github.sefiraat.equivalencytech.item.builders.TransmutationOrb;
 import io.github.sefiraat.equivalencytech.statics.ContainerStorage;
 import io.github.sefiraat.equivalencytech.statics.Messages;
+import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
 import net.md_5.bungee.api.ChatColor;
 import org.apache.commons.lang.WordUtils;
 import org.bukkit.Material;
@@ -22,6 +23,13 @@ public class Utils {
     }
 
     public static Double getEMC(EquivalencyTech plugin, ItemStack itemStack) {
+        SlimefunItem sfItem = null;
+        if (EquivalencyTech.getInstance().getManagerSupportedPlugins().isInstalledSlimefun()) {
+            sfItem = SlimefunItem.getByItem(itemStack);
+        }
+        if (sfItem != null) {
+            return plugin.getEmcDefinitions().getEmcSlimefun().get(sfItem.getId());
+        }
         if (ContainerStorage.isCraftable(itemStack, plugin)) {
             ItemStack eqStack = plugin.getEqItems().getEqItemMap().get(eqNameConfig(itemStack.getItemMeta().getDisplayName()));
             return plugin.getEmcDefinitions().getEmcEQ().get(eqStack.getItemMeta().getDisplayName());
@@ -75,11 +83,11 @@ public class Utils {
 
     public static boolean canBeSynth(EquivalencyTech plugin, ItemStack itemStack) {
         if (itemStack.hasItemMeta()) {
-            if (ContainerStorage.isCraftable(itemStack, plugin)) {
-                return true;
-            } else {
-                return false;
+            SlimefunItem sfItem = null;
+            if (EquivalencyTech.getInstance().getManagerSupportedPlugins().isInstalledSlimefun()) {
+                sfItem = SlimefunItem.getByItem(itemStack);
             }
+            return ContainerStorage.isCraftable(itemStack, plugin) || sfItem != null;
         } else {
             return true;
         }

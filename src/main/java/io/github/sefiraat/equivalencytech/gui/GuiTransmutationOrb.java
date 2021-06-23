@@ -1,13 +1,14 @@
 package io.github.sefiraat.equivalencytech.gui;
 
+import dev.triumphteam.gui.builder.item.ItemBuilder;
+import dev.triumphteam.gui.guis.GuiItem;
+import dev.triumphteam.gui.guis.PaginatedGui;
 import io.github.sefiraat.equivalencytech.EquivalencyTech;
 import io.github.sefiraat.equivalencytech.configuration.ConfigMain;
 import io.github.sefiraat.equivalencytech.misc.Utils;
 import io.github.sefiraat.equivalencytech.statics.ContainerStorage;
 import io.github.sefiraat.equivalencytech.statics.Messages;
-import me.mattstudios.mfgui.gui.components.ItemBuilder;
-import me.mattstudios.mfgui.gui.guis.GuiItem;
-import me.mattstudios.mfgui.gui.guis.PaginatedGui;
+import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryAction;
@@ -58,14 +59,21 @@ public class GuiTransmutationOrb extends PaginatedGui {
 
             ItemStack itemStack;
             GuiItem guiItem;
-            boolean isVanilla = true;
+            boolean isVanilla = false;
 
-            if (plugin.getEqItems().getEqItemMap().containsKey(s)) {
-                isVanilla = false;
+            SlimefunItem sfItem = null;
+            if (EquivalencyTech.getInstance().getManagerSupportedPlugins().isInstalledSlimefun()) {
+                sfItem = SlimefunItem.getByID(s);
+            }
+
+            if (!plugin.getEqItems().getEqItemMap().containsKey(s) && sfItem == null) {
+                isVanilla = true;
             }
 
             if (isVanilla) {
                 itemStack = new ItemStack(Material.valueOf(s));
+            } else if (sfItem != null) {
+                itemStack = sfItem.getItem().clone();
             } else {
                 itemStack = plugin.getEqItems().getEqItemMap().get(s).clone();
             }
@@ -132,8 +140,12 @@ public class GuiTransmutationOrb extends PaginatedGui {
         }
 
         boolean isEQ = ContainerStorage.isCraftable(itemStack, plugin);
+        SlimefunItem sfItem = null;
+        if (EquivalencyTech.getInstance().getManagerSupportedPlugins().isInstalledSlimefun()) {
+            sfItem = SlimefunItem.getByItem(itemStack);
+        }
 
-        if (itemStack.hasItemMeta() && !isEQ) {
+        if (itemStack.hasItemMeta() && !isEQ && sfItem == null) {
             player.sendMessage(Messages.messageGuiItemMeta(plugin));
             return;
         }
@@ -147,6 +159,8 @@ public class GuiTransmutationOrb extends PaginatedGui {
             String entryName;
             if (isEQ) {
                 entryName = Utils.eqNameConfig(itemStack.getItemMeta().getDisplayName());
+            } else if (sfItem != null) {
+                entryName = sfItem.getId();
             } else {
                 entryName = material.toString();
             }
@@ -190,12 +204,18 @@ public class GuiTransmutationOrb extends PaginatedGui {
 
         ItemStack clickedItem = e.getCurrentItem();
         boolean isEQ = ContainerStorage.isCraftable(clickedItem, plugin);
+        SlimefunItem sfItem = null;
+        if (EquivalencyTech.getInstance().getManagerSupportedPlugins().isInstalledSlimefun()) {
+            sfItem = SlimefunItem.getByItem(clickedItem);
+        }
         double playerEmc = ConfigMain.getPlayerEmc(plugin, player);
         Double emcValue = Utils.getEMC(plugin, clickedItem);
         String itemName;
 
         if (isEQ) {
             itemName = Utils.eqNameConfig(clickedItem.getItemMeta().getDisplayName());
+        } else if (sfItem != null) {
+            itemName = sfItem.getId();
         } else {
             itemName = clickedItem.getType().toString();
         }
@@ -204,6 +224,8 @@ public class GuiTransmutationOrb extends PaginatedGui {
             ItemStack itemStack;
             if (isEQ) {
                 itemStack = plugin.getEqItems().getEqItemMap().get(itemName).clone();
+            } else if (sfItem != null) {
+                itemStack = sfItem.getItem().clone();
             } else {
                 itemStack = new ItemStack(e.getCurrentItem().getType());
             }
@@ -223,12 +245,18 @@ public class GuiTransmutationOrb extends PaginatedGui {
         Material material = clickedItem.getType();
 
         boolean isEQ = ContainerStorage.isCraftable(e.getCurrentItem(), plugin);
+        SlimefunItem sfItem = null;
+        if (EquivalencyTech.getInstance().getManagerSupportedPlugins().isInstalledSlimefun()) {
+            sfItem = SlimefunItem.getByItem(clickedItem);
+        }
 
         String itemName;
         Double emcValue = Utils.getEMC(plugin, clickedItem);
 
         if (isEQ) {
             itemName = Utils.eqNameConfig(e.getCurrentItem().getItemMeta().getDisplayName());
+        } else if (sfItem != null) {
+            itemName = sfItem.getId();
         } else {
             itemName = material.toString();
         }
@@ -254,6 +282,8 @@ public class GuiTransmutationOrb extends PaginatedGui {
             ItemStack itemStack;
             if (isEQ) {
                 itemStack = plugin.getEqItems().getEqItemMap().get(itemName).clone();
+            } else if (sfItem != null) {
+                itemStack = sfItem.getItem().clone();
             } else {
                 itemStack = new ItemStack(e.getCurrentItem().getType());
             }
