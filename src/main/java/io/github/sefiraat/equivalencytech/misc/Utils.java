@@ -6,7 +6,7 @@ import io.github.sefiraat.equivalencytech.item.builders.DissolutionChest;
 import io.github.sefiraat.equivalencytech.item.builders.TransmutationOrb;
 import io.github.sefiraat.equivalencytech.statics.ContainerStorage;
 import io.github.sefiraat.equivalencytech.statics.Messages;
-import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
+import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import net.md_5.bungee.api.ChatColor;
 import org.apache.commons.lang.WordUtils;
 import org.bukkit.Material;

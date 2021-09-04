@@ -8,7 +8,7 @@ import io.github.sefiraat.equivalencytech.configuration.ConfigMain;
 import io.github.sefiraat.equivalencytech.misc.Utils;
 import io.github.sefiraat.equivalencytech.statics.ContainerStorage;
 import io.github.sefiraat.equivalencytech.statics.Messages;
-import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
+import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryAction;
@@ -63,7 +63,7 @@ public class GuiTransmutationOrb extends PaginatedGui {
 
             SlimefunItem sfItem = null;
             if (EquivalencyTech.getInstance().getManagerSupportedPlugins().isInstalledSlimefun()) {
-                sfItem = SlimefunItem.getByID(s);
+                sfItem = SlimefunItem.getById(s);
             }
 
             if (!plugin.getEqItems().getEqItemMap().containsKey(s) && sfItem == null) {

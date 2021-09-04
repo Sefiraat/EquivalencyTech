@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>io.github.sefiraat</groupId>
   <artifactId>EquivalencyTech</artifactId>
-  <version>1.1.5</version>
+  <version>1.1.6</version>
   <build>
     <plugins>
       <plugin>
@@ -126,7 +126,7 @@
     <dependency>
       <groupId>com.github.Slimefun</groupId>
       <artifactId>Slimefun4</artifactId>
-      <version>RC-22</version>
+      <version>RC-27</version>
       <scope>provided</scope>
       <exclusions>
         <exclusion>

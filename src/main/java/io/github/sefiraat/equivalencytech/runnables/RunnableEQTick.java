@@ -4,7 +4,7 @@ import io.github.sefiraat.equivalencytech.EquivalencyTech;
 import io.github.sefiraat.equivalencytech.configuration.ConfigMain;
 import io.github.sefiraat.equivalencytech.misc.Utils;
 import io.github.sefiraat.equivalencytech.statics.ContainerStorage;
-import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
+import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Chest;

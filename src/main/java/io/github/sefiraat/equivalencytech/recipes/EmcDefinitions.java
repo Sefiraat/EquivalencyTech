@@ -3,16 +3,11 @@ package io.github.sefiraat.equivalencytech.recipes;
 import io.github.sefiraat.equivalencytech.EquivalencyTech;
 import io.github.sefiraat.equivalencytech.statics.ContainerStorage;
 import io.github.sefiraat.equivalencytech.statics.DebugLogs;
-import io.github.thebusybiscuit.slimefun4.core.SlimefunRegistry;
-import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
-import io.github.thebusybiscuit.slimefun4.implementation.SlimefunPlugin;
+import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
+import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
 import io.github.thebusybiscuit.slimefun4.implementation.items.backpacks.SlimefunBackpack;
-import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
-import me.mrCookieSlime.Slimefun.api.Slimefun;
-import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.inventory.FurnaceRecipe;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Recipe;
@@ -123,7 +118,7 @@ public class EmcDefinitions {
 
     private void fillSlimefun(EquivalencyTech plugin) {
         if (EquivalencyTech.getInstance().getManagerSupportedPlugins().isInstalledSlimefun()) {
-            for (SlimefunItem item : SlimefunPlugin.getRegistry().getEnabledSlimefunItems()) {
+            for (SlimefunItem item : Slimefun.getRegistry().getEnabledSlimefunItems()) {
                 if (item instanceof SlimefunBackpack || !item.getAddon().getName().equals("Slimefun")) {
                     continue;
                 }

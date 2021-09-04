@@ -6,11 +6,11 @@ import io.github.sefiraat.equivalencytech.item.EQSlimefunItem;
 import io.github.sefiraat.equivalencytech.recipes.Recipes;
 import io.github.sefiraat.equivalencytech.statics.SkullTextures;
 import io.github.thebusybiscuit.slimefun4.api.SlimefunAddon;
-import me.mrCookieSlime.Slimefun.Lists.RecipeType;
-import me.mrCookieSlime.Slimefun.Objects.Category;
-import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
-import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
-import me.mrCookieSlime.Slimefun.cscorelib2.recipes.MinecraftRecipe;
+import io.github.thebusybiscuit.slimefun4.api.items.ItemGroup;
+import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
+import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
+import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
+import io.github.thebusybiscuit.slimefun4.libraries.dough.recipes.MinecraftRecipe;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
@@ -38,7 +38,7 @@ public class SlimefunEQAddon implements SlimefunAddon {
         im.setDisplayName(ChatColor.YELLOW + "EquivalencyTech");
         im.setLore(Collections.singletonList("&a> Click to open"));
         categoryItemMain.setItemMeta(im);
-        Category eqCategory = new Category(categoryIdMain, categoryItemMain);
+        ItemGroup eqCategory = new ItemGroup(categoryIdMain, categoryItemMain);
 
         // Items
         // Coal 1
