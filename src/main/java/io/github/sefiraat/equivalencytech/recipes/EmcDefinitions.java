@@ -6,7 +6,6 @@ import io.github.sefiraat.equivalencytech.statics.DebugLogs;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
 import io.github.thebusybiscuit.slimefun4.implementation.items.backpacks.SlimefunBackpack;
-import jdk.internal.joptsimple.internal.Strings;
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
