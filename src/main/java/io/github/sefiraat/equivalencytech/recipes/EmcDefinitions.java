@@ -6,6 +6,7 @@ import io.github.sefiraat.equivalencytech.statics.DebugLogs;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
 import io.github.thebusybiscuit.slimefun4.implementation.items.backpacks.SlimefunBackpack;
+import jdk.internal.joptsimple.internal.Strings;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.inventory.FurnaceRecipe;
@@ -137,14 +138,14 @@ public class EmcDefinitions {
     private Double getSFEmcValue(EquivalencyTech plugin, ItemStack item, Integer nestLevel) {
         SlimefunItem sfItem = SlimefunItem.getByItem(item);
         if (sfItem == null) { // Vanilla
-            DebugLogs.logBoring(plugin, item.getType().toString() + "> ".repeat(nestLevel) + " Vanilla - getting found vanilla value");
+            DebugLogs.logBoring(plugin, item.getType().toString() + Strings.repeat('>', nestLevel) + " Vanilla - getting found vanilla value");
             return getEmcValue(plugin, item, nestLevel + 1);
         }
         if (emcSFBase.containsKey(sfItem.getId())) {
-            DebugLogs.logBoring(plugin, sfItem.getId() + "> ".repeat(nestLevel) + " Item in SF Base");
+            DebugLogs.logBoring(plugin, sfItem.getId() + Strings.repeat('>', nestLevel) + " Item in SF Base");
             Double emcBaseValue = emcSFBase.get(sfItem.getId());
             if (emcBaseValue == 0) {
-                DebugLogs.logBoring(plugin, sfItem.getId() + "> ".repeat(nestLevel) + " Zero base val");
+                DebugLogs.logBoring(plugin, sfItem.getId() + Strings.repeat('>', nestLevel) + " Zero base val");
                 return null;
             } else {
                 DebugLogs.logEmcIsBase(plugin, emcBaseValue, nestLevel);
@@ -152,28 +153,28 @@ public class EmcDefinitions {
             }
         }
         if (emcSlimefun.containsKey(sfItem.getId())) { // Is Slimefun and already calculated
-            DebugLogs.logBoring(plugin, sfItem.getId() + "> ".repeat(nestLevel) + " Already calculated at : " + emcSlimefun.get(sfItem.getId()));
+            DebugLogs.logBoring(plugin, sfItem.getId() + Strings.repeat('>', nestLevel) + " Already calculated at : " + emcSlimefun.get(sfItem.getId()));
             return emcSlimefun.get(sfItem.getId());
         }
         ItemStack[] recipe = sfItem.getRecipe();
         Double amount = 0D;
         if (recipe == null) {
-            DebugLogs.logBoring(plugin, sfItem.getId() + "> ".repeat(nestLevel) + " Not in base and no recipes. Nulling out.");
+            DebugLogs.logBoring(plugin, sfItem.getId() + Strings.repeat('>', nestLevel) + " Not in base and no recipes. Nulling out.");
             return null;
         }
         for (ItemStack recipeItem : recipe) {
             if (recipeItem != null) {
-                DebugLogs.logBoring(plugin, sfItem.getId() + "> ".repeat(nestLevel) + " Checking recipe item");
+                DebugLogs.logBoring(plugin, sfItem.getId() + Strings.repeat('>', nestLevel) + " Checking recipe item");
                 Double stackAmount = getSFEmcValue(plugin, recipeItem, nestLevel + 1);
                 if (stackAmount == null) {
-                    DebugLogs.logBoring(plugin, sfItem.getId() + "> ".repeat(nestLevel) + " Null");
+                    DebugLogs.logBoring(plugin, sfItem.getId() + Strings.repeat('>', nestLevel) + " Null");
                     return null;
                 }
                 amount += (stackAmount / sfItem.getRecipeOutput().getAmount());
             }
         }
         if (amount == 0D) {
-            DebugLogs.logBoring(plugin, sfItem.getId() + "> ".repeat(nestLevel) + " Stack is null due to 0. If base items is missing?");
+            DebugLogs.logBoring(plugin, sfItem.getId() + Strings.repeat('>', nestLevel) + " Stack is null due to 0. If base items is missing?");
             return null;
         }
         return amount;
