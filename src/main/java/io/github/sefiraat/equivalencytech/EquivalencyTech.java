@@ -9,6 +9,7 @@ import io.github.sefiraat.equivalencytech.misc.ManagerSupportedPlugins;
 import io.github.sefiraat.equivalencytech.recipes.EmcDefinitions;
 import io.github.sefiraat.equivalencytech.recipes.Recipes;
 import io.github.sefiraat.equivalencytech.runnables.ManagerRunnables;
+import io.github.thebusybiscuit.slimefun4.libraries.dough.updater.GitHubBuildsUpdater;
 import org.bstats.bukkit.Metrics;
 import org.bstats.charts.SimplePie;
 import org.bukkit.plugin.PluginDescriptionFile;
@@ -81,11 +82,14 @@ public class EquivalencyTech extends JavaPlugin {
     public void onEnable() {
 
         getLogger().info("########################################");
-        getLogger().info("             EquivalencyTech            ");
-        getLogger().info("           Created by Sefiraat          ");
+        getLogger().info(" EquivalencyTech - Created by Sefiraat  ");
         getLogger().info("########################################");
 
         instance = this;
+
+        if (this.getConfig().getBoolean("auto-update") && this.getDescription().getVersion().startsWith("DEV")) {
+            new GitHubBuildsUpdater(this, this.getFile(), "Sefiraat/EquivalencyTech/master").start();
+        }
 
         configMainClass = new ConfigMain(this);
         eqItems = new EQItems(this);
