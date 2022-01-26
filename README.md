@@ -39,3 +39,10 @@ The plugin currently features:
 * [Condensate Chest](https://github.com/Sefiraat/EquivalencyTech/wiki/Condensate-Chest)
 * [Crafting](https://github.com/Sefiraat/EquivalencyTech/wiki/Crafting)
 * [Commands](https://github.com/Sefiraat/EquivalencyTech/wiki/Commands)
+
+
+## Thanks!
+
+A big thanks to the owners of **mct.tantrum.org** who have tested nearly everything I have made and really given me direction and drive to make these things.
+
+Another big shoutout to **GentlemanCheesy** of **mc.talosmp.net** for being my first (and as of writing this, only!) sponsor. A few coffee's a month to make me feel better about making these addons <3
