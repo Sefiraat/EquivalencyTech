@@ -7,11 +7,13 @@ import io.github.sefiraat.equivalencytech.statics.ContainerStorage;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.block.BlockState;
 import org.bukkit.block.Chest;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import java.text.MessageFormat;
 import java.util.HashMap;
 
 public class RunnableEQTick extends BukkitRunnable {
@@ -33,7 +35,16 @@ public class RunnableEQTick extends BukkitRunnable {
     private void processDChests() {
         for (Location location : ConfigMain.getAllDChestLocations(plugin)) {
             if (location.getWorld().isChunkLoaded(location.getBlockX() >> 4, location.getBlockZ() >> 4)) {
-                String playerUUID = ConfigMain.getOwnerDChest(plugin, ConfigMain.getDChestIdStore(plugin, location));
+                int chestId = ConfigMain.getDChestIdStore(plugin, location);
+                String playerUUID = ConfigMain.getOwnerDChest(plugin, chestId);
+
+                BlockState state = location.getBlock().getState();
+
+                if (!(state instanceof Chest)) {
+                    EquivalencyTech.getInstance().getLogger().warning(getErrorDissolutionChest(chestId, location));
+                    continue;
+                }
+
                 Chest chest = (Chest) location.getBlock().getState();
                 Inventory inventory = chest.getBlockInventory();
                 for (ItemStack itemStack : inventory.getContents()) {
@@ -72,6 +83,14 @@ public class RunnableEQTick extends BukkitRunnable {
             if (location.getWorld().isChunkLoaded(location.getBlockX() >> 4, location.getBlockZ() >> 4)) {
                 int chestId = ConfigMain.getCChestIdStore(plugin, location);
                 String playerUUID = ConfigMain.getOwnerCChest(plugin, chestId);
+
+                BlockState state = location.getBlock().getState();
+
+                if (!(state instanceof Chest)) {
+                    EquivalencyTech.getInstance().getLogger().warning(getErrorCondensateChest(chestId, location));
+                    continue;
+                }
+
                 Chest chest = (Chest) location.getBlock().getState();
                 Inventory inventory = chest.getBlockInventory();
                 ItemStack itemStack = ConfigMain.getCChestItem(plugin, chestId);
@@ -89,5 +108,25 @@ public class RunnableEQTick extends BukkitRunnable {
                 }
             }
         }
+    }
+
+    public static String getErrorDissolutionChest(int chestId, Location location) {
+        return MessageFormat.format(
+            "A Dissolution chest (ID: {0}has been removed wrongly. " +
+                "Either replace with a vanilla chest (location : {1}) " +
+                "or remove from dissolution_chests.yml",
+            chestId,
+            location.toString()
+        );
+    }
+
+    public static String getErrorCondensateChest(int chestId, Location location) {
+        return MessageFormat.format(
+            "A Condensate chest (ID: {0}has been removed wrongly. " +
+                "Either replace with a vanilla chest (location : {1})  " +
+                "or remove from condensate_chests.yml",
+            chestId,
+            location.toString()
+        );
     }
 }
