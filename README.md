@@ -3,6 +3,10 @@
 
 EquivalencyTech (EquiTech) is an attempt to recreate elements of the [ProjectE](https://www.curseforge.com/minecraft/mc-mods/projecte) mod.
 
+## Download EquivalencyTech
+
+[![Build Status](https://thebusybiscuit.github.io/builds/Sefiraat/EquivalencyTech/master/badge.svg)](https://thebusybiscuit.github.io/builds/Sefiraat/EquivalencyTech/master)
+
 ## Features
 The plugin currently features:
 * EMC!
