@@ -55,7 +55,20 @@ public class RunnableEQTick extends BukkitRunnable {
                             sfItem = SlimefunItem.getByItem(itemStack);
                         }
                         Material material = itemStack.getType();
-                        Double emcValue = Utils.roundDown((Utils.getEMC(plugin, itemStack) / 100) * 150, 2);
+                        //fix https://github.com/Sefiraat/EquivalencyTech/issues/44
+                        try {
+                            if (Utils.getEMC(plugin, itemStack) == null) {
+                                EquivalencyTech.getInstance().getLogger().warning(getErrorDissolutionChest(chestId, location) + "\nFix https://github.com/Sefiraat/EquivalencyTech/issues/44");
+                                //便于排查问题，因为我没有能力解决这个问题，建议让卡住全服箱子的人尝试凌迟
+                                break;//打破当前循环，阻止导致报错的代码执行
+                            }//尝试去处理异常
+                        }catch(Exception e){
+                            EquivalencyTech.getInstance().getLogger().warning(getErrorDissolutionChest(chestId, location) + "\nFix https://github.com/Sefiraat/EquivalencyTech/issues/44");
+                        }
+
+                        Double emcValue = Utils.roundDown((Utils.getEMC(plugin, itemStack) / 100) * 150, 2);//改行存在问题
+
+                        //fix end
                         if (emcValue != null && Utils.canBeSynth(plugin, itemStack)) {
                             String entryName;
                             if (isEQ) {
@@ -112,7 +125,7 @@ public class RunnableEQTick extends BukkitRunnable {
 
     public static String getErrorDissolutionChest(int chestId, Location location) {
         return MessageFormat.format(
-            "A Dissolution chest (ID: {0}has been removed wrongly. " +
+            "A Dissolution chest (ID: {0}has been FUCKED wrongly. " +
                 "Either replace with a vanilla chest (location : {1}) " +
                 "or remove from dissolution_chests.yml",
             chestId,
@@ -130,3 +143,4 @@ public class RunnableEQTick extends BukkitRunnable {
         );
     }
 }
+
