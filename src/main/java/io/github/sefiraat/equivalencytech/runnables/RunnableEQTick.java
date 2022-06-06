@@ -58,11 +58,11 @@ public class RunnableEQTick extends BukkitRunnable {
                         //fix https://github.com/Sefiraat/EquivalencyTech/issues/44
                         try {
                             if (Utils.getEMC(plugin, itemStack) == null) {
-                                EquivalencyTech.getInstance().getLogger().warning(getErrorDissolutionChest(chestId, location) + "\nFix https://github.com/Sefiraat/EquivalencyTech/issues/44");
                                 //便于排查问题，因为我没有能力解决这个问题，
                                 //好了我现在会解决了，通过:
                                 ConfigMain.removeDChestStore(plugin, chestId);
                                 ConfigMain.removeDChest(plugin, chestId);
+                                EquivalencyTech.getInstance().getLogger().warning(getErrorDissolutionChest(chestId, location) + "\nFix https://github.com/Sefiraat/EquivalencyTech/issues/44");
                                 break;//打破当前循环，阻止导致报错的代码执行
                             }//尝试去处理异常
                         }catch(Exception e){
@@ -103,10 +103,10 @@ public class RunnableEQTick extends BukkitRunnable {
                 BlockState state = location.getBlock().getState();
 
                 if (!(state instanceof Chest)) {
-                    EquivalencyTech.getInstance().getLogger().warning(getErrorCondensateChest(chestId, location));
                     //为了解决一些意外导致的凝固箱不工作最后在控制台中喷射，可以采取简单粗暴的直接删除
                     ConfigMain.removeCChestStore(plugin, chestId);
                     ConfigMain.removeCChest(plugin, chestId);
+                    EquivalencyTech.getInstance().getLogger().warning(getErrorCondensateChest(chestId, location));
                     continue;
                 }
 
