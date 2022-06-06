@@ -44,6 +44,7 @@ public class RunnableEQTick extends BukkitRunnable {
                     //修正溶解箱消失后spam的问题
                     ConfigMain.removeDChestStore(plugin, chestId);
                     ConfigMain.removeDChest(plugin, chestId);
+                    //先删配置后打印
                     EquivalencyTech.getInstance().getLogger().warning(getErrorDissolutionChest(chestId, location));
                     continue;
                 }
