@@ -4,6 +4,7 @@ main: io.github.sefiraat.equivalencytech.EquivalencyTech
 api-version: 1.16
 softdepend:
   - Slimefun
+  - Galactifun
 permissions:
   equitech.admin:
     description: Allows access to /et
