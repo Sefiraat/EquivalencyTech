@@ -60,6 +60,9 @@ public class CraftListener implements Listener {
             } else if (contentLayer.equals(Recipes.recipeDissolutionChestCheck(plugin))) {
                     e.getInventory().setResult(plugin.getEqItems().getDissolutionChest().getItemClone());
 
+            } else if (contentLayer.equals(Recipes.recipeCondensatorChestCheck(plugin))) {
+                e.getInventory().setResult(plugin.getEqItems().getCondensatorChest().getItemClone());
+
             } else if (contentsEQ(contentLayer)) {
                 e.getInventory().setResult(new ItemStack(Material.AIR));
             }
