@@ -55,22 +55,25 @@ public class RunnableEQTick extends BukkitRunnable {
                             sfItem = SlimefunItem.getByItem(itemStack);
                         }
                         Material material = itemStack.getType();
-                        Double emcValue = Utils.roundDown((Utils.getEMC(plugin, itemStack) / 100) * 150, 2);
-                        if (emcValue != null && Utils.canBeSynth(plugin, itemStack)) {
-                            String entryName;
-                            if (isEQ) {
-                                entryName = Utils.eqNameConfig(itemStack.getItemMeta().getDisplayName());
-                            } else if (sfItem != null) {
-                                entryName = sfItem.getId();
-                            } else {
-                                entryName = material.toString();
+                        Double emcCheck = Utils.getEMC(plugin, itemStack);
+                        if (emcCheck != null) {
+                            Double emcValue = Utils.roundDown((emcCheck / 100) * 150, 2);
+                            if (emcValue != null && Utils.canBeSynth(plugin, itemStack)) {
+                                String entryName;
+                                if (isEQ) {
+                                    entryName = Utils.eqNameConfig(itemStack.getItemMeta().getDisplayName());
+                                } else if (sfItem != null) {
+                                    entryName = sfItem.getId();
+                                } else {
+                                    entryName = material.toString();
+                                }
+                                if (!ConfigMain.getLearnedItems(plugin, playerUUID).contains(entryName)) {
+                                    ConfigMain.addLearnedItem(plugin, playerUUID, entryName);
+                                }
+                                ConfigMain.addPlayerEmc(plugin, playerUUID, emcValue);
+                                itemStack.setAmount(itemStack.getAmount() - 1);
+                                break;
                             }
-                            if (!ConfigMain.getLearnedItems(plugin, playerUUID).contains(entryName)) {
-                                ConfigMain.addLearnedItem(plugin, playerUUID, entryName);
-                            }
-                            ConfigMain.addPlayerEmc(plugin, playerUUID, emcValue);
-                            itemStack.setAmount(itemStack.getAmount() - 1);
-                            break;
                         }
                     }
                 }
